@@ -1,115 +1,123 @@
 <!DOCTYPE html>
-<html lang = "">
+<html lang="en">
 <head>
-  <title>
-    Portfolio
-  </title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-    }
+    <title>Portfolio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
 
-    .topnav {
-      overflow: hidden;
-      background-color: #333;
-    }
+        .topnav {
+            overflow: hidden;
+            background-color: #333;
+        }
 
-    .topnav a {
-      float: left;
-      color: #f2f2f2;
-      text-align: center;
-      padding: 14px 16px;
-      text-decoration: none;
-      font-size: 17px;
-    }
+        .topnav a {
+            float: left;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-size: 17px;
+        }
 
-    .topnav a:hover {
-      background-color: #ddd;
-      color: black;
-    }
+        .topnav a:hover {
+            background-color: #ddd;
+            color: black;
+        }
 
-    .topnav a.active {
-      background-color: #04AA6D;
-      color: white;
-    }
-    .projects {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-around;
-        padding: 20px;
-    }
+        .topnav a.active {
+            background-color: #04AA6D;
+            color: white;
+        }
 
-    /* Individual project card */
-    .project-card {
-        background-color: #fff;
-        border-radius: 8px;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        width: 300px;
-        margin: 20px;
-        text-align: center;
-        overflow: hidden;
-    }
+        h1 {
+            text-align: center; /* Center-align the header */
+            margin: 40px 0 20px 0; /* Add some space around the header */
+        }
 
-    /* Image for each project */
-    .project-card img {
-        width: 100%;
-        height: auto;
-    }
+        .projects {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            padding: 20px;
+        }
 
-    /* Description text */
-    .project-description {
-        padding: 15px;
-    }
+        /* Individual project card */
+        .project-card {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            margin: 20px;
+            text-align: center;
+            overflow: hidden;
+        }
 
-    /* Learn more link */
-    .project-card a {
-        display: inline-block;
-        padding: 10px 20px;
-        background-color: #04AA6D;
-        color: white;
-        text-decoration: none;
-        border-radius: 4px;
-        margin: 10px;
-        transition: background-color 0.3s ease;
-    }
+        /* Image for each project */
+        .project-card img {
+            width: 100%;
+            height: auto;
+        }
 
-    .project-card a:hover {
-        background-color: #027b45;
-    }
-  </style>
+        /* Description text */
+        .project-description {
+            padding: 15px;
+        }
+
+        /* Learn more link */
+        .project-card a {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #04AA6D;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            margin: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .project-card a:hover {
+            background-color: #027b45;
+        }
+    </style>
 </head>
 <body>
+
 <div class="topnav">
-  <a class="active" href="./index.html">Home</a>
-  <a href="./projects.html">Projects</a>
-  <a href="./resume.html">Resume</a>
-  <a href="./about.html">About</a>
-    <h1>My Projects</h1>
-    <div class="projects">
-        <!-- Project 1 -->
-        <div class="project-card">
-            <img src="project1.jpg" alt="Project 1 Image">
-            <div class="project-description">
-                <h3>Project 1</h3>
-                <p>This project is about building a responsive website using HTML, CSS, and JavaScript.</p>
-                <a href="OilStates.html">Learn More</a>
-            </div>
-        </div>
-
-        <!-- Project 2 -->
-        <div class="project-card">
-            <img src="project2.jpg" alt="Project 2 Image">
-            <div class="project-description">
-                <h3>Project 2</h3>
-                <p>This is a web application built with React and Node.js.</p>
-                <a href="project2-details.html">Learn More</a>
-            </div>
-        </div>
-
-        <!-- Add more projects as needed -->
-        </div>
+    <a class="active" href="./index.html">Home</a>
+    <a href="./projects.html">Projects</a>
+    <a href="./resume.html">Resume</a>
+    <a href="./about.html">About</a>
 </div>
+
+<!-- Move the header outside of .topnav -->
+<h1>My Projects</h1>
+
+<div class="projects">
+    <!-- Project 1 -->
+    <div class="project-card">
+        <img src="project1.jpg" alt="Project 1 Image">
+        <div class="project-description">
+            <h3>Project 1</h3>
+            <p>This project is about building a responsive website using HTML, CSS, and JavaScript.</p>
+            <a href="OilStates.html">Learn More</a>
+        </div>
+    </div>
+
+    <!-- Project 2 -->
+    <div class="project-card">
+        <img src="project2.jpg" alt="Project 2 Image">
+        <div class="project-description">
+            <h3>Project 2</h3>
+            <p>This is a web application built with React and Node.js.</p>
+            <a href="project2-details.html">Learn More</a>
+        </div>
+    </div>
+    <!-- Add more projects as needed -->
+</div>
+
 </body>
 </html>
