@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>
-    Resume
-  </title>
+  <title>Resume</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
     body {
@@ -34,10 +32,38 @@
       background-color: #04AA6D;
       color: white;
     }
-      h1 {
-        text-align: center; /* Center-align the header */
-        margin: 40px 0 20px 0; /* Add some space around the header */
-      }
+
+    h1 {
+      text-align: center;
+      margin: 40px 0 20px 0;
+    }
+
+    .resume-container {
+      text-align: center;
+      margin: 20px;
+    }
+
+    .resume-viewer {
+      width: 80%;
+      height: 600px;
+      border: 1px solid #ccc;
+      margin: 0 auto;
+    }
+
+    .download-link {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #04AA6D;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+
+    .download-link:hover {
+      background-color: #027b45;
+    }
   </style>
 </head>
 <body>
@@ -48,9 +74,16 @@
   <a href="./resume.html">Resume</a>
   <a href="./about.html">About</a>
 </div>
-  <div>
-    <h1>Isaiah Hajabolhassan's Resume</h1>
-    <a href="https://github.com/Frosty-Animal/Engineering-Portfolio/blob/main/resume.pdf" download>Download My Resume</a>
-  </div>
+
+<div class="resume-container">
+  <h1>Isaiah Hajabolhassan's Resume</h1>
+
+  <!-- Embed the PDF for viewing -->
+  <embed src="https://github.com/Frosty-Animal/Engineering-Portfolio/raw/main/resume.pdf" type="application/pdf" class="resume-viewer">
+
+  <!-- Download link -->
+  <a href="https://github.com/Frosty-Animal/Engineering-Portfolio/raw/main/resume.pdf" download class="download-link">Download My Resume</a>
+</div>
+
 </body>
 </html>
