@@ -1,15 +1,28 @@
 <!DOCTYPE html>
-<html lang = "">
+<html lang="en">
 <head>
-  <title>
-    Portfolio
-  </title>
+  <title>Portfolio</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
   <style>
+    /* Basic reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Make the whole page a flex container */
     body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
       margin: 0;
       font-family: Arial, Helvetica, sans-serif;
+    }
+
+    /* Main content will grow to fill space */
+    .content {
+      flex-grow: 1;
     }
 
     .topnav {
@@ -34,15 +47,33 @@
     .topnav a.active {
       background-color: #04AA6D;
       color: white;
-
     }
+
     h1 {
-      text-align: center; /* Center-align the header */
-      margin: 40px 0 20px 0; /* Add some space around the header */
+      text-align: center;
+      margin: 40px 0 20px 0;
+    }
+
+    /* Footer styles */
+    footer {
+      background-color: #333;
+      color: #f2f2f2;
+      text-align: center;
+      padding: 10px 0;
+      position: relative;
+    }
+
+    /* Footer link styles */
+    footer a {
+      color: #04AA6D;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
     }
   </style>
   <link rel="icon" href="favicon.ico" type="image/x-icon">
-
 </head>
 <body>
 
@@ -52,19 +83,21 @@
   <a href="./resume.html">Resume</a>
   <a href="./about.html">About</a>
 </div>
-  <div>
-    <section class="hero">
-    <div class="hero-content">
-        <h1>Welcome to My Engineering Portfolio</h1>
-        <p>Explore my projects and learn more about my journey.</p>
-        <a href="#projects" class="button">See My Work</a>
-    </div>
-</section>
 
-  </div>
-  </body>
-  <footer>
-    <p>&copy; 2024 Isaiah Hajabolhassan. All rights reserved.</p>
-    <a href="https://github.com/Frosty-Animal" target="_blank"><i class="fa fa-github"></i> GitHub</a>
+<div class="content">
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Welcome to My Engineering Portfolio</h1>
+      <p>Explore my projects and learn more about my journey.</p>
+      <a href="#projects" class="button">See My Work</a>
+    </div>
+  </section>
+</div>
+
+<footer>
+  <p>&copy; 2024 Isaiah Hajabolhassan. All rights reserved.</p>
+  <a href="https://github.com/Frosty-Animal" target="_blank"><i class="fa fa-github"></i> GitHub</a>
 </footer>
+
+</body>
 </html>
