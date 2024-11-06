@@ -1,22 +1,64 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project 1 Details</title>
+    <title>Racing Drones</title>
+    <link rel="stylesheet" type = "text/css" href="./styles.css">
     <style>
         h1 {
             text-align: center; /* Center-align the header */
             margin: 40px 0 20px 0; /* Add some space around the header */
         }
+        /* Center the video and control its size */
+        .video-container {
+            display: flex;
+            justify-content: center;
+            margin: 20px auto;
+            width: 20%;         /* Full width for the container */
+            max-width: 1200px;    /* Set a maximum width as desired */
+        }
+
+        /* Style the video for flexible sizing */
+        video {
+            width: 100%;          /* Expand video to full width of container */
+            max-width: 100%;      /* Prevent video from overflowing container */
+            height: auto;         /* Maintain aspect ratio */
+            border-radius: 8px;   /* Optional rounded corners */
+        }
+
+        /* Center-align link */
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+        }
     </style>
 </head>
+<div class="topnav">
+    <a class="active" href="./index.html">Home</a>
+    <a href="./projects.html">Projects</a>
+    <a href="./resume.html">Resume</a>
+    <a href="./about.html">About</a>
+</div>
 <body>
-<h1>Project: Built racing drones for competition</h1>
-    <p>This page contains detailed information about Project 1...</p>
-<video width="600" controls>
-    <source src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main//IMG_4100.MOV" type="video/mp4">
-    Your browser does not support the video tag.
-</video>
-    <a href="projects.html">Back to Projects</a>
+<h1>Project: Built Racing Drones for Competition</h1>
+<p>This page contains detailed information about Project 1...</p>
+
+<!-- Container to center the video -->
+<div class="video-container">
+    <video controls>
+        <source src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/IMG_4100.MOV" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+</div>
+
+<!-- Center the back link -->
+<a href="projects.html" class="back-link">Back to Projects</a>
+
+<footer>
+    <p>&copy; 2024 Isaiah Hajabolhassan. All rights reserved.</p>
+    <a href="https://github.com/Frosty-Animal" target="_blank"><i class="fa fa-github"></i> GitHub</a>
+</footer>
 </body>
 </html>
