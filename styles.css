@@ -54,3 +54,67 @@ footer a {
 footer a:hover {
     text-decoration: underline;
 }
+.project-card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    margin: 20px;
+    text-align: center;
+    overflow: hidden;
+    position: relative; /* Needed for overlay positioning */
+    transition: transform 0.3s ease; /* Smooth animation for hover effect */
+}
+
+/* Container slide-up effect on hover */
+.project-card:hover {
+    transform: translateY(-20px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Hidden content that slides up */
+.project-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 15px;
+    opacity: 0;
+    transform: translateY(100%); /* Start outside the card */
+    transition: opacity 0.3s ease, transform 0.3s ease; /* Smooth animation */
+}
+
+/* Reveal content on hover */
+.project-card:hover .project-content {
+    opacity: 1;
+    transform: translateY(0); /* Slide into view */
+}
+
+/* Image styling */
+.project-card img {
+    width: 100%;
+    height: auto;
+}
+
+/* Project description hidden by default */
+.project-description {
+    display: none;
+}
+
+/* Button styles */
+.project-content a {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #04AA6D;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.project-content a:hover {
+    background-color: #027b45;
+}
