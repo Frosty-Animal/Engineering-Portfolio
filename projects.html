@@ -3,109 +3,7 @@
 <head>
     <title>Portfolio</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, Helvetica, sans-serif;
-        }
-
-        .topnav {
-            overflow: hidden;
-            background-color: #333;
-        }
-
-        .topnav a {
-            float: left;
-            color: #f2f2f2;
-            text-align: center;
-            padding: 14px 16px;
-            text-decoration: none;
-            font-size: 17px;
-        }
-
-        .topnav a:hover {
-            background-color: white; /* Background turns white on hover */
-            color: black; /* Text turns black on hover */
-        }
-
-        .topnav a.active {
-            background-color: black; /* Make "Home" button black */
-            color: white; /* Text color for "Home" */
-        }
-
-        /* Added hover effect for active link */
-        .topnav a.active:hover {
-            background-color: white; /* Highlight with white background */
-            color: black; /* Text turns black on hover */
-        }
-
-        h1 {
-            text-align: center; /* Center-align the header */
-            margin: 40px 0 20px 0; /* Add some space around the header */
-        }
-
-        .projects {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-around;
-            padding: 20px;
-        }
-
-        /* Individual project card */
-        .project-card {
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 300px;
-            margin: 20px;
-            text-align: center;
-            overflow: hidden;
-        }
-
-        /* Image for each project */
-        .project-card img {
-            width: 100%;
-            height: auto;
-        }
-
-        /* Description text */
-        .project-description {
-            padding: 15px;
-        }
-
-        /* Learn more link */
-        .project-card a {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #04AA6D;
-            color: white;
-            text-decoration: none;
-            border-radius: 4px;
-            margin: 10px;
-            transition: background-color 0.3s ease;
-        }
-
-        .project-card a:hover {
-            background-color: #027b45;
-        }
-        footer {
-            background-color: #333;
-            color: #f2f2f2;
-            text-align: center;
-            padding: 10px 0;
-            position: relative;
-        }
-
-        /* Footer link styles */
-        footer a {
-            color: #04AA6D;
-            text-decoration: none;
-        }
-
-        footer a:hover {
-            text-decoration: underline;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css"> <!-- Link to external CSS -->
 </head>
 <body>
 
@@ -120,88 +18,75 @@
 
 <div class="projects">
     <div class="project-card">
-        <img src="project1.jpg" alt="Project 1 Image">
+        <img src="project2.jpg" alt="Image not shown">
         <div class="project-content">
             <h3>Oil Pan Automation</h3>
-            <p>Contracted while working at the NPDC, I automated the process of putting caps onto Oil Pans.</p>
-            <a href="Hopkins.html">Learn More</a>
+            <p>While Interning at the NPDC, I helped develop a system to automate the placement of plugs for offshore oil rigs.</p>
+            <a href="./Hopkins.html">More Info</a>
         </div>
     </div>
 
     <div class="project-card">
         <img src="project2.jpg" alt="Image not shown">
-        <div class="project-description">
-            <h3>Plug slip placement automation</h3>
-            <p>Contracted while working at the NPDC, I helped develop a system to automate the placement of plugs for offshore oil rigs</p>
+        <div class="project-content">
+            <h3>Plug Slip Placement Automation</h3>
+            <p>While Interning at the NPDC, I helped develop a system to automate the placement of plugs for offshore oil rigs.</p>
             <a href="./OilStates.html">More Info</a>
         </div>
     </div>
+
     <div class="project-card">
-        <img src= "https//:raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/profilePicture/Capture.jpg" alt="Image not shown" width="500" height="300">
-        <div class="project-description">
+        <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/Capture.jpg" alt="Image not shown">
+        <div class="project-content">
             <h3>Impact drill for High Voltage Power Lines</h3>
-            <p>Contracted while working at the NPDC, I helped redesign and test their Impact Drill for remote use on 500kV powerlines</p>
+            <p>While Interning at the NPDC, I redesign and test a Impact Drill for remote use on 500kV powerlines</p>
             <a href="./Bevins.html">More Info</a>
         </div>
     </div>
+
     <div class="project-card">
         <img src="project2.jpg" alt="Image not shown">
-        <div class="project-description">
-            <h3>Gasifier</h3>
-            <p>A wood burner that turns the smoke exhaust from wood to electricity being pumped back into the grid</p>
+        <div class="project-content">
+            <h3>Energy Renewal Gasification</h3>
+            <p>A wood burner that turns the smoke exhaust from wood to electricity being pumped back into the grid.</p>
             <a href="./Gasifier.html">More Info</a>
         </div>
     </div>
+
     <div class="project-card">
         <img src="project2.jpg" alt="Image not shown">
-        <div class="project-description">
-            <h3>DIY Resin 3D printer</h3>
-            <p>A mini Desktop 3D printer that uses resin for creating models</p>
-            <a href="./3DPrinter.html">More Info</a>
-        </div>
-    </div>
-    <div class="project-card">
-        <img src="project2.jpg" alt="Image not shown">
-        <div class="project-description">
+        <div class="project-content">
             <h3>Automatic HVAC control vent</h3>
-            <p>Made in a hackathon competition that used InfraRed sensors to detect whether someone entered the room to allow HVAC flow into the room to save on Electricty</p>
+            <p>Made in a hackathon competition that used InfraRed sensors to detect whether someone entered the room to allow HVAC flow into the room to save on Electricty.</p>
             <a href="./HVAC.html">More Info</a>
         </div>
     </div>
+
     <div class="project-card">
         <img src="project2.jpg" alt="Image not shown">
-        <div class="project-description">
+        <div class="project-content">
             <h3>NixieTube Watch</h3>
             <p>A watch that displays are NixieTubes rather than your usuall Clockwork or Digital watchs</p>
             <a href="./NixieTubeWatch.html">More Info</a>
         </div>
     </div>
+
     <div class="project-card">
-        <img src="project2.jpg" alt="Image not shown">
-        <div class="project-description">
-            <h3>Racing Drones</h3>
+        <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/Capture.jpg" alt="Image not shown">
+        <div class="project-content">
+            <h3>Racing Drones></h3>
             <p>A for fun project to build racing drones with my friends</p>
             <a href="./Drones.html">More Info</a>
         </div>
     </div>
+
 </div>
+
 <footer>
     <p>&copy; 2024 Isaiah Hajabolhassan.</p>
-
-    <!-- GitHub link with icon -->
-    <a href="https://github.com/Frosty-Animal" target="_blank" style="margin-right: 15px;">
-        <i class="fab fa-github"></i> GitHub
-    </a>
-
-    <!-- LinkedIn link with icon -->
-    <a href="https://www.linkedin.com/in/isaiah-h/" target="_blank" style="margin-right: 15px;">
-        <i class="fab fa-linkedin"></i> LinkedIn
-    </a>
-
-    <!-- Email link with icon -->
-    <a href="mailto:Isaiahmh28@gmail.com" style="margin-right: 15px;">
-        <i class="fas fa-envelope"></i> Email
-    </a>
+    <a href="https://github.com/Frosty-Animal" target="_blank">GitHub</a>
+    <a href="https://www.linkedin.com/in/isaiah-h/" target="_blank">LinkedIn</a>
+    <a href="mailto:Isaiahmh28@gmail.com">Email</a>
 </footer>
 
 </body>

@@ -1,3 +1,8 @@
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
 .topnav {
     overflow: hidden;
     background-color: #333;
@@ -13,47 +18,33 @@
 }
 
 .topnav a:hover {
-    background-color: white;
-    color: black;
+    background-color: white; /* Background turns white on hover */
+    color: #04AA6D; /* Text turns black on hover */
 }
 
 .topnav a.active {
-    background-color: #04AA6D;
-    color: white;
+    background-color: #04AA6D; /* Make "Home" button black */
+    color: white; /* Text color for "Home" */
 }
 
 .topnav a.active:hover {
     background-color: white; /* Highlight with white background */
-    color: black; /* Text turns black on hover */
+    color: black /* Text turns black on hover */
 }
 
 h1 {
-    text-align: center;
-    padding: 16px 18px;
-    text-decoration: none;
-    background-color: #04AA6D;
-    font-size: 24px;
-    color: white;
+    text-align: center; /* Center-align the header */
+    margin: 40px 0 20px 0; /* Add some space around the header */
 }
 
-/* Footer styles */
-footer {
-    background-color: #333;
-    color: #f2f2f2;
-    text-align: center;
-    padding: 10px 0;
-    position: relative;
+.projects {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 20px;
 }
 
-/* Footer link styles */
-footer a {
-    color: #04AA6D;
-    text-decoration: none;
-}
-
-footer a:hover {
-    text-decoration: underline;
-}
+/* Individual project card */
 .project-card {
     background-color: #fff;
     border-radius: 8px;
@@ -117,4 +108,22 @@ footer a:hover {
 
 .project-content a:hover {
     background-color: #027b45;
+}
+
+footer {
+    background-color: #333;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 10px 0;
+    position: relative;
+}
+
+/* Footer link styles */
+footer a {
+    color: #04AA6D;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
 }
