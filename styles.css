@@ -19,7 +19,7 @@ body {
 
 .topnav a:hover {
     background-color: white; /* Background turns white on hover */
-    color: #04AA6D; /* Text turns black on hover */
+    color: black; /* Text turns black on hover */
 }
 
 .topnav a.active {
@@ -126,4 +126,30 @@ footer a {
 
 footer a:hover {
     text-decoration: underline;
+}
+.video-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px; /* Optional: Adds spacing above */
+}
+
+.button {
+    text-align: center;
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #04AA6D;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    margin: 40px 0 20px 0;
+}
+
+.button:hover {
+    background-color: #027b45;
+}
+
+.center-container {
+    text-align: center;
 }
