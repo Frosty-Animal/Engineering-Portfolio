@@ -36,7 +36,9 @@ h1 {
     text-align: center; /* Center-align the header */
     margin: 40px 0 20px 0; /* Add some space around the header */
 }
-
+p{
+    margin: 20px 40px;; /* Add some space around the header */
+}
 .projects {
     display: flex;
     flex-wrap: wrap;
