@@ -1,28 +1,63 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <title>Resin 3D Printer</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type = "text/css" href="./styles.css">
+    <link rel="icon" type="image/png" href="./Screenshot 2024-12-01 045343.png">
     <style>
 
     </style>
 </head>
+
 <div class="topnav">
     <a class="active" href="./index.html">Home</a>
     <a href="./projects.html">Projects</a>
     <a href="./resume.html">Resume</a>
     <a href="./about.html">About</a>
 </div>
+
+<div class="sidebar">
+    <a href="#overview">Overview</a>
+    <a href="#materials">Materials</a>
+    <a href="#assembly">Assembly</a>
+    <a href="#testing">Testing</a>
+</div>
+
 <body>
-<h1>Project: Building a 3D resin Printer from Scratch</h1>
-<p>This page contains detailed information about Project 1...</p>
+<div class="content-wrapper">
+    <div class="content">
+        <h1>Project: Building a 3D resin Printer from Scratch</h1>
+        <p>This page contains detailed information about Project 1...</p>
+
+<section id="overview">
+    <h2>Overview</h2>
+    <p>This section provides an overview of the project...</p>
+</section>
+
+<section id="materials">
+    <h2>Materials</h2>
+    <p>Details about the materials required...</p>
+</section>
+
+<section id="assembly">
+    <h2>Assembly</h2>
+    <p>Step-by-step instructions for assembling the printer...</p>
+</section>
+
+<section id="testing">
+    <h2>Testing</h2>
+    <p>Information on how to test and troubleshoot...</p>
+</section>
+
 <div class="center-container">
     <a href="./projects.html" class="button">Back to Projects</a>
 </div>
-
+    </div>
+</div>
 <footer>
-    <p>&copy; 2024 Isaiah Hajabolhassan.</p>
+    <p>&copy; 2024 Isaiah Hajabolhassan.All Rights Reserved.</p>
 
     <!-- GitHub link with icon -->
     <a href="https://github.com/Frosty-Animal" target="_blank" style="margin-right: 15px;">
@@ -39,6 +74,15 @@
         <i class="fas fa-envelope"></i> Email
     </a>
 </footer>
-
+<script>
+    document.querySelectorAll('.sidebar a').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+</script>
 </body>
 </html>

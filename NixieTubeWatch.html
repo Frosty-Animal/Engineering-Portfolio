@@ -4,6 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nixie Tube Watch</title>
     <link rel="stylesheet" type = "text/css" href="./styles.css">
+    <link rel="icon" type="image/png" href="./Screenshot 2024-12-01 045343.png">
     <style>
 
     </style>
@@ -14,13 +15,50 @@
     <a href="./resume.html">Resume</a>
     <a href="./about.html">About</a>
 </div>
+
+<div class="sidebar">
+    <a href="#overview">Overview</a>
+    <a href="#materials">Materials</a>
+    <a href="#assembly">Assembly</a>
+    <a href="#testing">Testing</a>
+</div>
+
 <body>
+<div class="content-wrapper">
+    <div class="content">
     <h1>Project: Build a Nixie Tube Watch from Scratch</h1>
     <p>This page contains detailed information about Project 1...</p>
+    </div>
+    <section id="overview">
+        <h2>Overview</h2>
+        <p>This section provides an overview of the project...</p>
+    </section>
+
+    <section id="materials">
+        <h2>Materials</h2>
+        <p>Details about the materials required...</p>
+    </section>
+
+    <section id="assembly">
+        <h2>Assembly</h2>
+        <p>Step-by-step instructions for assembling the printer...</p>
+    </section>
+
+    <section id="testing">
+        <h2>Testing</h2>
+        <p>Information on how to test and troubleshoot...</p>
+        <div class="video-container">
+            <video controls>
+                <source src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/IMG_4100.MOV" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </section>
+
     <div class="button">
         <a href="./projects.html">Back to Projects</a>
     </div>
-</body>
+</div>
 <footer>
     <p>&copy; 2024 Isaiah Hajabolhassan.</p>
 
@@ -39,4 +77,15 @@
         <i class="fas fa-envelope"></i> Email
     </a>
 </footer>
+<script>
+    document.querySelectorAll('.sidebar a').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+</script>
+</body>
 </html>

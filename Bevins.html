@@ -4,6 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Project 1 Details</title>
     <link rel="stylesheet" type = "text/css" href="./styles.css">
+    <link rel="icon" type="image/png" href="./Screenshot 2024-12-01 045343.png">
     <style>
 
     </style>
@@ -14,15 +15,46 @@
     <a href="./resume.html">Resume</a>
     <a href="./about.html">About</a>
 </div>
+
+<div class="sidebar">
+    <a href="#overview">Overview</a>
+    <a href="#materials">Materials</a>
+    <a href="#assembly">Assembly</a>
+    <a href="#testing">Testing</a>
+</div>
+
+
 <body>
-<section class="hero">
-<div class="hero-content">
+<div class="content-wrapper">
+<div class="content">
 <h1>Project: Contracted to Build a Impact Gun for High Voltage Power Lines</h1>
 <p>While interning at the New Product Development Center we were contracted by a company to.</p>
 </div>
+
+
+<section id="overview">
+    <h2>Overview</h2>
+    <p>This section provides an overview of the project...</p>
 </section>
+
+<section id="materials">
+    <h2>Materials</h2>
+    <p>Details about the materials required...</p>
+</section>
+
+<section id="assembly">
+    <h2>Assembly</h2>
+    <p>Step-by-step instructions for assembling the printer...</p>
+</section>
+
+<section id="testing">
+    <h2>Testing</h2>
+    <p>Information on how to test and troubleshoot...</p>
+</section>
+
 <div class="center-container">
     <a href="./projects.html" class="button">Back to Projects</a>
+</div>
 </div>
 <footer>
     <p>&copy; 2024 Isaiah Hajabolhassan.</p>
@@ -42,5 +74,15 @@
         <i class="fas fa-envelope"></i> Email
     </a>
 </footer>
+<script>
+    document.querySelectorAll('.sidebar a').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+</script>
 </body>
 </html>

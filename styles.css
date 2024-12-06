@@ -155,3 +155,57 @@ footer a:hover {
 .center-container {
     text-align: center;
 }
+
+/* Sidebar */
+/* Sidebar */
+.sidebar {
+    position: fixed;
+    top: 60px; /* Adjust for the topnav height */
+    left: 10px; /* Margin from the left */
+    width: 200px;
+    background-color: #333;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    padding-top: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    height: auto; /* Dynamic height based on content */
+    max-height: calc(100vh - 80px); /* Ensure it doesn't exceed viewport height */
+    overflow-y: auto; /* Add scroll if content overflows */
+}
+
+/* Sidebar Links */
+.sidebar a {
+    text-decoration: none;
+    color: white;
+    padding: 10px 15px;
+    display: block;
+    margin: 5px 10px; /* Adds space around each link */
+    border-radius: 5px;
+}
+
+.sidebar a:hover {
+    background-color: #575757;
+}
+
+.content-wrapper {
+    margin-left: 220px; /* Creates space for the sidebar */
+    padding: 20px; /* Adds padding inside the wrapper */
+    box-sizing: border-box; /* Ensures padding doesn't affect the width */
+}
+
+/* Content */
+.content {
+    margin: 20px 0; /* Adds vertical margin around the content */
+}
+
+/* Sections */
+section {
+    margin-bottom: 40px; /* Space between sections */
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    margin-right: 10px; /* Margin between the text and the right edge */
+}
