@@ -160,14 +160,13 @@ footer a:hover {
 /* Sidebar */
 .sidebar {
     position: fixed;
-    top: 60px; /* Adjust for the topnav height */
+    top: 60px;
     left: 10px; /* Margin from the left */
     width: 200px;
     background-color: #333;
     color: white;
     display: flex;
     flex-direction: column;
-    padding-top: 20px;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
     height: auto; /* Dynamic height based on content */
