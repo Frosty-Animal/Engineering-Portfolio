@@ -7,26 +7,6 @@
     <link rel="stylesheet" type = "text/css" href="./styles.css">
     <link rel="icon" type="image/png" href="./Screenshot 2024-12-01 045343.png">
     <style>
-        h1 {
-            text-align: center; /* Center-align the header */
-            margin: 40px 0 20px 0; /* Add some space around the header */
-        }
-        /* Center the video and control its size */
-        .video-container {
-            display: flex;
-            justify-content: center;
-            margin: 20px auto;
-            width: 20%;         /* Full width for the container */
-            max-width: 1200px;    /* Set a maximum width as desired */
-        }
-
-        /* Style the video for flexible sizing */
-        video {
-            width: 100%;          /* Expand video to full width of container */
-            max-width: 100%;      /* Prevent video from overflowing container */
-            height: auto;         /* Maintain aspect ratio */
-            border-radius: 8px;   /* Optional rounded corners */
-        }
 
     </style>
 </head>
@@ -42,22 +22,60 @@
     <a href="#materials">Materials</a>
     <a href="#assembly">Assembly</a>
     <a href="#testing">Testing</a>
+    <a href="#results">Results</a>
 </div>
 
 <body>
 <div class="content-wrapper">
     <div class="content">
 <h1>Project: Built Racing Drones for Competition</h1>
-<p>This page contains detailed information about Project 1...</p>
 </div>
+
+    <div class="slideshow-container">
+        <div class="slide">
+            <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/IMG_4080.jpg" alt="Slide 3">
+        </div>
+        <div class="slide">
+            <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/IMG_4091.HEIC" alt="Slide 1">
+        </div>
+        <div class="slide">
+            <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/IMG_5229.JPG" alt="Slide 2">
+        </div>
+        <div class="slide">
+            <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/IMG_5231.JPG" alt="Slide 2">
+        </div>
+        <div class="slide">
+            <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/IMG_5232.JPG" alt="Slide 2">
+        </div>
+
+        <button class="prev" onclick="plusSlides(-1)">&#10094;</button>
+        <button class="next" onclick="plusSlides(1)">&#10095;</button>
+    </div>
+
+    <div class="dots">
+        <span class="dot" onclick="currentSlide(1)"></span>
+        <span class="dot" onclick="currentSlide(2)"></span>
+        <span class="dot" onclick="currentSlide(3)"></span>
+        <span class="dot" onclick="currentSlide(4)"></span>
+        <span class="dot" onclick="currentSlide(5)"></span>
+    </div>
+
 <section id="overview">
     <h2>Overview</h2>
-    <p>This section provides an overview of the project...</p>
+    <p1>This for fun project was started by me and acouple of friends who bored at work one day and wanted something
+        new to break the monotony of work and school. We ended up fixating on racing drones as we recently got on to
+        watching several drone racing tournaments and wanted to test our own skills. We ended up even making a club
+        out of it for a while during my sophomore year of college. Each drone took about 10 hours to build and program as well as being a good
+        starting experience on getting good at soldering as there were a lot of parts that needed to be hand soldered...
+        and how to deal with burns as there were a lot of those as well. at top speeds the drones could get over 100MPH
+        and has a battery life of roughly 6 minutes(dependent on how long your drone will be flying at top speeds
+
+    </p1>
 </section>
 
 <section id="materials">
     <h2>Materials</h2>
-    <p>Details about the materials required...</p>
+    <p>For this project we used the following e</p>
 </section>
 
 <section id="assembly">
@@ -68,13 +86,19 @@
 <section id="testing">
     <h2>Testing</h2>
     <p>Information on how to test and troubleshoot...</p>
+</section>
+
+<section id="results">
+    <h2>Results</h2>
     <div class="video-container">
         <video controls>
             <source src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/IMG_4100.MOV" type="video/mp4">
             Your browser does not support the video tag.
         </video>
     </div>
+    <p></p>
 </section>
+
 
 <div class="center-container">
     <a href="./projects.html" class="button">Back to Projects</a>
@@ -83,22 +107,21 @@
 <footer>
     <p>&copy; 2024 Isaiah Hajabolhassan.</p>
 
-    <!-- GitHub link with icon -->
     <a href="https://github.com/Frosty-Animal" target="_blank" style="margin-right: 15px;">
         <i class="fab fa-github"></i> GitHub
     </a>
 
-    <!-- LinkedIn link with icon -->
     <a href="https://www.linkedin.com/in/isaiah-h/" target="_blank" style="margin-right: 15px;">
         <i class="fab fa-linkedin"></i> LinkedIn
     </a>
 
-    <!-- Email link with icon -->
     <a href="mailto:Isaiahmh28@gmail.com" style="margin-right: 15px;">
         <i class="fas fa-envelope"></i> Email
     </a>
 </footer>
 <script>
+
+    /*Shit i found online*/
     document.querySelectorAll('.sidebar a').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
             e.preventDefault();
@@ -107,6 +130,29 @@
             });
         });
     });
+
+    let slideIndex = 1;
+    showSlides(slideIndex);
+
+    function plusSlides(n) {
+        showSlides(slideIndex += n);
+    }
+
+    function currentSlide(n) {
+        showSlides(slideIndex = n);
+    }
+
+    function showSlides(n) {
+        let slides = document.querySelectorAll(".slide");
+        let dots = document.querySelectorAll(".dot");
+        if (n > slides.length) slideIndex = 1;
+        if (n < 1) slideIndex = slides.length;
+        slides.forEach((slide, index) => {
+            slide.style.display = (index + 1 === slideIndex) ? "block" : "none";
+        });
+        dots.forEach(dot => dot.className = dot.className.replace(" active-dot", ""));
+        dots[slideIndex - 1].className += " active-dot";
+    }
 </script>
 </body>
 </html>

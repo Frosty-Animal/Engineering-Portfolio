@@ -38,6 +38,12 @@ h1 {
 }
 p{
     margin: 20px 40px;; /* Add some space around the header */
+
+}
+p1 {
+    margin: 20px 40px;; /* Add some space around the header */
+    text-indent: 50px;
+
 }
 .projects {
     display: flex;
@@ -207,4 +213,89 @@ section {
     border-radius: 10px;
     background-color: #f9f9f9;
     margin-right: 10px; /* Margin between the text and the right edge */
+}
+
+.slideshow-container {
+    position: relative;
+    max-width: 800px; /* Set your desired width */
+    height: 450px;    /* Set your desired height */
+    margin: 0 auto;   /* Center the slideshow */
+    overflow: hidden; /* Ensure no overflow from images */
+    border-radius: 8px; /* Optional: Rounded corners */
+    border: 1px solid #ccc; /* Optional: Border */
+    display: flex;   /* Flexbox for centering images */
+    justify-content: center; /* Horizontally center content */
+    align-items: center; /* Vertically center content */
+    background-color: #000; /* Optional: Background color for empty space */
+}
+
+.slide {
+    display: none; /* Hide all slides by default */
+    width: 100%;
+    height: 100%; /* Match the container height */
+}
+
+.slide img {
+    max-width: 100%; /* Ensure images don’t exceed container width */
+    max-height: 100%; /* Ensure images don’t exceed container height */
+    object-fit: contain; /* Adjust image scaling to fit within container */
+    display: block; /* Ensure proper block rendering */
+    margin: auto; /* Center image inside the slide */
+}
+
+
+.prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    padding: 10px;
+    margin-top: -22px;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5);
+    border: none;
+    border-radius: 3px;
+    user-select: none;
+}
+
+.prev {
+    left: 0;
+}
+
+.next {
+    right: 0;
+}
+
+.dots {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.dot {
+    cursor: pointer;
+    height: 15px;
+    width: 15px;
+    margin: 0 5px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.active-dot {
+    background-color: #717171;
+}
+
+.video-container {
+    display: flex;
+    justify-content: center;
+    margin: 20px auto;
+    width: 20%;         /* Full width for the container */
+    max-width: 1200px;    /* Set a maximum width as desired */
+}
+
+/* Style the video for flexible sizing */
+video {width: 100%;          /* Expand video to full width of container */
+    max-width: 100%;      /* Prevent video from overflowing container */
+    height: auto;         /* Maintain aspect ratio */
+    border-radius: 8px;   /* Optional rounded corners */
 }

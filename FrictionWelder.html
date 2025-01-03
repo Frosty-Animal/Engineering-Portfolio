@@ -1,1 +1,132 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project 1 Details</title>
+    <link rel="stylesheet" type = "text/css" href="./styles.css">
+    <link rel="icon" type="image/png" href="./Screenshot 2024-12-01 045343.png">
+    <style>
+    </style>
+</head>
+<div class="topnav">
+    <a class="active" href="./index.html">Home</a>
+    <a href="./projects.html">Projects</a>
+    <a href="./resume.html">Resume</a>
+    <a href="./about.html">About</a>
+</div>
 
+<div class="sidebar">
+    <a href="#overview">Overview</a>
+    <a href="#materials">Materials</a>
+    <a href="#assembly">Assembly</a>
+    <a href="#testing">Testing</a>
+</div>
+
+
+
+<body>
+<div class="content-wrapper">
+    <div class="content">
+        <h1>Project: Contracted to build...</h1>
+    </div>
+
+
+    <div class="slideshow-container">
+        <div class="slide">
+            <img src="image1.jpg" alt="Slide 1">
+        </div>
+        <div class="slide">
+            <img src="image2.jpg" alt="Slide 2">
+        </div>
+        <div class="slide">
+            <img src="image3.jpg" alt="Slide 3">
+        </div>
+
+        <button class="prev" onclick="plusSlides(-1)">&#10094;</button>
+        <button class="next" onclick="plusSlides(1)">&#10095;</button>
+    </div>
+
+    <div class="dots">
+        <span class="dot" onclick="currentSlide(1)"></span>
+        <span class="dot" onclick="currentSlide(2)"></span>
+        <span class="dot" onclick="currentSlide(3)"></span>
+    </div>
+
+    <section id="overview">
+        <h2>Overview</h2>
+        <p>This section provides an overview of the project...</p>
+    </section>
+
+    <section id="materials">
+        <h2>Materials</h2>
+        <p>Details about the materials required...</p>
+    </section>
+
+    <section id="assembly">
+        <h2>Assembly</h2>
+        <p>Step-by-step instructions for assembling the printer...</p>
+    </section>
+
+    <section id="testing">
+        <h2>Testing</h2>
+        <p>Information on how to test and troubleshoot...</p>
+    </section>
+
+    <div class="center-container">
+        <a href="./projects.html" class="button">Back to Projects</a>
+    </div>
+</div>
+<footer>
+    <p>&copy; 2024 Isaiah Hajabolhassan.</p>
+
+    <!-- GitHub link with icon -->
+    <a href="https://github.com/Frosty-Animal" target="_blank" style="margin-right: 15px;">
+        <i class="fab fa-github"></i> GitHub
+    </a>
+
+    <!-- LinkedIn link with icon -->
+    <a href="https://www.linkedin.com/in/isaiah-h/" target="_blank" style="margin-right: 15px;">
+        <i class="fab fa-linkedin"></i> LinkedIn
+    </a>
+
+    <!-- Email link with icon -->
+    <a href="mailto:Isaiahmh28@gmail.com" style="margin-right: 15px;">
+        <i class="fas fa-envelope"></i> Email
+    </a>
+</footer>
+<script>
+    document.querySelectorAll('.sidebar a').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+
+
+    let slideIndex = 1;
+    showSlides(slideIndex);
+
+    function plusSlides(n) {
+        showSlides(slideIndex += n);
+    }
+
+    function currentSlide(n) {
+        showSlides(slideIndex = n);
+    }
+
+    function showSlides(n) {
+        let slides = document.querySelectorAll(".slide");
+        let dots = document.querySelectorAll(".dot");
+        if (n > slides.length) slideIndex = 1;
+        if (n < 1) slideIndex = slides.length;
+        slides.forEach((slide, index) => {
+            slide.style.display = (index + 1 === slideIndex) ? "block" : "none";
+        });
+        dots.forEach(dot => dot.className = dot.className.replace(" active-dot", ""));
+        dots[slideIndex - 1].className += " active-dot";
+    }
+</script>
+</body>
+</html>
