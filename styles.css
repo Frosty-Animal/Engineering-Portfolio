@@ -1,11 +1,12 @@
 body {
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
+    background-color: #e6e4e0
 }
 
 .topnav {
     overflow: hidden;
-    background-color: #333;
+    background-color: #44443b;
 }
 
 .topnav a {
@@ -15,20 +16,21 @@ body {
     padding: 14px 16px;
     text-decoration: none;
     font-size: 17px;
+    transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
 .topnav a:hover {
-    background-color: white; /* Background turns white on hover */
-    color: black; /* Text turns black on hover */
+    background-color: #bc6116 ; /* Background turns white on hover */
+    color: white; /* Text turns black on hover */
 }
 
 .topnav a.active {
-    background-color: #04AA6D; /* Make "Home" button black */
+    background-color: #ec7a1c; /* Make "Home" button black */
     color: white; /* Text color for "Home" */
 }
 
 .topnav a.active:hover {
-    background-color: white; /* Highlight with white background */
+    background-color: #bc6116; /* Highlight with white background */
     color: black /* Text turns black on hover */
 }
 
@@ -106,7 +108,7 @@ p1 {
 .project-content a {
     display: inline-block;
     padding: 10px 20px;
-    background-color: #04AA6D;
+    background-color: #ec7a1c;
     color: white;
     text-decoration: none;
     border-radius: 4px;
@@ -115,7 +117,7 @@ p1 {
 }
 
 .project-content a:hover {
-    background-color: #027b45;
+    background-color: #bc6116;
 }
 
 footer {
@@ -128,7 +130,7 @@ footer {
 
 /* Footer link styles */
 footer a {
-    color: #04AA6D;
+    color: #ec7a1c;
     text-decoration: none;
 }
 
@@ -146,7 +148,7 @@ footer a:hover {
     text-align: center;
     display: inline-block;
     padding: 10px 20px;
-    background-color: #04AA6D;
+    background-color: #ec7a1c;
     color: white;
     text-decoration: none;
     border-radius: 5px;
@@ -155,7 +157,7 @@ footer a:hover {
 }
 
 .button:hover {
-    background-color: #027b45;
+    background-color: #bc6116;
 }
 
 .center-container {
@@ -243,27 +245,28 @@ section {
     margin: auto; /* Center image inside the slide */
 }
 
+.slide.active {
+    display: block; /* Only display the active slide */
+}
 
 .prev, .next {
     cursor: pointer;
     position: absolute;
     top: 50%;
-    width: auto;
-    padding: 10px;
-    margin-top: -22px;
-    color: white;
+    transform: translateY(-50%);
     background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 10px;
     border: none;
     border-radius: 3px;
-    user-select: none;
 }
 
 .prev {
-    left: 0;
+    left: 10px;
 }
 
 .next {
-    right: 0;
+    right: 10px;
 }
 
 .dots {
@@ -272,13 +275,12 @@ section {
 }
 
 .dot {
-    cursor: pointer;
     height: 15px;
     width: 15px;
-    margin: 0 5px;
     background-color: #bbb;
     border-radius: 50%;
     display: inline-block;
+    cursor: pointer;
 }
 
 .active-dot {

@@ -33,19 +33,19 @@
 
     <div class="slideshow-container">
         <div class="slide">
-            <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/IMG_4080.jpg" alt="Slide 3">
+            <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/IMG_4080.jpg" alt="Slide 1" style="width:100%">
         </div>
         <div class="slide">
-            <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/IMG_4091.HEIC" alt="Slide 1">
+            <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/IMG_4091.jpg" alt="Slide 2" style="width:100%">
         </div>
         <div class="slide">
-            <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/IMG_5229.JPG" alt="Slide 2">
+            <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/IMG_5229.jpg" alt="Slide 3" style="width:100%">
         </div>
         <div class="slide">
-            <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/IMG_5231.JPG" alt="Slide 2">
+            <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/IMG_5231.jpg" alt="Slide 4" style="width:100%">
         </div>
         <div class="slide">
-            <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/IMG_5232.JPG" alt="Slide 2">
+            <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/IMG_5232.jpg" alt="Slide 5" style="width:100%">
         </div>
 
         <button class="prev" onclick="plusSlides(-1)">&#10094;</button>
@@ -68,7 +68,7 @@
         out of it for a while during my sophomore year of college. Each drone took about 10 hours to build and program as well as being a good
         starting experience on getting good at soldering as there were a lot of parts that needed to be hand soldered...
         and how to deal with burns as there were a lot of those as well. at top speeds the drones could get over 100MPH
-        and has a battery life of roughly 6 minutes(dependent on how long your drone will be flying at top speeds
+        and has a battery life of roughly 6 minutes(dependent on how long your drone will be flying at max speeds).
 
     </p1>
 </section>
@@ -134,25 +134,33 @@
     let slideIndex = 1;
     showSlides(slideIndex);
 
+    // Next/previous controls
     function plusSlides(n) {
         showSlides(slideIndex += n);
     }
 
+    // Thumbnail image controls
     function currentSlide(n) {
         showSlides(slideIndex = n);
     }
 
     function showSlides(n) {
-        let slides = document.querySelectorAll(".slide");
-        let dots = document.querySelectorAll(".dot");
+        const slides = document.querySelectorAll(".slide");
+        const dots = document.querySelectorAll(".dot");
+
+        // Adjust slideIndex if out of bounds
         if (n > slides.length) slideIndex = 1;
         if (n < 1) slideIndex = slides.length;
-        slides.forEach((slide, index) => {
-            slide.style.display = (index + 1 === slideIndex) ? "block" : "none";
-        });
-        dots.forEach(dot => dot.className = dot.className.replace(" active-dot", ""));
-        dots[slideIndex - 1].className += " active-dot";
+
+        // Hide all slides and remove active-dot from all dots
+        slides.forEach(slide => (slide.style.display = "none"));
+        dots.forEach(dot => dot.classList.remove("active-dot"));
+
+        // Show the active slide and activate the corresponding dot
+        slides[slideIndex - 1].style.display = "block";
+        dots[slideIndex - 1].classList.add("active-dot");
     }
+
 </script>
 </body>
 </html>
