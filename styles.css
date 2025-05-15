@@ -20,38 +20,62 @@ body {
 }
 
 .topnav a:hover {
-    background-color: #bc6116 ; /* Background turns white on hover */
-    color: white; /* Text turns black on hover */
+    background-color: #bc6116;
+    color: white;
 }
 
 .topnav a.active {
-    background-color: #ec7a1c; /* Make "Home" button black */
-    color: white; /* Text color for "Home" */
+    background-color: #ec7a1c;
+    color: white;
 }
 
 .topnav a.active:hover {
-    background-color: #bc6116; /* Highlight with white background */
-    color: black /* Text turns black on hover */
+    background-color: #bc6116;
+    color: black;
 }
 
 h1 {
-    text-align: center; /* Center-align the header */
-    margin: 40px 0 20px 0; /* Add some space around the header */
+    text-align: center;
+    margin: 40px 0 20px 0;
 }
-p{
-    margin: 20px 40px;; /* Add some space around the header */
 
+p {
+    margin: 20px 40px;
 }
+
 p1 {
-    margin: 20px 40px;; /* Add some space around the header */
+    margin: 20px 40px;
     text-indent: 50px;
-
 }
+
+/* Improved project grid layout */
 .projects {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    padding: 40px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Responsive adjustments for grid */
+@media (max-width: 768px) {
+    .projects {
+        grid-template-columns: 1fr;
+        padding: 20px 10px;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .projects {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1025px) {
+    .projects {
+        grid-template-columns: repeat(3, 1fr);
+    }
 }
 
 /* Individual project card */
@@ -59,18 +83,29 @@ p1 {
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 300px;
-    margin: 20px;
     text-align: center;
     overflow: hidden;
-    position: relative; /* Needed for overlay positioning */
-    transition: transform 0.3s ease; /* Smooth animation for hover effect */
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 250px; /* Fixed height for consistency */
 }
 
 /* Container slide-up effect on hover */
 .project-card:hover {
-    transform: translateY(-20px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Image styling */
+.project-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.project-card:hover img {
+    transform: scale(1.05);
 }
 
 /* Hidden content that slides up */
@@ -79,24 +114,29 @@ p1 {
     bottom: 0;
     left: 0;
     right: 0;
-    background-color: rgba(0, 0, 0, 0.8);
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
     color: white;
-    padding: 15px;
+    padding: 20px 15px 15px;
     opacity: 0;
-    transform: translateY(100%); /* Start outside the card */
-    transition: opacity 0.3s ease, transform 0.3s ease; /* Smooth animation */
+    transform: translateY(100%);
+    transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 /* Reveal content on hover */
 .project-card:hover .project-content {
     opacity: 1;
-    transform: translateY(0); /* Slide into view */
+    transform: translateY(0);
 }
 
-/* Image styling */
-.project-card img {
-    width: 100%;
-    height: auto;
+.project-content h3 {
+    margin: 0 0 10px 0;
+    font-size: 1.2em;
+}
+
+.project-content p {
+    margin: 5px 0;
+    font-size: 0.9em;
+    color: #e0e0e0;
 }
 
 /* Project description hidden by default */
@@ -107,13 +147,14 @@ p1 {
 /* Button styles */
 .project-content a {
     display: inline-block;
-    padding: 10px 20px;
+    padding: 8px 16px;
     background-color: #ec7a1c;
     color: white;
     text-decoration: none;
     border-radius: 4px;
     margin-top: 10px;
     transition: background-color 0.3s ease;
+    font-size: 0.9em;
 }
 
 .project-content a:hover {
@@ -137,11 +178,12 @@ footer a {
 footer a:hover {
     text-decoration: underline;
 }
+
 .video-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 20px; /* Optional: Adds spacing above */
+    margin-top: 20px;
 }
 
 .button {
@@ -165,11 +207,10 @@ footer a:hover {
 }
 
 /* Sidebar */
-/* Sidebar */
 .sidebar {
     position: fixed;
     top: 60px;
-    left: 10px; /* Margin from the left */
+    left: 10px;
     width: 200px;
     background-color: #333;
     color: white;
@@ -177,9 +218,9 @@ footer a:hover {
     flex-direction: column;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
-    height: auto; /* Dynamic height based on content */
-    max-height: calc(100vh - 80px); /* Ensure it doesn't exceed viewport height */
-    overflow-y: auto; /* Add scroll if content overflows */
+    height: auto;
+    max-height: calc(100vh - 80px);
+    overflow-y: auto;
 }
 
 /* Sidebar Links */
@@ -188,7 +229,7 @@ footer a:hover {
     color: white;
     padding: 10px 15px;
     display: block;
-    margin: 5px 10px; /* Adds space around each link */
+    margin: 5px 10px;
     border-radius: 5px;
 }
 
@@ -197,56 +238,56 @@ footer a:hover {
 }
 
 .content-wrapper {
-    margin-left: 220px; /* Creates space for the sidebar */
-    padding: 20px; /* Adds padding inside the wrapper */
-    box-sizing: border-box; /* Ensures padding doesn't affect the width */
+    margin-left: 220px;
+    padding: 20px;
+    box-sizing: border-box;
 }
 
 /* Content */
 .content {
-    margin: 20px 0; /* Adds vertical margin around the content */
+    margin: 20px 0;
 }
 
 /* Sections */
 section {
-    margin-bottom: 40px; /* Space between sections */
+    margin-bottom: 40px;
     padding: 20px;
     border: 1px solid #ddd;
     border-radius: 10px;
     background-color: #f9f9f9;
-    margin-right: 10px; /* Margin between the text and the right edge */
+    margin-right: 10px;
 }
 
 .slideshow-container {
     position: relative;
-    max-width: 800px; /* Set your desired width */
-    height: 450px;    /* Set your desired height */
-    margin: 0 auto;   /* Center the slideshow */
-    overflow: hidden; /* Ensure no overflow from images */
-    border-radius: 8px; /* Optional: Rounded corners */
-    border: 1px solid #ccc; /* Optional: Border */
-    display: flex;   /* Flexbox for centering images */
-    justify-content: center; /* Horizontally center content */
-    align-items: center; /* Vertically center content */
-    background-color: #000; /* Optional: Background color for empty space */
+    max-width: 800px;
+    height: 450px;
+    margin: 0 auto;
+    overflow: hidden;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #000;
 }
 
 .slide {
-    display: none; /* Hide all slides by default */
+    display: none;
     width: 100%;
-    height: 100%; /* Match the container height */
+    height: 100%;
 }
 
 .slide img {
-    max-width: 100%; /* Ensure images don’t exceed container width */
-    max-height: 100%; /* Ensure images don’t exceed container height */
-    object-fit: contain; /* Adjust image scaling to fit within container */
-    display: block; /* Ensure proper block rendering */
-    margin: auto; /* Center image inside the slide */
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    display: block;
+    margin: auto;
 }
 
 .slide.active {
-    display: block; /* Only display the active slide */
+    display: block;
 }
 
 .prev, .next {
@@ -291,13 +332,14 @@ section {
     display: flex;
     justify-content: center;
     margin: 20px auto;
-    width: 20%;         /* Full width for the container */
-    max-width: 1200px;    /* Set a maximum width as desired */
+    width: 20%;
+    max-width: 1200px;
 }
 
 /* Style the video for flexible sizing */
-video {width: 100%;          /* Expand video to full width of container */
-    max-width: 100%;      /* Prevent video from overflowing container */
-    height: auto;         /* Maintain aspect ratio */
-    border-radius: 8px;   /* Optional rounded corners */
+video {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
 }
