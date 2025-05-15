@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>Portfolio</title>
     <link rel="stylesheet" type="text/css" href="./styles.css">
     <link rel="icon" type="image/png" href="./Screenshot 2024-12-01 045343.png">
@@ -18,23 +19,48 @@
             background-color: #ec7a1c;
             color: white;
             text-decoration: none;
+            border: none;
             border-radius: 5px;
             margin: 40px 0 20px 0;
             transition: opacity 0.5s ease, transform 0.5s ease;
+            cursor: pointer;
+            font-size: 16px;
         }
 
         /* Hover effect */
         .filter-buttons button:hover {
             background-color: #bc6116;
             color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Active button state */
+        .filter-buttons button.active {
+            background-color: #bc6116;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
         }
 
         .project-card {
             display: block; /* Default: All projects displayed */
+            transition: opacity 0.3s ease, transform 0.3s ease;
         }
 
         .project-card.hide {
             display: none; /* Hide filtered out projects */
+        }
+
+        /* Optional: Add animation for showing/hiding */
+        @media (prefers-reduced-motion: no-preference) {
+            .project-card {
+                opacity: 1;
+                transform: scale(1);
+            }
+            
+            .project-card.hide {
+                opacity: 0;
+                transform: scale(0.95);
+                transition: opacity 0.3s ease, transform 0.3s ease;
+            }
         }
     </style>
 </head>
@@ -50,115 +76,132 @@
 <h1>My Projects</h1>
 
 <div class="filter-buttons">
-    <button onclick="filterProjects('all')">All</button>
-    <button onclick="filterProjects('internship')">Internship</button>
-    <button onclick="filterProjects('personal')">Personal Projects</button>
-    <button onclick="filterProjects('school')">School</button>
+    <button onclick="filterProjects('all')" class="active" id="btn-all">All</button>
+    <button onclick="filterProjects('internship')" id="btn-internship">Internship</button>
+    <button onclick="filterProjects('personal')" id="btn-personal">Personal Projects</button>
+    <button onclick="filterProjects('school')" id="btn-school">School</button>
 </div>
 
 <div class="projects">
     <div class="project-card internship">
-        <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/Capture.jpg" alt="Image not shown">
+        <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/Capture.jpg" alt="">
         <div class="project-content">
             <h3>Oil Pan Automation</h3>
-            <p><b>Completed December 2024</b></p>
-            <p>While Interning at the NPDC, I helped develop a system to automate the placement of plugs for offshore oil rigs.</p>
-            <a href="./Hopkins.html">More Info</a>
+            <p><strong>Completed: December 2024</strong></p>
+            <p>While interning at the NPDC, I helped develop a system to automate the placement of plugs for offshore oil rigs.</p>
+            <a href="./Hopkins.html" aria-label="Learn more about Oil Pan Automation project">More Info</a>
         </div>
     </div>
 
     <div class="project-card internship">
-        <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/Capture.jpg" alt="Image not shown">
+        <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/Capture.jpg" alt="">
         <div class="project-content">
             <h3>Oil Plug Automation</h3>
-            <p>While Interning at the NPDC, I helped develop a system to automate the placement of plugs for offshore oil rigs.</p>
-            <a href="./OilStates.html">More Info</a>
+            <p><strong>NPDC Internship Project</strong></p>
+            <p>While interning at the NPDC, I helped develop a system to automate the placement of plugs for offshore oil rigs.</p>
+            <a href="./OilStates.html" aria-label="Learn more about Oil Plug Automation project">More Info</a>
         </div>
     </div>
 
     <div class="project-card internship">
-        <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/Capture1.PNG" alt="Image not shown">
+        <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/Capture1.PNG" alt="">
         <div class="project-content">
-            <h3>Impact drill for High Voltage Power Lines</h3>
-            <p>While Interning at the NPDC, I redesign and test an Impact Drill for remote use on 500kV powerlines</p>
-            <a href="./Bevins.html">More Info</a>
+            <h3>Impact Drill for High Voltage Power Lines</h3>
+            <p><strong>NPDC Internship Project</strong></p>
+            <p>While interning at the NPDC, I redesigned and tested an impact drill for remote use on 500kV power lines.</p>
+            <a href="./Bevins.html" aria-label="Learn more about Impact Drill project">More Info</a>
         </div>
     </div>
 
     <div class="project-card internship">
-        <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/Capture.jpg" alt="Image not shown">
+        <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/Capture.jpg" alt="">
         <div class="project-content">
             <h3>Energy Renewal Gasification</h3>
-            <p>A wood burner that turns the smoke exhaust from wood to electricity being pumped back into the grid.</p>
-            <a href="./Gasifier.html">More Info</a>
+            <p><strong>NPDC Internship Project</strong></p>
+            <p>A wood burner that converts smoke exhaust from wood into electricity, feeding back into the grid.</p>
+            <a href="./Gasifier.html" aria-label="Learn more about Energy Renewal Gasification project">More Info</a>
         </div>
     </div>
 
     <div class="project-card school">
-        <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/Intellevent2.PNG" alt="Image not shown">
+        <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/Intellevent2.PNG" alt="">
         <div class="project-content">
-            <h3>Automatic HVAC control vent</h3>
-            <p>Made in a hackathon competition, I used IR and Temp Sensors to autonomously control vents for HVAC flow in buildings.</p>
-            <a href="./HVAC.html">More Info</a>
+            <h3>Automatic HVAC Control Vent</h3>
+            <p><strong>Hackathon Competition Entry</strong></p>
+            <p>Created during a hackathon competition, I used IR and temperature sensors to autonomously control vents for HVAC flow in buildings.</p>
+            <a href="./HVAC.html" aria-label="Learn more about HVAC Control Vent project">More Info</a>
         </div>
     </div>
 
     <div class="project-card personal">
-        <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/Capture.jpg" alt="Image not shown">
+        <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/Capture.jpg" alt="">
         <div class="project-content">
-            <h3>NixieTube Watch</h3>
-            <p>A watch that displays using NixieTubes rather than your usually Clockwork or digital watches</p>
-            <a href="./NixieTubeWatch.html">More Info</a>
+            <h3>Nixie Tube Watch</h3>
+            <p><strong>Personal Project</strong></p>
+            <p>A watch that displays time using nixie tubes rather than traditional clockwork or digital displays.</p>
+            <a href="./NixieTubeWatch.html" aria-label="Learn more about Nixie Tube Watch project">More Info</a>
         </div>
     </div>
 
     <div class="project-card personal">
-        <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/IMG_4080.jpg" alt="Image not shown">
+        <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/IMG_4080.jpg" alt="">
         <div class="project-content">
             <h3>Racing Drones</h3>
-            <p>A for fun project to build racing drones with my friends</p>
-            <a href="./Drones.html">More Info</a>
+            <p><strong>Personal Project</strong></p>
+            <p>A fun project to build racing drones with my friends for competitive flying and learning.</p>
+            <a href="./Drones.html" aria-label="Learn more about Racing Drones project">More Info</a>
         </div>
     </div>
 
     <div class="project-card personal">
-        <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/IMG_4428.JPG" alt="Image not shown">
+        <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/IMG_4428.JPG" alt="">
         <div class="project-content">
             <h3>DIY Resin Printer</h3>
-            <p>A desktop 3D Printer that uses a UV light and a LCD screen to make 3D prints</p>
-            <a href="./3DPrinter.html">More Info</a>
+            <p><strong>Personal Project</strong></p>
+            <p>A desktop 3D printer that uses UV light and an LCD screen to create precise 3D prints.</p>
+            <a href="./3DPrinter.html" aria-label="Learn more about DIY Resin Printer project">More Info</a>
         </div>
     </div>
 
     <div class="project-card internship">
-        <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/IMG_5146.jpg" alt="Image not shown">
+        <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/IMG_5146.jpg" alt="">
         <div class="project-content">
             <h3>Friction Welder</h3>
-            <p><b>Completed December 2024</b></p>
-            <p>While Interning at the NPDC, i designed a friction welder that would attach to a skid steer and be used to friction weld pipes to be later laid into the ground</p>
-            <a href="./FrictionWelder.html">More Info</a>
+            <p><strong>Completed: December 2024</strong></p>
+            <p>While interning at the NPDC, I designed a friction welder that attaches to a skid steer for friction welding pipes to be laid underground.</p>
+            <a href="./FrictionWelder.html" aria-label="Learn more about Friction Welder project">More Info</a>
         </div>
     </div>
 
     <div class="project-card school">
-        <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/Capture.jpg" alt="Image not shown">
+        <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/Capture.jpg" alt="">
         <div class="project-content">
             <h3>Pipelined Computer</h3>
-            <p></p>
-            <a href="">More Info</a>
+            <p><strong>Academic Project</strong></p>
+            <p>Design and implementation of a pipelined computer architecture as part of computer engineering coursework.</p>
+            <a href="#" aria-label="Learn more about Pipelined Computer project">More Info</a>
         </div>
     </div>
-  </div>  
+</div>
+
 <footer>
     <p>&copy; 2024 Isaiah Hajabolhassan.</p>
-    <a href="https://github.com/Frosty-Animal" target="_blank">GitHub</a>
-    <a href="https://www.linkedin.com/in/isaiah-h/" target="_blank">LinkedIn</a>
+    <a href="https://github.com/Frosty-Animal" target="_blank" rel="noopener noreferrer">GitHub</a>
+    <a href="https://www.linkedin.com/in/isaiah-h/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
     <a href="mailto:Isaiahmh28@gmail.com">Email</a>
 </footer>
 
 <script>
     function filterProjects(category) {
         const projects = document.querySelectorAll('.project-card');
+        const buttons = document.querySelectorAll('.filter-buttons button');
+        
+        // Remove active class from all buttons
+        buttons.forEach(btn => btn.classList.remove('active'));
+        
+        // Add active class to clicked button
+        document.getElementById(`btn-${category}`).classList.add('active');
+        
         projects.forEach(project => {
             if (category === 'all') {
                 project.classList.remove('hide'); // Show all projects
@@ -169,7 +212,7 @@
             }
         });
     }
-
 </script>
+
 </body>
 </html>
