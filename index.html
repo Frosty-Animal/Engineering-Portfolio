@@ -20,10 +20,10 @@
       font-family: Arial, Helvetica, sans-serif;
     }
     
-    /* Hero slideshow container */
+    /* Smaller hero slideshow container */
     .intro-header {
       position: relative;
-      height: 100vh;
+      height: 60vh; /* Reduced from 100vh to 60vh */
       overflow: hidden;
       display: flex;
       align-items: center;
@@ -49,17 +49,19 @@
       width: 100%;
       height: 100%;
       opacity: 0;
-      transition: opacity 1.5s ease-in-out;
+      transition: opacity 2s ease-in-out;
     }
     
     .slide.active {
       opacity: 1;
     }
     
+    /* Better image handling to prevent white space */
     .slide img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: cover; /* This ensures images fill the entire space */
+      object-position: center; /* Centers the image for better cropping */
     }
     
     /* Dark overlay for better text readability */
@@ -70,7 +72,7 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: rgba(0, 0, 0, 0.4);
+      background: rgba(0, 0, 0, 0.5); /* Slightly darker overlay */
       z-index: -1;
     }
     
@@ -78,8 +80,8 @@
     .hero-content {
       z-index: 1;
       color: white;
-      padding: 40px;
-      background: rgba(0, 0, 0, 0.6);
+      padding: 30px;
+      background: rgba(0, 0, 0, 0.7);
       border-radius: 10px;
       backdrop-filter: blur(5px);
       animation: fadeIn 1s ease-in-out;
@@ -91,80 +93,29 @@
     }
     
     .hero-content h1 {
-      font-size: 3.5rem;
+      font-size: 2.5rem; /* Reduced from 3.5rem */
       font-weight: bold;
       text-transform: uppercase;
-      margin-bottom: 20px;
+      margin-bottom: 15px;
       text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
     }
     
     .hero-content p {
-      font-size: 1.5rem;
+      font-size: 1.2rem; /* Reduced from 1.5rem */
       margin: 0;
       text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
     }
     
-    /* Navigation dots */
-    .slideshow-dots {
-      position: absolute;
-      bottom: 30px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      gap: 10px;
-      z-index: 1;
-    }
-    
-    .dot {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      background-color: rgba(255, 255, 255, 0.5);
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-    
-    .dot.active {
-      background-color: white;
-    }
-    
-    /* Optional: Navigation arrows */
-    .slideshow-arrows {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background: rgba(255, 255, 255, 0.2);
-      color: white;
-      border: none;
-      font-size: 24px;
-      padding: 15px 20px;
-      cursor: pointer;
-      border-radius: 5px;
-      transition: background-color 0.3s ease;
-    }
-    
-    .slideshow-arrows:hover {
-      background: rgba(255, 255, 255, 0.4);
-    }
-    
-    .prev-arrow {
-      left: 30px;
-    }
-    
-    .next-arrow {
-      right: 30px;
-    }
-    
     /* Responsive adjustments */
     @media (max-width: 768px) {
+      .intro-header {
+        height: 50vh; /* Even smaller on mobile */
+      }
       .hero-content h1 {
-        font-size: 2.5rem;
+        font-size: 2rem;
       }
       .hero-content p {
-        font-size: 1.2rem;
-      }
-      .slideshow-arrows {
-        display: none; /* Hide arrows on mobile */
+        font-size: 1rem;
       }
     }
     
@@ -182,7 +133,7 @@
   <a href="./about.html">About</a>
 </div>
 
-<!-- Hero section with slideshow -->
+<!-- Smaller hero section with auto-only slideshow -->
 <div class="intro-header">
   <div class="slideshow-container">
     <!-- Slide 1 -->
@@ -201,25 +152,12 @@
     <div class="slide">
       <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/IMG_4428.JPG" alt="Engineering Project 4">
     </div>
-    <!-- Add more slides as needed -->
   </div>
-  
-  <!-- Navigation arrows (optional) -->
-  <button class="slideshow-arrows prev-arrow" onclick="changeSlide(-1)">❮</button>
-  <button class="slideshow-arrows next-arrow" onclick="changeSlide(1)">❯</button>
   
   <!-- Text content over slideshow -->
   <div class="hero-content">
     <h1>Isaiah Hajabolhassan</h1>
     <p>Electrical Engineer Project and Design Portfolio</p>
-  </div>
-  
-  <!-- Navigation dots -->
-  <div class="slideshow-dots">
-    <span class="dot active" onclick="currentSlide(1)"></span>
-    <span class="dot" onclick="currentSlide(2)"></span>
-    <span class="dot" onclick="currentSlide(3)"></span>
-    <span class="dot" onclick="currentSlide(4)"></span>
   </div>
 </div>
 
@@ -247,22 +185,14 @@
 <script>
 let currentSlideIndex = 0;
 const slides = document.querySelectorAll('.slide');
-const dots = document.querySelectorAll('.dot');
 const totalSlides = slides.length;
-
-// Auto-advance slideshow every 5 seconds
-setInterval(() => {
-  changeSlide(1);
-}, 5000);
 
 function showSlide(index) {
   // Hide all slides
   slides.forEach(slide => slide.classList.remove('active'));
-  dots.forEach(dot => dot.classList.remove('active'));
   
   // Show current slide
   slides[index].classList.add('active');
-  dots[index].classList.add('active');
 }
 
 function changeSlide(direction) {
@@ -278,31 +208,10 @@ function changeSlide(direction) {
   showSlide(currentSlideIndex);
 }
 
-function currentSlide(index) {
-  currentSlideIndex = index - 1;
-  showSlide(currentSlideIndex);
-}
-
-// Optional: Pause slideshow on hover
-const slideshowContainer = document.querySelector('.intro-header');
-let autoSlideInterval;
-
-function startAutoSlide() {
-  autoSlideInterval = setInterval(() => {
-    changeSlide(1);
-  }, 5000);
-}
-
-function stopAutoSlide() {
-  clearInterval(autoSlideInterval);
-}
-
-// Pause on hover, resume on mouse leave
-slideshowContainer.addEventListener('mouseenter', stopAutoSlide);
-slideshowContainer.addEventListener('mouseleave', startAutoSlide);
-
-// Start the auto-slideshow
-startAutoSlide();
+// Auto-advance slideshow every 4 seconds
+setInterval(() => {
+  changeSlide(1);
+}, 4000);
 </script>
 
 </body>
