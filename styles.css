@@ -50,35 +50,16 @@ p1 {
 
 /* Improved project grid layout */
 .projects {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    display: flex;
+    flex-wrap: wrap;
     gap: 30px;
     padding: 40px 20px;
     max-width: 1200px;
     margin: 0 auto;
+    justify-content: center;
 }
 
-/* Responsive adjustments for grid */
-@media (max-width: 768px) {
-    .projects {
-        grid-template-columns: 1fr;
-        padding: 20px 10px;
-    }
-}
-
-@media (min-width: 769px) and (max-width: 1024px) {
-    .projects {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media (min-width: 1025px) {
-    .projects {
-        grid-template-columns: repeat(3, 1fr);
-    }
-}
-
-/* Individual project card */
+/* Filter transition effects */
 .project-card {
     background-color: #fff;
     border-radius: 8px;
@@ -86,8 +67,39 @@ p1 {
     text-align: center;
     overflow: hidden;
     position: relative;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    height: 250px; /* Fixed height for consistency */
+    transition: all 0.3s ease;
+    height: 250px;
+    width: 300px;
+    flex: 0 0 300px;
+    opacity: 1;
+    transform: scale(1);
+}
+
+.project-card.hide {
+    opacity: 0;
+    transform: scale(0.8);
+    pointer-events: none;
+    position: absolute;
+    visibility: hidden;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .projects {
+        padding: 20px 10px;
+    }
+    
+    .project-card {
+        width: calc(100% - 20px);
+        flex: 0 0 calc(100% - 20px);
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .project-card {
+        width: calc(50% - 15px);
+        flex: 0 0 calc(50% - 15px);
+    }
 }
 
 /* Container slide-up effect on hover */
