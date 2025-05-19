@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
   <title>Portfolio</title>
-  <link rel="stylesheet" type = "text/css" href="./styles.css">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/png" href="./Screenshot 2024-12-01 045343.png">
   <style>
@@ -11,26 +10,61 @@
       padding: 0;
       box-sizing: border-box;
     }
-    
+
     body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background-color: #e6e4e0;
       display: flex;
       flex-direction: column;
       min-height: 100vh;
-      margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
+      width: 100%;
+      overflow-x: hidden; /* Prevent horizontal scrolling */
     }
-    
-    /* Smaller hero slideshow container */
+
+    .topnav {
+      overflow: hidden;
+      background-color: #44443b;
+      width: 100%;
+    }
+
+    .topnav a {
+      float: left;
+      color: #f2f2f2;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+      font-size: 17px;
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .topnav a:hover {
+      background-color: #bc6116;
+      color: white;
+    }
+
+    .topnav a.active {
+      background-color: #ec7a1c;
+      color: white;
+    }
+
+    .topnav a.active:hover {
+      background-color: #bc6116;
+      color: black;
+    }
+
+    /* Hero section with slideshow */
     .intro-header {
       position: relative;
-      height: 60vh; /* Reduced from 100vh to 60vh */
+      height: 60vh;
+      width: 100%;
       overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
       text-align: center;
     }
-    
+
     /* Slideshow container */
     .slideshow-container {
       position: absolute;
@@ -40,7 +74,12 @@
       height: 100%;
       z-index: -2;
     }
-    
+
+    /* For the hero slideshow */
+    .intro-header .slideshow-container {
+      width: 100vw; /* Use viewport width */
+    }
+
     /* Individual slide */
     .slide {
       position: absolute;
@@ -51,19 +90,18 @@
       opacity: 0;
       transition: opacity 2s ease-in-out;
     }
-    
+
     .slide.active {
       opacity: 1;
     }
-    
-    /* Better image handling to prevent white space */
-    .slide img {
-      width: 100%;
+
+    .intro-header .slide img {
+      width: 100vw; /* Full viewport width */
       height: 100%;
-      object-fit: cover; /* This ensures images fill the entire space */
-      object-position: center; /* Centers the image for better cropping */
+      object-fit: cover;
+      object-position: center;
     }
-    
+
     /* Dark overlay for better text readability */
     .intro-header::before {
       content: '';
@@ -72,10 +110,11 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: rgba(0, 0, 0, 0.5); /* Slightly darker overlay */
+      background: rgba(0, 0, 0, 0.5);
       z-index: -1;
+      width: 100vw;
     }
-    
+
     /* Text content over slideshow */
     .hero-content {
       z-index: 1;
@@ -85,31 +124,134 @@
       border-radius: 10px;
       backdrop-filter: blur(5px);
       animation: fadeIn 1s ease-in-out;
+      width: 80%;
+      max-width: 800px;
     }
-    
+
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
-    
+
     .hero-content h1 {
-      font-size: 2.5rem; /* Reduced from 3.5rem */
+      font-size: 2.5rem;
       font-weight: bold;
       text-transform: uppercase;
       margin-bottom: 15px;
       text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
     }
-    
+
     .hero-content p {
-      font-size: 1.2rem; /* Reduced from 1.5rem */
+      font-size: 1.2rem;
       margin: 0;
       text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
     }
-    
+
+    /* Content styles */
+    h1 {
+      text-align: center;
+      margin: 40px 0 20px 0;
+    }
+
+    p {
+      margin: 20px 40px;
+    }
+
+    p1 {
+      margin: 20px 40px;
+      text-indent: 50px;
+    }
+
+    .container {
+      padding: 50px;
+      text-align: center;
+      width: 100%;
+    }
+
+    /* Regular project slideshow */
+    .project-slideshow {
+      position: relative;
+      max-width: 800px;
+      height: 450px;
+      margin: 0 auto;
+      overflow: hidden;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #000;
+    }
+
+    .project-slide {
+      display: none;
+      width: 100%;
+      height: 100%;
+    }
+
+    .project-slide img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      display: block;
+      margin: auto;
+    }
+
+    .project-slide.active {
+      display: block;
+    }
+
+    .prev, .next {
+      cursor: pointer;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(0, 0, 0, 0.5);
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 3px;
+    }
+
+    .prev {
+      left: 10px;
+    }
+
+    .next {
+      right: 10px;
+    }
+
+    /* Project card styles */
+    .projects {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      padding: 40px 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+      justify-content: center;
+    }
+
+    .project-card {
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      overflow: hidden;
+      position: relative;
+      transition: all 0.3s ease;
+      height: 250px;
+      width: 300px;
+      flex: 0 0 300px;
+      opacity: 1;
+      transform: scale(1);
+    }
+
+
     /* Responsive adjustments */
     @media (max-width: 768px) {
       .intro-header {
-        height: 50vh; /* Even smaller on mobile */
+        height: 50vh;
       }
       .hero-content h1 {
         font-size: 2rem;
@@ -117,13 +259,44 @@
       .hero-content p {
         font-size: 1rem;
       }
+      .projects {
+        padding: 20px 10px;
+      }
+      .project-card {
+        width: calc(100% - 20px);
+        flex: 0 0 calc(100% - 20px);
+      }
     }
-    
-    .container {
-      padding: 50px;
+
+    @media (min-width: 769px) and (max-width: 1024px) {
+      .project-card {
+        width: calc(50% - 15px);
+        flex: 0 0 calc(50% - 15px);
+      }
+    }
+
+    /* Footer */
+    footer {
+      background-color: #333;
+      color: #f2f2f2;
       text-align: center;
+      padding: 20px;
+      margin-top: auto;
+      width: 100%;
+    }
+
+    footer a {
+      color: #ec7a1c;
+      text-decoration: none;
+      margin-right: 15px;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
     }
   </style>
+  <!-- FontAwesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
 <div class="topnav">
@@ -133,7 +306,7 @@
   <a href="./about.html">About</a>
 </div>
 
-<!-- Smaller hero section with auto-only slideshow -->
+<!-- Hero section with slideshow -->
 <div class="intro-header">
   <div class="slideshow-container">
     <!-- Slide 1 -->
@@ -153,7 +326,7 @@
       <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/IMG_4428.JPG" alt="Engineering Project 4">
     </div>
   </div>
-  
+
   <!-- Text content over slideshow -->
   <div class="hero-content">
     <h1>Isaiah Hajabolhassan</h1>
@@ -170,48 +343,49 @@
 </div>
 
 <footer>
-  <p>&copy; 2024 Isaiah Hajabolhassan. All Rights Reserved.</p>
-  <a href="https://github.com/Frosty-Animal" target="_blank" style="margin-right: 15px;">
+  <p>&copy; <script>document.write(new Date().getFullYear())</script> Isaiah Hajabolhassan. All Rights Reserved.</p>
+  <a href="https://github.com/Frosty-Animal" target="_blank">
     <i class="fab fa-github"></i> GitHub
   </a>
-  <a href="https://www.linkedin.com/in/isaiah-h/" target="_blank" style="margin-right: 15px;">
+  <a href="https://www.linkedin.com/in/isaiah-h/" target="_blank">
     <i class="fab fa-linkedin"></i> LinkedIn
   </a>
-  <a href="mailto:Isaiahmh28@gmail.com" style="margin-right: 15px;">
+  <a href="mailto:Isaiahmh28@gmail.com">
     <i class="fas fa-envelope"></i> Email
   </a>
 </footer>
 
 <script>
-let currentSlideIndex = 0;
-const slides = document.querySelectorAll('.slide');
-const totalSlides = slides.length;
+  // Auto-advancing slideshow for intro header
+  let currentSlideIndex = 0;
+  const slides = document.querySelectorAll('.intro-header .slide');
+  const totalSlides = slides.length;
 
-function showSlide(index) {
-  // Hide all slides
-  slides.forEach(slide => slide.classList.remove('active'));
-  
-  // Show current slide
-  slides[index].classList.add('active');
-}
+  function showSlide(index) {
+    // Hide all slides
+    slides.forEach(slide => slide.classList.remove('active'));
 
-function changeSlide(direction) {
-  currentSlideIndex += direction;
-  
-  // Loop back to beginning/end
-  if (currentSlideIndex >= totalSlides) {
-    currentSlideIndex = 0;
-  } else if (currentSlideIndex < 0) {
-    currentSlideIndex = totalSlides - 1;
+    // Show current slide
+    slides[index].classList.add('active');
   }
-  
-  showSlide(currentSlideIndex);
-}
 
-// Auto-advance slideshow every 4 seconds
-setInterval(() => {
-  changeSlide(1);
-}, 4000);
+  function changeSlide(direction) {
+    currentSlideIndex += direction;
+
+    // Loop back to beginning/end
+    if (currentSlideIndex >= totalSlides) {
+      currentSlideIndex = 0;
+    } else if (currentSlideIndex < 0) {
+      currentSlideIndex = totalSlides - 1;
+    }
+
+    showSlide(currentSlideIndex);
+  }
+
+  // Auto-advance slideshow every 4 seconds
+  setInterval(() => {
+    changeSlide(1);
+  }, 4000);
 </script>
 
 </body>
