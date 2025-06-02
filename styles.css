@@ -355,3 +355,142 @@ video {
     height: auto;
     border-radius: 8px;
 }
+.code-with-lines {
+     background-color: #2d3748;
+     border-radius: 8px;
+     overflow: hidden;
+     margin: 15px 0;
+     max-height: 700px; /* Set maximum height */
+     border: 1px solid #4a5568;
+ }
+
+.code-with-lines pre {
+    margin: 0;
+    padding: 20px;
+    counter-reset: line;
+    overflow-x: auto;
+    overflow-y: auto; /* Enable vertical scrolling */
+    max-height: 400px; /* Match the container height */
+}
+
+.code-with-lines pre code {
+    display: block;
+    color: #f5f5dc; /* Off-white color */
+    font-family: 'Courier New', Monaco, monospace;
+    font-size: 14px;
+    line-height: 1.2; /* Compact spacing */
+}
+
+.code-with-lines pre code .line {
+    display: block;
+    counter-increment: line;
+}
+
+.code-with-lines pre code .line::before {
+    content: counter(line);
+    display: inline-block;
+    width: 3em;
+    color: #718096;
+    margin-right: 1em;
+    text-align: right;
+    border-right: 1px solid #4a5568;
+    padding-right: 0.5em;
+}
+
+/* Scrollbar styling for better appearance */
+.code-with-lines pre::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+.code-with-lines pre::-webkit-scrollbar-track {
+    background: #1a202c;
+    border-radius: 4px;
+}
+
+.code-with-lines pre::-webkit-scrollbar-thumb {
+    background: #4a5568;
+    border-radius: 4px;
+}
+
+.code-with-lines pre::-webkit-scrollbar-thumb:hover {
+    background: #718096;
+}
+/* GitHub button container */
+.code-section {
+    position: relative;
+    margin: 20px 0;
+}
+
+/* GitHub button styling */
+.github-button-orange {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background-color: #ec7a1c;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    margin-top: 15px;
+    border: 1px solid #bc6116;
+}
+
+.github-button-orange:hover {
+    background-color: #bc6116;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.github-button-orange i {
+    font-size: 16px;
+}
+
+/* Code header for better organization */
+.code-header {
+    background-color: #1a202c;
+    color: #e2e8f0;
+    padding: 12px 20px;
+    margin: 0;
+    font-family: 'Courier New', Monaco, monospace;
+    font-size: 14px;
+    border-bottom: 1px solid #4a5568;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.code-filename {
+    font-weight: bold;
+    color: #a0aec0;
+}
+
+.code-language {
+    font-size: 12px;
+    color: #718096;
+    background-color: #2d3748;
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .code-with-lines {
+        max-height: 300px;
+    }
+
+    .code-with-lines pre {
+        max-height: 300px;
+        padding: 15px;
+    }
+
+    .github-button,
+    .github-button-orange {
+        padding: 8px 16px;
+        font-size: 13px;
+    }
+}

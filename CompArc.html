@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RISC-V Processor Project</title>
+  <link rel="stylesheet" type="text/css" href="./styles.css">
+  <link rel="icon" type="image/png" href="./Screenshot 2024-12-01 045343.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+<div class="topnav">
+  <a class="active" href="./index.html">Home</a>
+  <a href="./projects.html">Projects</a>
+  <a href="./resume.html">Resume</a>
+  <a href="./about.html">About</a>
+</div>
+
+<div class="sidebar">
+  <a href="#overview">Overview</a>
+  <a href="#materials">Materials</a>
+  <a href="#assembly">Assembly</a>
+  <a href="#testing">Testing</a>
+  <a href="#results">Results</a>
+</div>
+
+<div class="content-wrapper">
+  <div class="content">
+    <h1>Project: Implementing a multistage pipelined RISCV architecture</h1>
+  </div>
+
+  <div class="slideshow-container">
+    <div class="slide">
+      <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/IMG_4080.jpg" alt="Slide 1" style="width:100%">
+    </div>
+    <div class="slide">
+      <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/IMG_4091.jpg" alt="Slide 2" style="width:100%">
+    </div>
+    <div class="slide">
+      <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/IMG_5229.jpg" alt="Slide 3" style="width:100%">
+    </div>
+    <div class="slide">
+      <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/IMG_5231.jpg" alt="Slide 4" style="width:100%">
+    </div>
+    <div class="slide">
+      <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/IMG_5232.jpg" alt="Slide 5" style="width:100%">
+    </div>
+
+    <button class="prev" onclick="plusSlides(-1)">&#10094;</button>
+    <button class="next" onclick="plusSlides(1)">&#10095;</button>
+  </div>
+
+  <div class="dots">
+    <span class="dot" onclick="currentSlide(1)"></span>
+    <span class="dot" onclick="currentSlide(2)"></span>
+    <span class="dot" onclick="currentSlide(3)"></span>
+    <span class="dot" onclick="currentSlide(4)"></span>
+    <span class="dot" onclick="currentSlide(5)"></span>
+  </div>
+
+  <section id="overview">
+    <h2>Overview</h2>
+  </section>
+
+  <section id="materials">
+    <h2>Materials</h2>
+  </section>
+
+  <section id="assembly">
+    <h2>Implementation</h2>
+  </section>
+
+  <section id="testing">
+    <h2>Testing</h2>
+  </section>
+
+  <section id="results">
+    <h2>Results</h2>
+    <p>The final implementation successfully executes RISC-V programs with proper pipeline operation. Below is the main processor module:</p>
+
+    <div class="code-section">
+      <div class="code-with-lines">
+        <div class="code-header">
+          <span class="code-filename">📄 riscv_processor.v</span>
+          <span class="code-language">Verilog</span>
+        </div>
+        <pre><code><span class="line">// 5-Stage RISC-V Pipeline Processor</span>
+
+<span class="line">// riscvpipelined.sv</span>
+<span class="line"></span>
+<span class="line">// RISC-V pipelined processor</span>
+<span class="line">// From Section 7.6 of Digital Design & Computer Architecture: RISC-V Edition</span>
+<span class="line">// 27 April 2020</span>
+<span class="line">// David_Harris@hmc.edu </span>
+<span class="line">// Sarah.Harris@unlv.edu</span>
+<span class="line"></span>
+<span class="line">// run 210</span>
+<span class="line">// Expect simulator to print "Simulation succeeded"</span>
+<span class="line">// when the value 25 (0x19) is written to address 100 (0x64)</span>
+<span class="line"></span>
+<span class="line">// Pipelined implementation of RISC-V (RV32I)</span>
+<span class="line">// User-level Instruction Set Architecture V2.2 (May 7, 2017)</span>
+<span class="line">// Implements a subset of the base integer instructions:</span>
+<span class="line">//    lw, sw</span>
+<span class="line">//    add, sub, and, or, slt, </span>
+<span class="line">//    addi, andi, ori, slti</span>
+<span class="line">//    beq</span>
+<span class="line">//    jal</span>
+<span class="line">// Exceptions, traps, and interrupts not implemented</span>
+<span class="line">// little-endian memory</span>
+<span class="line"></span>
+<span class="line">// 31 32-bit registers x1-x31, x0 hardwired to 0</span>
+<span class="line">// R-Type instructions</span>
+<span class="line">//   add, sub, and, or, slt</span>
+<span class="line">//   INSTR rd, rs1, rs2</span>
+<span class="line">//   Instr[31:25] = funct7 (funct7b5 & opb5 = 1 for sub, 0 for others)</span>
+<span class="line">//   Instr[24:20] = rs2</span>
+<span class="line">//   Instr[19:15] = rs1</span>
+<span class="line">//   Instr[14:12] = funct3</span>
+<span class="line">//   Instr[11:7]  = rd</span>
+<span class="line">//   Instr[6:0]   = opcode</span>
+<span class="line"></span>
+<span class="line">// I-Type Instructions</span>
+<span class="line">//   lw, I-type ALU (addi, andi, ori, slti)</span>
+<span class="line">//   lw:         INSTR rd, imm(rs1)</span>
+<span class="line">//   I-type ALU: INSTR rd, rs1, imm (12-bit signed)</span>
+<span class="line">//   Instr[31:20] = imm[11:0]</span>
+<span class="line">//   Instr[24:20] = rs2</span>
+<span class="line">//   Instr[19:15] = rs1</span>
+<span class="line">//   Instr[14:12] = funct3</span>
+<span class="line">//   Instr[11:7]  = rd</span>
+<span class="line">//   Instr[6:0]   = opcode</span>
+<span class="line"></span>
+<span class="line">// S-Type Instruction</span>
+<span class="line">//   sw rs2, imm(rs1) (store rs2 into address specified by rs1 + immm)</span>
+<span class="line">//   Instr[31:25] = imm[11:5] (offset[11:5])</span>
+<span class="line">//   Instr[24:20] = rs2 (src)</span>
+<span class="line">//   Instr[19:15] = rs1 (base)</span>
+<span class="line">//   Instr[14:12] = funct3</span>
+<span class="line">//   Instr[11:7]  = imm[4:0]  (offset[4:0])</span>
+<span class="line">//   Instr[6:0]   = opcode</span>
+<span class="line"></span>
+<span class="line">// B-Type Instruction</span>
+<span class="line">//   beq rs1, rs2, imm (PCTarget = PC + (signed imm x 2))</span>
+<span class="line">//   Instr[31:25] = imm[12], imm[10:5]</span>
+<span class="line">//   Instr[24:20] = rs2</span>
+<span class="line">//   Instr[19:15] = rs1</span>
+<span class="line">//   Instr[14:12] = funct3</span>
+<span class="line">//   Instr[11:7]  = imm[4:1], imm[11]</span>
+<span class="line">//   Instr[6:0]   = opcode</span>
+<span class="line"></span>
+<span class="line">// J-Type Instruction</span>
+<span class="line">//   jal rd, imm  (signed imm is multiplied by 2 and added to PC, rd = PC+4)</span>
+<span class="line">//   Instr[31:12] = imm[20], imm[10:1], imm[11], imm[19:12]</span>
+<span class="line">//   Instr[11:7]  = rd</span>
+<span class="line">//   Instr[6:0]   = opcode</span>
+<span class="line"></span>
+<span class="line">//   Instruction  opcode    funct3    funct7</span>
+<span class="line">//   add          0110011   000       0000000</span>
+<span class="line">//   sub          0110011   000       0100000</span>
+<span class="line">//   and          0110011   111       0000000</span>
+<span class="line">//   or           0110011   110       0000000</span>
+<span class="line">//   slt          0110011   010       0000000</span>
+<span class="line">//   addi         0010011   000       immediate</span>
+<span class="line">//   andi         0010011   111       immediate</span>
+<span class="line">//   ori          0010011   110       immediate</span>
+<span class="line">//   slti         0010011   010       immediate</span>
+<span class="line">//   beq          1100011   000       immediate</span>
+<span class="line">//   lw	          0000011   010       immediate</span>
+<span class="line">//   sw           0100011   010       immediate</span>
+<span class="line">//   jal          1101111   immediate immediate</span>
+<span class="line"></span>
+<span class="line">/*</span>
+<span class="line">add Done</span>
+<span class="line">addi Done</span>
+<span class="line">and Done</span>
+<span class="line">andi Done</span>
+<span class="line">auipc Jump instruction dont work</span>
+<span class="line">beq Done</span>
+<span class="line">bge Done</span>
+<span class="line">bgeu Done</span>
+<span class="line">blt Done</span>
+<span class="line">bltu Done</span>
+<span class="line">bne Done</span>
+<span class="line">jal </span>
+<span class="line">jalr </span>
+<span class="line">lb Done</span>
+<span class="line">lbu Done</span>
+<span class="line">lh Done</span>
+<span class="line">lhu Done</span>
+<span class="line">lw Done</span>
+<span class="line">lui Done</span>
+<span class="line">or Done</span>
+<span class="line">ori Done</span>
+<span class="line">sb Done</span>
+<span class="line">sh Done</span>
+<span class="line">sll Done</span>
+<span class="line">slt Done</span>
+<span class="line">slli Done</span>
+<span class="line">slti Done</span>
+<span class="line">sltiu Done</span>
+<span class="line">sltu Done</span>
+<span class="line">sra Done</span>
+<span class="line">srai Done</span>
+<span class="line">srl Done</span>
+<span class="line">srli Done</span>
+<span class="line">sub Done</span>
+<span class="line">sw Done</span>
+<span class="line">xor Done</span>
+<span class="line">xori Done</span>
+<span class="line"></span>
+<span class="line">*/</span>
+<span class="line"></span>
+<span class="line">module testbench();</span>
+<span class="line"></span>
+<span class="line">   logic        clk;</span>
+<span class="line">   logic        reset;</span>
+<span class="line"></span>
+<span class="line">   logic [31:0] WriteData, DataAdr;</span>
+<span class="line">   logic        MemWrite;</span>
+<span class="line"></span>
+<span class="line">   // instantiate device to be tested</span>
+<span class="line">   top dut(clk, reset, WriteData, DataAdr, MemWrite);</span>
+<span class="line"></span>
+<span class="line">   initial</span>
+<span class="line">     begin</span>
+<span class="line">	string memfilename;</span>
+<span class="line">        memfilename = {"../testing/auipc.memfile"};</span>
+<span class="line">	$readmemh(memfilename, dut.imem.RAM);</span>
+<span class="line">  $readmemh(memfilename, dut.dmem.RAM);</span>
+<span class="line"></span>
+<span class="line">     end</span>
+<span class="line">   </span>
+<span class="line">   // initialize test</span>
+<span class="line">   initial</span>
+<span class="line">     begin</span>
+<span class="line">	reset <= 1; # 22; reset <= 0;</span>
+<span class="line">     end</span>
+<span class="line"></span>
+<span class="line">   // generate clock to sequence tests</span>
+<span class="line">   always</span>
+<span class="line">     begin</span>
+<span class="line">	clk <= 1; # 5; clk <= 0; # 5;</span>
+<span class="line">     end</span>
+<span class="line"></span>
+<span class="line">/*   // check results</span>
+<span class="line">   always @(negedge clk)</span>
+<span class="line">     begin</span>
+<span class="line">	if(MemWrite) begin</span>
+<span class="line">           if(DataAdr === 100 & WriteData === 25) begin</span>
+<span class="line">              $display("Simulation succeeded");</span>
+<span class="line">              $stop;</span>
+<span class="line">           end else if (DataAdr !== 96) begin</span>
+<span class="line">              $display("Simulation failed");</span>
+<span class="line">              $stop;</span>
+<span class="line">           end</span>
+<span class="line">	end</span>
+<span class="line">     end*/</span>
+<span class="line">endmodule</span>
+<span class="line"></span>
+<span class="line">/*module top(input  logic        clk, reset, </span>
+<span class="line">           output logic [31:0] WriteDataM, DataAdrM, </span>
+<span class="line">           output logic        MemWriteM);</span>
+<span class="line"></span>
+<span class="line">   logic [31:0] 	       PCF, InstrF, ReadDataM;</span>
+<span class="line">   </span>
+<span class="line">   // instantiate processor and memories</span>
+<span class="line">   riscv rv32pipe (clk, reset, PCF, InstrF, MemWriteM, DataAdrM, </span>
+<span class="line">		   WriteDataM, ReadDataM);</span>
+<span class="line">   imem imem (PCF, InstrF);</span>
+<span class="line">   dmem dmem (clk, MemWriteM, DataAdrM, WriteDataM, ReadDataM);</span>
+<span class="line">   </span>
+<span class="line">endmodule*/</span>
+<span class="line"></span>
+<span class="line">module riscv(input  logic        clk, reset,</span>
+<span class="line">             output logic [31:0] PCF,</span>
+<span class="line">             input logic [31:0]  InstrF,</span>
+<span class="line">             output logic 	 MemWriteM,</span>
+<span class="line">             output logic [31:0] ALUResultM, WriteDataM,</span>
+<span class="line">             input logic [31:0]  ReadDataM);</span>
+<span class="line"></span>
+<span class="line">   logic [6:0] 			 opD;</span>
+<span class="line">   logic [2:0] 			 funct3D, funct3M, funct3E;</span>
+<span class="line">   logic 			 funct7b5D;</span>
+<span class="line">   logic [2:0] 			 ImmSrcD;</span>
+<span class="line">   logic 			 ZeroE, NegativeE, CarryE, OverflowE;</span>
+<span class="line">   logic 			 PCSrcE, PCSrcNextE;</span>
+<span class="line">   logic [3:0] 			 ALUControlE;</span>
+<span class="line">   logic [1:0] ALUSrcE;</span>
+<span class="line">   logic 			 ResultSrcEb0;</span>
+<span class="line">   logic 			 RegWriteM;</span>
+<span class="line">   logic [1:0] 			 ResultSrcW;</span>
+<span class="line">   logic 			 RegWriteW;</span>
+<span class="line"></span>
+<span class="line">   logic [1:0] 			 ForwardAE, ForwardBE;</span>
+<span class="line">   logic 			 StallF, StallD, FlushD, FlushE;</span>
+<span class="line"></span>
+<span class="line">   logic [4:0] 			 Rs1D, Rs2D, Rs1E, Rs2E, RdE, RdM, RdW;</span>
+<span class="line">   logic [31:0] dpReadDataM, dpWriteDataM;</span>
+<span class="line">   </span>
+<span class="line">   controller c(clk, reset,</span>
+<span class="line">            opD, funct3D, funct3E, funct7b5D, ImmSrcD,</span>
+<span class="line">            FlushE, ZeroE, NegativeE, CarryE, OverflowE, PCSrcE, PCSrcNextE, ALUControlE, ALUSrcE, ResultSrcEb0,</span>
+<span class="line">            MemWriteM, RegWriteM, </span>
+<span class="line">            RegWriteW, ResultSrcW, funct3M);</span>
+<span class="line"></span>
+<span class="line">   datapath dp(clk, reset,</span>
+<span class="line">           StallF, PCF, InstrF,</span>
+<span class="line">           opD, funct3D, funct7b5D, StallD, FlushD, ImmSrcD,</span>
+<span class="line">           FlushE, ForwardAE, ForwardBE, PCSrcE, PCSrcNextE, ALUControlE, ALUSrcE, ZeroE, NegativeE, CarryE, OverflowE,</span>
+<span class="line">           MemWriteM, dpWriteDataM, ALUResultM, ReadDataM,</span>
+<span class="line">           RegWriteW, ResultSrcW,</span>
+<span class="line">           Rs1D, Rs2D, Rs1E, Rs2E, RdE, RdM, RdW);</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">   hazard  hu(Rs1D, Rs2D, Rs1E, Rs2E, RdE, RdM, RdW,</span>
+<span class="line">              PCSrcE,PCSrcNextE, ResultSrcEb0, RegWriteM, RegWriteW,</span>
+<span class="line">              ForwardAE, ForwardBE, StallF, StallD, FlushD, FlushE);			</span>
+<span class="line"></span>
+<span class="line">always_comb</span>
+<span class="line">  case(funct3M)</span>
+<span class="line">    // Store byte (sb)</span>
+<span class="line">    3'b000: begin</span>
+<span class="line">      case(ALUResultM[1:0])</span>
+<span class="line">        2'b00: WriteDataM = {ReadDataM[31:8], dpWriteDataM[7:0]};</span>
+<span class="line">        2'b01: WriteDataM = {ReadDataM[31:16], dpWriteDataM[7:0], ReadDataM[7:0]};</span>
+<span class="line">        2'b10: WriteDataM = {ReadDataM[31:24], dpWriteDataM[7:0], ReadDataM[15:0]};</span>
+<span class="line">        2'b11: WriteDataM = {dpWriteDataM[7:0], ReadDataM[23:0]};</span>
+<span class="line">      endcase</span>
+<span class="line">    end</span>
+<span class="line">    // Store halfword (sh)</span>
+<span class="line">    3'b001: begin</span>
+<span class="line">      case(ALUResultM[1])</span>
+<span class="line">        1'b0: WriteDataM = {ReadDataM[31:16], dpWriteDataM[15:0]};</span>
+<span class="line">        1'b1: WriteDataM = {dpWriteDataM[15:0], ReadDataM[15:0]};</span>
+<span class="line">      endcase</span>
+<span class="line">    end</span>
+<span class="line">    // Store word (sw)</span>
+<span class="line">    default: WriteDataM = dpWriteDataM;</span>
+<span class="line">  endcase</span>
+<span class="line"></span>
+<span class="line">endmodule</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">module controller(input  logic        clk, reset,</span>
+<span class="line">                  // Decode stage control signals</span>
+<span class="line">                  input logic [6:0]   opD,</span>
+<span class="line">                  input logic [2:0]   funct3D, funct3E,</span>
+<span class="line">                  input logic         funct7b5D,</span>
+<span class="line">                  output logic [2:0]  ImmSrcD,</span>
+<span class="line">                  // Execute stage control signals</span>
+<span class="line">                  input logic         FlushE, </span>
+<span class="line">                  input logic         ZeroE, NegativeE, CarryE, OverflowE,</span>
+<span class="line">                  output logic        PCSrcE, // for datapath and Hazard Unit</span>
+<span class="line">                  output logic        PCSrcNextE, // for jalr</span>
+<span class="line">                  output logic [3:0]  ALUControlE, </span>
+<span class="line">                  output logic [1:0]  ALUSrcE,</span>
+<span class="line">                  output logic        ResultSrcEb0, // for Hazard Unit</span>
+<span class="line">                  // Memory stage control signals</span>
+<span class="line">                  output logic        MemWriteM,</span>
+<span class="line">                  output logic        RegWriteM, // for Hazard Unit                  </span>
+<span class="line">                  // Writeback stage control signals</span>
+<span class="line">                  output logic        RegWriteW, // for datapath and Hazard Unit</span>
+<span class="line">                  output logic [1:0]  ResultSrcW,</span>
+<span class="line">                  output logic [2:0]  funct3M);</span>
+<span class="line">   // pipelined control signals</span>
+<span class="line">   logic 			     RegWriteD, RegWriteE;</span>
+<span class="line">   logic [1:0] 			     ResultSrcD, ResultSrcE, ResultSrcM;</span>
+<span class="line">   logic 			     MemWriteD, MemWriteE;</span>
+<span class="line">   logic 			     JumpD, JumpE;</span>
+<span class="line">   logic 			     BranchD, BranchE, BranchTakenE;</span>
+<span class="line">   logic [1:0] 			     ALUOpD;</span>
+<span class="line">   logic [3:0] 			     ALUControlD;</span>
+<span class="line">   logic [1:0]			     ALUSrcD;</span>
+<span class="line">   logic                Memstrobe;</span>
+<span class="line">   // Fetching Instructions</span>
+<span class="line">   </span>
+<span class="line">   // Decode stage logic</span>
+<span class="line">   maindec md(opD, ResultSrcD, MemWriteD, BranchD,</span>
+<span class="line">              ALUSrcD, RegWriteD, JumpD, Memstrobe, ImmSrcD, ALUOpD);</span>
+<span class="line">   aludec  ad(opD[5], funct3D, funct7b5D, ALUOpD, ALUControlD);</span>
+<span class="line">   </span>
+<span class="line">   // Execute stage pipeline control register and logic</span>
+<span class="line">   floprc #(15) controlregE(clk, reset, FlushE,</span>
+<span class="line">                        {RegWriteD, ResultSrcD, MemWriteD, JumpD, BranchD, ALUControlD, ALUSrcD, funct3D},</span>
+<span class="line">                        {RegWriteE, ResultSrcE, MemWriteE, JumpE, BranchE, ALUControlE, ALUSrcE, funct3E});</span>
+<span class="line"></span>
+<span class="line">always_comb</span>
+<span class="line">  case(funct3E)</span>
+<span class="line">    3'b000: BranchTakenE = ZeroE;                    // beq =</span>
+<span class="line">    3'b001: BranchTakenE = ~ZeroE;                   // bne !=</span>
+<span class="line">    3'b100: BranchTakenE = (NegativeE ^ OverflowE);  // blt </span>
+<span class="line">    3'b101: BranchTakenE = ~(NegativeE ^ OverflowE); // bge >=</span>
+<span class="line">    3'b110: BranchTakenE = ~CarryE;                  // bltu < unsigned</span>
+<span class="line">    3'b111: BranchTakenE = CarryE;                   // bgeu >= unsigned</span>
+<span class="line">    default: BranchTakenE = 1'b0;</span>
+<span class="line">  endcase</span>
+<span class="line"></span>
+<span class="line">   assign PCSrcE = (BranchE & BranchTakenE) | JumpE;</span>
+<span class="line">   assign PCSrcNextE = JumpE & ALUSrcE;</span>
+<span class="line">   assign ResultSrcEb0 = ResultSrcE[0];</span>
+<span class="line">   </span>
+<span class="line">   // Memory stage pipeline control register</span>
+<span class="line">   flopr #(7) controlregM(clk, reset,</span>
+<span class="line">                      {RegWriteE, ResultSrcE, MemWriteE, funct3E},</span>
+<span class="line">                      {RegWriteM, ResultSrcM, MemWriteM, funct3M});</span>
+<span class="line">   </span>
+<span class="line">   // Writeback stage pipeline control register</span>
+<span class="line">   flopr #(3) controlregW(clk, reset,</span>
+<span class="line">                          {RegWriteM, ResultSrcM},</span>
+<span class="line">                          {RegWriteW, ResultSrcW});     </span>
+<span class="line">endmodule</span>
+<span class="line"></span>
+<span class="line">module maindec (input  logic [6:0] op,</span>
+<span class="line">		output logic [1:0] ResultSrc,</span>
+<span class="line">		output logic 	   MemWrite,</span>
+<span class="line">		output logic 	   Branch,</span>
+<span class="line">		output logic [1:0]  ALUSrc,</span>
+<span class="line">		output logic 	   RegWrite, Jump, MemStrobe,</span>
+<span class="line">		output logic [2:0] ImmSrc,</span>
+<span class="line">		output logic [1:0] ALUOp);</span>
+<span class="line">   </span>
+<span class="line">	logic [13:0] 		   controls;</span>
+<span class="line">   </span>
+<span class="line">   assign {RegWrite, ImmSrc, ALUSrc, MemWrite,</span>
+<span class="line">	   ResultSrc, Branch, ALUOp, Jump ,MemStrobe} = controls;</span>
+<span class="line">   </span>
+<span class="line">   always_comb</span>
+<span class="line">     case(op)</span>
+<span class="line">       // RegWrite_ImmSrc_ALUSrc_MemWrite_ResultSrc_Branch_ALUOp_Jump_MemStrobe</span>
+<span class="line">       7'b0000011: controls = 14'b1_000_01_0_11_0_00_0_1; // load</span>
+<span class="line">       7'b0100011: controls = 14'b0_001_01_1_01_0_00_0_1; // save</span>
+<span class="line">       7'b0110011: controls = 14'b1_xxx_00_0_00_0_10_0_0; // R–type</span>
+<span class="line">       7'b1100011: controls = 14'b0_010_00_0_00_1_01_0_0; // B-Type</span>
+<span class="line">       7'b0010011: controls = 14'b1_000_01_0_00_0_10_0_0; // I–type ALU</span>
+<span class="line">       7'b1101111: controls = 14'b1_011_00_0_10_0_00_1_0; // Jal</span>
+<span class="line">       7'b1100111: controls = 14'b1_000_01_0_10_0_00_1_0; // jalr   </span>
+<span class="line">       7'b0010111: controls = 14'b1_100_11_0_00_0_00_0_0; // auipc    </span>
+<span class="line">       7'b0110111: controls = 14'b1_100_01_0_00_0_11_0_0; // lui      </span>
+<span class="line"></span>
+<span class="line">       default: controls = 14'bx_xxx_xx_x_xx_x_xx_x_x; // ???</span>
+<span class="line">     endcase // case (op)</span>
+<span class="line">   </span>
+<span class="line">endmodule // maindec</span>
+<span class="line"></span>
+<span class="line">module aludec (input  logic     opb5,</span>
+<span class="line">	       input  logic [2:0]   funct3,</span>
+<span class="line">	       input  logic 	    funct7b5,</span>
+<span class="line">	       input  logic [1:0]   ALUOp,</span>
+<span class="line">	       output logic [3:0]   ALUControl);</span>
+<span class="line">   </span>
+<span class="line">   logic 			  RtypeSub;</span>
+<span class="line">   </span>
+<span class="line">   assign RtypeSub = funct7b5 & opb5; // TRUE for R–type subtract</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">   always_comb</span>
+<span class="line">     case(ALUOp)</span>
+<span class="line">        2'b00: ALUControl = 4'b0000; // addition</span>
+<span class="line">        2'b01: ALUControl = 4'b0001; // subtraction</span>
+<span class="line">        2'b11: ALUControl = 4'b1110; // lui</span>
+<span class="line">        default: case(funct3) // R–type or I–type ALU</span>
+<span class="line">            3'b000: if (RtypeSub)</span>
+<span class="line">                         ALUControl = 4'b0001; // sub</span>
+<span class="line">                    else</span>
+<span class="line">                         ALUControl = 4'b0000; // add, addi</span>
+<span class="line">            3'b010: if (!RtypeSub) // I type set less than</span>
+<span class="line">                         ALUControl = 4'b0101; // slt, slti</span>
+<span class="line">                    else</span>
+<span class="line">                         if (!funct7b5)</span>
+<span class="line">                             ALUControl = 4'b0101; // slt</span>
+<span class="line">                         else</span>
+<span class="line">                             ALUControl = 4'b1010; // sgt</span>
+<span class="line">            3'b110: ALUControl = 4'b0011; // or, ori</span>
+<span class="line">            3'b111: ALUControl = 4'b0010; // and, andi</span>
+<span class="line">            3'b100: ALUControl = 4'b0100; // xor, xori</span>
+<span class="line">            3'b101: if (funct7b5)</span>
+<span class="line">                         ALUControl = 4'b0111; // sra, srai</span>
+<span class="line">                    else</span>
+<span class="line">                         ALUControl = 4'b0110; // srl, srli</span>
+<span class="line">            3'b001: ALUControl = 4'b1000; // sll, slli</span>
+<span class="line">            3'b011: if (!RtypeSub) // I type</span>
+<span class="line">                         ALUControl = 4'b1001; // sltiu</span>
+<span class="line">                    else // R type</span>
+<span class="line">                         if (!funct7b5)</span>
+<span class="line">                             ALUControl = 4'b1001; // sltu</span>
+<span class="line">                         else</span>
+<span class="line">                             ALUControl = 4'b1100;</span>
+<span class="line">            default: ALUControl = 4'bxxxx; // ???</span>
+<span class="line">        endcase // case (funct3)</span>
+<span class="line">     endcase // case (ALUOp)</span>
+<span class="line"></span>
+<span class="line">endmodule // aludec</span>
+<span class="line"></span>
+<span class="line">module datapath(input logic clk, reset,</span>
+<span class="line">                // Fetch stage signals</span>
+<span class="line">                input logic         StallF,</span>
+<span class="line">                output logic [31:0] PCF,</span>
+<span class="line">                input logic [31:0]  InstrF,</span>
+<span class="line">                // Decode stage signals</span>
+<span class="line">                output logic [6:0]  opD,</span>
+<span class="line">                output logic [2:0]  funct3D,</span>
+<span class="line">                output logic        funct7b5D,</span>
+<span class="line">                input logic         StallD, FlushD,</span>
+<span class="line">                input logic [2:0]   ImmSrcD,</span>
+<span class="line">                // Execute stage signals</span>
+<span class="line">                input logic         FlushE,</span>
+<span class="line">                input logic [1:0]   ForwardAE, ForwardBE,</span>
+<span class="line">                input logic         PCSrcE,</span>
+<span class="line">                input logic         PCSrcNextE,</span>
+<span class="line">                input logic [3:0]   ALUControlE,</span>
+<span class="line">                input logic [1:0]   ALUSrcE,</span>
+<span class="line">                output logic        ZeroE, NegativeE, CarryE, OverflowE,</span>
+<span class="line">                // Memory stage signals</span>
+<span class="line">                input logic         MemWriteM,</span>
+<span class="line">                output logic [31:0] dpWriteDataM, ALUResultM,</span>
+<span class="line">                input logic [31:0]  ReadDataM,</span>
+<span class="line">                // Writeback stage signals</span>
+<span class="line">                input logic         RegWriteW,</span>
+<span class="line">                input logic [1:0]   ResultSrcW,</span>
+<span class="line">                // Hazard Unit signals</span>
+<span class="line">                output logic [4:0]  Rs1D, Rs2D, Rs1E, Rs2E,</span>
+<span class="line">                output logic [4:0]  RdE, RdM, RdW);</span>
+<span class="line">   // Fetch stage signals</span>
+<span class="line">   logic [31:0] PCNextTemp, PCNextF, PCPlus4F;</span>
+<span class="line">   // Decode stage signals</span>
+<span class="line">   logic [31:0] InstrD;</span>
+<span class="line">   logic [31:0] PCD, PCPlus4D;</span>
+<span class="line">   logic [31:0] RD1D, RD2D;</span>
+<span class="line">   logic [31:0] ImmExtD;</span>
+<span class="line">   logic [4:0] RdD;</span>
+<span class="line">   // Execute stage signals</span>
+<span class="line">   logic [31:0] RD1E, RD2E;</span>
+<span class="line">   logic [31:0] PCE, ImmExtE;</span>
+<span class="line">   logic [31:0] SrcAE, SrcBE, RegOutAE;</span>
+<span class="line">   logic [31:0] ALUResultE;</span>
+<span class="line">   logic [31:0] WriteDataE;</span>
+<span class="line">   logic [31:0] PCPlus4E;</span>
+<span class="line">   logic [31:0] PCTargetE;</span>
+<span class="line">   // Memory stage signals</span>
+<span class="line">   logic [31:0] PCPlus4M;</span>
+<span class="line">   // Writeback stage signals</span>
+<span class="line">   logic [31:0] ALUResultW;</span>
+<span class="line">   logic [31:0] ReadDataW;</span>
+<span class="line">   logic [31:0] PCPlus4W;</span>
+<span class="line">   logic [31:0] ResultW;</span>
+<span class="line">   logic [31:0] ResultLoad;</span>
+<span class="line"></span>
+<span class="line">   // Fetch stage pipeline register and logic</span>
+<span class="line">   mux2 #(32) pcmux(PCPlus4F, PCTargetE, PCSrcE, PCNextTemp);</span>
+<span class="line">   mux2 #(32) pcmux2(PCNextTemp, ALUResultE, PCSrcNextE, PCNextF);</span>
+<span class="line">   flopenr #(32) pcreg(clk, reset, ~StallF, PCNextF, PCF);</span>
+<span class="line">   adder pcadd(PCF, 32'h4, PCPlus4F);</span>
+<span class="line"></span>
+<span class="line">   // Decode stage pipeline register and logic</span>
+<span class="line">   flopenrc #(96) regD(clk, reset, FlushD, ~StallD,</span>
+<span class="line">                       {InstrF, PCF, PCPlus4F},</span>
+<span class="line">                       {InstrD, PCD, PCPlus4D});</span>
+<span class="line">   assign opD       = InstrD[6:0];</span>
+<span class="line">   assign funct3D   = InstrD[14:12];</span>
+<span class="line">   assign funct7b5D = InstrD[30];</span>
+<span class="line">   assign Rs1D      = InstrD[19:15];</span>
+<span class="line">   assign Rs2D      = InstrD[24:20];</span>
+<span class="line">   assign RdD       = InstrD[11:7];</span>
+<span class="line"></span>
+<span class="line">   regfile        rf(clk, RegWriteW, Rs1D, Rs2D, RdW, ResultW, RD1D, RD2D);</span>
+<span class="line">   extend         ext(InstrD[31:7], ImmSrcD, ImmExtD);</span>
+<span class="line"></span>
+<span class="line">   // Execute stage pipeline register and logic</span>
+<span class="line">   floprc #(175) regE(clk, reset, FlushE,</span>
+<span class="line">                      {RD1D, RD2D, PCD, Rs1D, Rs2D, RdD, ImmExtD, PCPlus4D},</span>
+<span class="line">                      {RD1E, RD2E, PCE, Rs1E, Rs2E, RdE, ImmExtE, PCPlus4E});</span>
+<span class="line"></span>
+<span class="line">   mux3   #(32)  faemux(RD1E, ResultW, ALUResultM, ForwardAE, RegOutAE);</span>
+<span class="line">   mux3   #(32)  fbemux(RD2E, ResultW, ALUResultM, ForwardBE, WriteDataE);</span>
+<span class="line">   mux2   #(32)  srcamux(RegOutAE, PCE, ALUSrcE[1], SrcAE);</span>
+<span class="line">   mux2   #(32)  srcbmux(WriteDataE, ImmExtE, ALUSrcE[0], SrcBE);</span>
+<span class="line">   alu           alu(SrcAE, SrcBE, ALUControlE, ALUResultE, ZeroE, NegativeE, CarryE, OverflowE);</span>
+<span class="line">   adder         branchadd(ImmExtE, PCE, PCTargetE);</span>
+<span class="line"></span>
+<span class="line">   // Memory stage pipeline register</span>
+<span class="line">   flopr  #(101) regM(clk, reset,</span>
+<span class="line">                  {ALUResultE, WriteDataE, RdE, PCPlus4E},</span>
+<span class="line">                  {ALUResultM, dpWriteDataM, RdM, PCPlus4M});</span>
+<span class="line"></span>
+<span class="line">   // Writeback stage pipeline register and logic</span>
+<span class="line">   flopr  #(101) regW(clk, reset,</span>
+<span class="line">                      {ALUResultM, ReadDataM, RdM, PCPlus4M},</span>
+<span class="line">                      {ALUResultW, ReadDataW, RdW, PCPlus4W});</span>
+<span class="line">   mux4 #(32) resultmux(ALUResultW, ReadDataW, PCPlus4W, ResultLoad, ResultSrcW, ResultW);</span>
+<span class="line">   loadextend load (ALUResultW, ReadDataW, funct3D, ResultLoad);</span>
+<span class="line">   // If memwrite  == true go to store extend</span>
+<span class="line">endmodule</span>
+<span class="line"></span>
+<span class="line">// Hazard Unit: forward, stall, and flush</span>
+<span class="line">module hazard(input  logic [4:0] Rs1D, Rs2D, Rs1E, Rs2E, RdE, RdM, RdW,</span>
+<span class="line">              input logic        PCSrcE, PCSrcNextE, ResultSrcEb0,</span>
+<span class="line">              input logic        RegWriteM, RegWriteW,</span>
+<span class="line">              output logic [1:0] ForwardAE, ForwardBE,</span>
+<span class="line">              output logic       StallF, StallD, FlushD, FlushE);</span>
+<span class="line"></span>
+<span class="line">   logic lwStallD;</span>
+<span class="line"></span>
+<span class="line">   // forwarding logic</span>
+<span class="line">   always_comb begin</span>
+<span class="line">      ForwardAE = 2'b00;</span>
+<span class="line">      ForwardBE = 2'b00;</span>
+<span class="line">      if (Rs1E != 5'b0)</span>
+<span class="line">         if      ((Rs1E == RdM) & RegWriteM) ForwardAE = 2'b10;</span>
+<span class="line">         else if ((Rs1E == RdW) & RegWriteW) ForwardAE = 2'b01;</span>
+<span class="line"></span>
+<span class="line">      if (Rs2E != 5'b0)</span>
+<span class="line">         if      ((Rs2E == RdM) & RegWriteM) ForwardBE = 2'b10;</span>
+<span class="line">         else if ((Rs2E == RdW) & RegWriteW) ForwardBE = 2'b01;</span>
+<span class="line">   end</span>
+<span class="line"></span>
+<span class="line">   // stalls and flushes</span>
+<span class="line">   assign lwStallD = ResultSrcEb0 & ((Rs1D == RdE) | (Rs2D == RdE));</span>
+<span class="line">   assign StallD = lwStallD;</span>
+<span class="line">   assign StallF = lwStallD;</span>
+<span class="line">   assign FlushD = PCSrcE | PCSrcNextE;</span>
+<span class="line">   assign FlushE = lwStallD | PCSrcE | PCSrcNextE;</span>
+<span class="line">endmodule</span>
+<span class="line"></span>
+<span class="line">module regfile(input  logic        clk,</span>
+<span class="line">               input logic         we3,</span>
+<span class="line">               input logic [ 4:0]  a1, a2, a3,</span>
+<span class="line">               input logic [31:0]  wd3,</span>
+<span class="line">               output logic [31:0] rd1, rd2);</span>
+<span class="line"></span>
+<span class="line">   logic [31:0] rf[31:0];</span>
+<span class="line"></span>
+<span class="line">   // three ported register file</span>
+<span class="line">   // read two ports combinationally (A1/RD1, A2/RD2)</span>
+<span class="line">   // write third port on rising edge of clock (A3/WD3/WE3)</span>
+<span class="line">   // write occurs on falling edge of clock</span>
+<span class="line">   // register 0 hardwired to 0</span>
+<span class="line"></span>
+<span class="line">   always_ff @(negedge clk)</span>
+<span class="line">     if (we3) rf[a3] <= wd3;</span>
+<span class="line"></span>
+<span class="line">   assign rd1 = (a1 != 0) ? rf[a1] : 0;</span>
+<span class="line">   assign rd2 = (a2 != 0) ? rf[a2] : 0;</span>
+<span class="line">endmodule</span>
+<span class="line"></span>
+<span class="line">module adder(input  [31:0] a, b,</span>
+<span class="line">             output [31:0] y);</span>
+<span class="line"></span>
+<span class="line">   assign y = a + b;</span>
+<span class="line">endmodule</span>
+<span class="line"></span>
+<span class="line">module extend (input  logic [31:7] instr,</span>
+<span class="line">               input  logic [2:0]  immsrc,</span>
+<span class="line">               output logic [31:0] immext);</span>
+<span class="line"></span>
+<span class="line">   always_comb</span>
+<span class="line">     case(immsrc)</span>
+<span class="line">       // I−type</span>
+<span class="line">       3'b000:  immext = {{20{instr[31]}}, instr[31:20]};</span>
+<span class="line">       // S−type (stores)</span>
+<span class="line">       3'b001:  immext = {{20{instr[31]}}, instr[31:25], instr[11:7]};</span>
+<span class="line">       // B−type (branches)</span>
+<span class="line">       3'b010:  immext = {{20{instr[31]}}, instr[7], instr[30:25], instr[11:8], 1'b0};</span>
+<span class="line">       // J−type (jal)</span>
+<span class="line">       3'b011:  immext = {{12{instr[31]}}, instr[19:12], instr[20], instr[30:21], 1'b0};</span>
+<span class="line">        // U−type (lui, auipc)</span>
+<span class="line">       3'b100: immext = {instr[31:12], 12'b0};</span>
+<span class="line">       default: immext = 32'bx; // undefined</span>
+<span class="line">     endcase // case (immsrc)</span>
+<span class="line"></span>
+<span class="line">endmodule // extend</span>
+<span class="line"></span>
+<span class="line">module loadextend (input logic [31:0] ALUResult, ReadData,</span>
+<span class="line">                     input logic [2:0] funct3,</span>
+<span class="line">                     output logic [31:0] ResultLoad);</span>
+<span class="line"></span>
+<span class="line">     logic [1:0]    loadchunk;</span>
+<span class="line"></span>
+<span class="line">     assign loadchunk = ALUResult[1:0];</span>
+<span class="line"></span>
+<span class="line">     always_comb</span>
+<span class="line">        case(funct3)</span>
+<span class="line">         3'b000: case(loadchunk) // lb</span>
+<span class="line">           2'b00: ResultLoad = {{24{ReadData[7]}}, ReadData[7:0]};</span>
+<span class="line">           2'b01: ResultLoad = {{24{ReadData[15]}}, ReadData[15:8]};</span>
+<span class="line">           2'b10: ResultLoad = {{24{ReadData[23]}}, ReadData[23:16]};</span>
+<span class="line">           2'b11: ResultLoad = {{24{ReadData[31]}}, ReadData[31:24]};</span>
+<span class="line">           default: ResultLoad = 32'bx;</span>
+<span class="line">           endcase</span>
+<span class="line">         3'b001:  case(loadchunk[1]) // lh</span>
+<span class="line">             1'b0:  ResultLoad = {{16{ReadData[15]}}, ReadData[15:0]};</span>
+<span class="line">             1'b1:  ResultLoad = {{16{ReadData[31]}}, ReadData[31:16]};</span>
+<span class="line">             default: ResultLoad = 32'bx;</span>
+<span class="line">             endcase</span>
+<span class="line">         3'b010:  ResultLoad = ReadData; // lw</span>
+<span class="line">         3'b100: case(loadchunk) // lbu</span>
+<span class="line">           2'b00: ResultLoad = {{24{0}}, ReadData[7:0]};</span>
+<span class="line">           2'b01: ResultLoad = {{24{0}}, ReadData[15:8]};</span>
+<span class="line">           2'b10: ResultLoad = {{24{0}}, ReadData[23:16]};</span>
+<span class="line">           2'b11: ResultLoad = {{24{0}}, ReadData[31:24]};</span>
+<span class="line">           default: ResultLoad = 32'bx;</span>
+<span class="line">           endcase</span>
+<span class="line">         3'b101:  case(loadchunk[1]) // lhu</span>
+<span class="line">             1'b0:  ResultLoad = {{16{0}}, ReadData[15:0]};</span>
+<span class="line">             1'b1:  ResultLoad = {{16{0}}, ReadData[31:16]};</span>
+<span class="line">             default: ResultLoad = 32'bx;</span>
+<span class="line">             endcase</span>
+<span class="line">         default: ResultLoad = 32'bx;</span>
+<span class="line">         endcase</span>
+<span class="line"></span>
+<span class="line">endmodule // loadextend</span>
+<span class="line"></span>
+<span class="line">/* module store (input logic [31:0] ALUResult, Result,</span>
+<span class="line">               input logic Memwrite,</span>
+<span class="line">               input logic [2:0] funct3,</span>
+<span class="line">               output logic [31:0] ResultStore);</span>
+<span class="line"></span>
+<span class="line">     logic [1:0]    storechunk;</span>
+<span class="line"></span>
+<span class="line">     assign storechunk = ALUResult[1:0];</span>
+<span class="line"></span>
+<span class="line"> if(Memwrite){</span>
+<span class="line">     always_comb</span>
+<span class="line">        case(funct3)</span>
+<span class="line">         3'b000: case(storechunk) // sb</span>
+<span class="line">           2'b00: ResultStore = {{{Result[31:8]}}, Result[7:0]};</span>
+<span class="line">           2'b01: ResultStore = {{{Result[31:16]}}, Result[7:0], Result[7:0]};</span>
+<span class="line">           2'b10: ResultStore = {{{Result[31:24]}}, Result[7:0], Result[15:0]};</span>
+<span class="line">           2'b11: ResultStore = {{{Result[7:0]}}, Result[23:0]};</span>
+<span class="line">           default: ResultStore = 32'bx;</span>
+<span class="line">           endcase</span>
+<span class="line">         3'b001:  case(storechunk[1]) // sh</span>
+<span class="line">             1'b0:  ResultStore = {{{Result[31:16]}}, Result[15:0]};</span>
+<span class="line">             1'b1:  ResultStore = {{{Result[31:16]}}, Result[15:0]};</span>
+<span class="line">             default: ResultStore = 32'bx;</span>
+<span class="line">             endcase</span>
+<span class="line">         3'b010:  ResultStore = Result; // sw</span>
+<span class="line">         default: ResultStore = 32'bx;</span>
+<span class="line">         endcase</span>
+<span class="line"> }</span>
+<span class="line"></span>
+<span class="line">endmodule // loadextend */</span>
+<span class="line"></span>
+<span class="line">module flopr #(parameter WIDTH = 8)</span>
+<span class="line">   (input  logic             clk, reset,</span>
+<span class="line">    input logic [WIDTH-1:0]  d,</span>
+<span class="line">    output logic [WIDTH-1:0] q);</span>
+<span class="line"></span>
+<span class="line">   always_ff @(posedge clk, posedge reset)</span>
+<span class="line">     if (reset) q <= 0;</span>
+<span class="line">     else       q <= d;</span>
+<span class="line">endmodule</span>
+<span class="line"></span>
+<span class="line">module flopenr #(parameter WIDTH = 8)</span>
+<span class="line">   (input  logic             clk, reset, en,</span>
+<span class="line">    input logic [WIDTH-1:0]  d,</span>
+<span class="line">    output logic [WIDTH-1:0] q);</span>
+<span class="line"></span>
+<span class="line">   always_ff @(posedge clk, posedge reset)</span>
+<span class="line">     if (reset)   q <= 0;</span>
+<span class="line">     else if (en) q <= d;</span>
+<span class="line">endmodule</span>
+<span class="line"></span>
+<span class="line">module flopenrc #(parameter WIDTH = 8)</span>
+<span class="line">   (input  logic             clk, reset, clear, en,</span>
+<span class="line">    input logic [WIDTH-1:0]  d,</span>
+<span class="line">    output logic [WIDTH-1:0] q);</span>
+<span class="line"></span>
+<span class="line">   always_ff @(posedge clk, posedge reset)</span>
+<span class="line">     if (reset)   q <= 0;</span>
+<span class="line">     else if (en)</span>
+<span class="line">       if (clear) q <= 0;</span>
+<span class="line">       else       q <= d;</span>
+<span class="line">endmodule</span>
+<span class="line"></span>
+<span class="line">module floprc #(parameter WIDTH = 8)</span>
+<span class="line">   (input  logic clk,</span>
+<span class="line">    input logic              reset,</span>
+<span class="line">    input logic              clear,</span>
+<span class="line">    input logic [WIDTH-1:0]  d,</span>
+<span class="line">    output logic [WIDTH-1:0] q);</span>
+<span class="line"></span>
+<span class="line">   always_ff @(posedge clk, posedge reset)</span>
+<span class="line">     if (reset) q <= 0;</span>
+<span class="line">     else</span>
+<span class="line">       if (clear) q <= 0;</span>
+<span class="line">       else       q <= d;</span>
+<span class="line">endmodule</span>
+<span class="line"></span>
+<span class="line">module mux2 #(parameter WIDTH = 8)</span>
+<span class="line">   (input  logic [WIDTH-1:0] d0, d1,</span>
+<span class="line">    input logic              s,</span>
+<span class="line">    output logic [WIDTH-1:0] y);</span>
+<span class="line"></span>
+<span class="line">   assign y = s ? d1 : d0;</span>
+<span class="line">endmodule</span>
+<span class="line"></span>
+<span class="line">module mux3 #(parameter WIDTH = 8)</span>
+<span class="line">   (input  logic [WIDTH-1:0] d0, d1, d2,</span>
+<span class="line">    input logic [1:0]        s,</span>
+<span class="line">    output logic [WIDTH-1:0] y);</span>
+<span class="line"></span>
+<span class="line">   assign y = s[1] ? d2 : (s[0] ? d1 : d0);</span>
+<span class="line">endmodule</span>
+<span class="line"></span>
+<span class="line">module mux4 # (parameter WIDTH = 8)</span>
+<span class="line">            (input logic [WIDTH-1:0] d0, d1, d2, d3,</span>
+<span class="line">             input logic [1:0] s,</span>
+<span class="line">             output logic [WIDTH-1:0] y);</span>
+<span class="line"></span>
+<span class="line">    assign y = (s[1] ? (s[0] ? d3 : d2) : (s[0] ? d1 : d0));</span>
+<span class="line"></span>
+<span class="line">endmodule</span>
+<span class="line"></span>
+<span class="line">/*module imem (input  logic [31:0] a,</span>
+<span class="line">             output logic [31:0] rd);</span>
+<span class="line"></span>
+<span class="line">   logic [31:0] RAM[2047:0];</span>
+<span class="line"></span>
+<span class="line">   assign rd = RAM[a[31:2]]; // word aligned</span>
+<span class="line"></span>
+<span class="line">endmodule // imem</span>
+
+<span class="line"></span>
+<span class="line">module dmem (input  logic        clk, we,</span>
+<span class="line">             input  logic [31:0] a, wd,</span>
+<span class="line">             output logic [31:0] rd);</span>
+<span class="line"></span>
+<span class="line">   logic [31:0] RAM[2047:0];</span>
+<span class="line"></span>
+<span class="line">   assign rd = RAM[a[31:2]]; // word aligned</span>
+<span class="line">   always_ff @(posedge clk)</span>
+<span class="line">     if (we) RAM[a[31:2]] <= wd;</span>
+<span class="line"></span>
+<span class="line">endmodule // dmem*/</span>
+<span class="line"></span>
+<span class="line">module alu (input  logic [31:0] a, b,</span>
+<span class="line">            input  logic [3:0]  alucontrol,</span>
+<span class="line">            output logic [31:0] result,</span>
+<span class="line">            output logic         zero, negative, carry, overflow);</span>
+<span class="line"></span>
+<span class="line">   logic [31:0] condinvb, sum, xorOut, sltuOut;</span>
+<span class="line">   logic [32:0] fullsum;</span>
+<span class="line">   logic        Cout;</span>
+<span class="line">   logic        isAddSub;       // true when is add or subtract operation</span>
+<span class="line"></span>
+<span class="line">   assign condinvb = alucontrol[0] ? ~b : b;</span>
+<span class="line">   assign fullsum = a + condinvb + alucontrol[0];</span>
+<span class="line">   assign sum = {fullsum[31:0]};</span>
+<span class="line">   assign isAddSub = ~alucontrol[2] & ~alucontrol[1] |</span>
+<span class="line">                     ~alucontrol[1] & alucontrol[0]  |</span>
+<span class="line">                     alucontrol[2] & alucontrol[1] & alucontrol[0];</span>
+<span class="line"></span>
+<span class="line">   always_comb</span>
+<span class="line">     case (alucontrol)</span>
+<span class="line">       4'b0000:  result = sum;         // add</span>
+<span class="line">       4'b0001:  result = sum;         // subtract</span>
+<span class="line">       4'b0010:  result = a & b;       // and</span>
+<span class="line">       4'b0011:  result = a | b;       // or</span>
+<span class="line">       4'b0101:  result = sum[31] ^ overflow; // slt</span>
+<span class="line">       4'b0110:  result = a >> unsigned'(b[4:0]);      // srl</span>
+<span class="line">       4'b0111:  result = $signed(a) >>> unsigned'(b[4:0]);     // sra</span>
+<span class="line">       4'b0100:  result = a ^ b;      // xor</span>
+<span class="line">       4'b1000:  result = a << unsigned'(b[4:0]);      // sll</span>
+<span class="line">       4'b1001:  result = unsigned'(a) < unsigned'(b);     // sltu</span>
+<span class="line">       4'b1110:  result = b;           // lui</span>
+<span class="line">       default:  result = 32'bx;</span>
+<span class="line">     endcase</span>
+<span class="line">   // overflow</span>
+<span class="line">   assign overflow = ~(alucontrol[0] ^ a[31] ^ b[31]) & (a[31] ^ sum[31]) & isAddSub;</span>
+<span class="line">   // negative</span>
+<span class="line">   assign negative = result[31];</span>
+<span class="line">   // Cout</span>
+<span class="line">   assign carry = fullsum[32];</span>
+<span class="line">   // zero</span>
+<span class="line">   assign zero = (result == 32'b0);</span>
+<span class="line"></span>
+<span class="line">endmodule // alu</span></code></pre>
+
+      </div>
+
+      <a href="https://github.com/Frosty-Animal/Computer-Architecture" target="_blank" class="github-button-orange">
+        <i class="fab fa-github"></i>
+        View Full Code on GitHub
+      </a>
+    </div>
+  </section>
+
+  <div class="center-container">
+    <a href="./projects.html" class="button">Back to Projects</a>
+  </div>
+</div>
+
+<footer>
+  <p>&copy; <script>document.write(new Date().getFullYear())</script> Isaiah Hajabolhassan. All Rights Reserved.</p>
+  <a href="https://github.com/Frosty-Animal" target="_blank">
+    <i class="fab fa-github"></i> GitHub
+  </a>
+  <a href="https://www.linkedin.com/in/isaiah-h/" target="_blank">
+    <i class="fab fa-linkedin"></i> LinkedIn
+  </a>
+  <a href="mailto:Isaiahmh28@gmail.com">
+    <i class="fas fa-envelope"></i> Email
+  </a>
+</footer>
+
+<script>
+  document.querySelectorAll('.sidebar a').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      e.preventDefault();
+      document.querySelector(this.getAttribute('href')).scrollIntoView({
+        behavior: 'smooth'
+      });
+    });
+  });
+
+  let slideIndex = 1;
+  showSlides(slideIndex);
+
+  // Next/previous controls
+  function plusSlides(n) {
+    showSlides(slideIndex += n);
+  }
+
+  // Thumbnail image controls
+  function currentSlide(n) {
+    showSlides(slideIndex = n);
+  }
+
+  function showSlides(n) {
+    const slides = document.querySelectorAll(".slide");
+    const dots = document.querySelectorAll(".dot");
+
+    // Adjust slideIndex if out of bounds
+    if (n > slides.length) slideIndex = 1;
+    if (n < 1) slideIndex = slides.length;
+
+    // Hide all slides and remove active-dot from all dots
+    slides.forEach(slide => (slide.style.display = "none"));
+    dots.forEach(dot => dot.classList.remove("active-dot"));
+
+    // Show the active slide and activate the corresponding dot
+    slides[slideIndex - 1].style.display = "block";
+    dots[slideIndex - 1].classList.add("active-dot");
+  }
+</script>
+</body>
+</html>
