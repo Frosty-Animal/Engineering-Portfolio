@@ -2,39 +2,213 @@
 <html lang="en">
 <head>
   <title>Resume</title>
-  <link rel="stylesheet" type = "text/css" href="./styles.css">
+  <link rel="stylesheet" type="text/css" href="./styles.css">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/png" href="./Screenshot 2024-12-01 045343.png">
   <style>
-
-
     .resume-container {
-      text-align: center;
-      margin: 20px;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 20px;
     }
 
-    .resume-viewer {
-      width: 80%;
-      height: 600px;
-      border: 1px solid #ccc;
-      margin: 0 auto;
+    .resume-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+
+    .resume-content {
+      display: none;
+      animation: fadeIn 0.3s ease-in-out;
+    }
+
+    .resume-content.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .resume-section {
+      margin-bottom: 40px;
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .resume-section h2 {
+      color: #44443b;
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 3px solid #ec7a1c;
+      position: relative;
+    }
+
+    .resume-section h2::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -3px;
+      width: 50px;
+      height: 3px;
+      background-color: #bc6116;
+    }
+
+    .experience-item, .education-item, .project-item {
+      margin-bottom: 25px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    .experience-item:last-child, .education-item:last-child, .project-item:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+    }
+
+    .item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
+
+    .item-title {
+      font-size: 1.3rem;
+      font-weight: bold;
+      color: #44443b;
+      margin-bottom: 5px;
+    }
+
+    .item-company {
+      font-size: 1.1rem;
+      color: #ec7a1c;
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+
+    .item-date {
+      color: #666;
+      font-weight: 500;
+      font-size: 0.95rem;
+      white-space: nowrap;
+    }
+
+    .item-location {
+      color: #666;
+      font-size: 0.9rem;
+      font-style: italic;
+    }
+
+    .item-description {
+      margin-top: 10px;
+    }
+
+    .item-description ul {
+      margin: 10px 0;
+      padding-left: 20px;
+    }
+
+    .item-description li {
+      margin-bottom: 5px;
+      line-height: 1.5;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .skill-category {
+      background: #f8f6f3;
+      padding: 20px;
+      border-radius: 8px;
+      border-left: 4px solid #ec7a1c;
+    }
+
+    .skill-category h3 {
+      color: #44443b;
+      margin-bottom: 10px;
+      font-size: 1.1rem;
+    }
+
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .skill-tag {
+      background-color: #ec7a1c;
+      color: white;
+      padding: 5px 12px;
+      border-radius: 15px;
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+
+    .download-section {
+      text-align: center;
+      margin: 40px 0;
+      padding: 30px;
+      background: linear-gradient(135deg, #f8f6f3, #e6e4e0);
+      border-radius: 10px;
     }
 
     .download-link {
       display: inline-block;
-      padding: 10px 20px;
-      background-color: #ec7a1c;
+      padding: 15px 30px;
+      background: linear-gradient(135deg, #ec7a1c, #bc6116);
       color: white;
       text-decoration: none;
-      border-radius: 5px;
-      transition: background-color 0.3s ease;
-      text-align: center;
-      margin: 40px 0 20px 0;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(236, 122, 28, 0.3);
     }
 
     .download-link:hover {
-      background-color: #bc6116;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(236, 122, 28, 0.4);
     }
+
+    .download-link i {
+      margin-right: 8px;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .resume-container {
+        padding: 15px;
+      }
+
+      .resume-section {
+        padding: 20px;
+      }
+
+      .item-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .item-date {
+        margin-top: 5px;
+      }
+
+      .skills-grid {
+        grid-template-columns: 1fr;
+      }
+
+    }
+
 
   </style>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
@@ -42,32 +216,277 @@
 <body>
 
 <div class="topnav">
-  <a class="active" href="./index.html">Home</a>
+  <a href="./index.html">Home</a>
   <a href="./projects.html">Projects</a>
-  <a href="./resume.html">Resume</a>
+  <a class="active" href="./resume.html">Resume</a>
   <a href="./about.html">About</a>
 </div>
 
 <div class="resume-container">
-  <h1>Isaiah Hajabolhassan's Resume</h1>
+  <div class="resume-header">
+    <h1>Isaiah Hajabolhassan's Resume</h1>
+    <p>Computer and Electrical Engineering Student at Oklahoma State University</p>
+  </div>
 
-  <!-- Embed the PDF for viewing -->
-  <iframe src="https://docs.google.com/gview?url=https://github.com/Frosty-Animal/Engineering-Portfolio/raw/main/resume.pdf&embedded=true" class="resume-viewer" ></iframe>
-  <div style="text-align: center;">
-    <a href="https://github.com/Frosty-Animal/Engineering-Portfolio/raw/main/resume.pdf" download class="download-link">Download My Resume</a>
+  <!-- Detailed Resume Content -->
+  <div id="detailed-resume" class="resume-content active">
+
+    <!-- Work Experience Section -->
+    <div class="resume-section">
+      <h2><i class="fas fa-briefcase"></i> Work Experience</h2>
+
+      <div class="experience-item">
+        <div class="item-header">
+          <div>
+            <div class="item-title">Engineering Intern</div>
+            <div class="item-company">NPDC (National Product Development Center)</div>
+            <div class="item-location">Tulsa, Oklahoma</div>
+          </div>
+          <div class="item-date">May 2024 - Present</div>
+        </div>
+        <div class="item-description">
+          <ul>
+            <li>Developed automation systems for offshore oil drilling equipment</li>
+            <li>Designed and tested impact tools for high voltage power line maintenance</li>
+            <li>Implemented gasification processes for renewable energy applications</li>
+            <li>Collaborated with cross-functional teams on complex engineering projects</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="experience-item">
+        <div class="item-header">
+          <div>
+            <div class="item-title">[Job Title]</div>
+            <div class="item-company">[Company Name]</div>
+            <div class="item-location">[Location]</div>
+          </div>
+          <div class="item-date">[Start Date] - [End Date]</div>
+        </div>
+        <div class="item-description">
+          <ul>
+            <li>[Key responsibility or achievement]</li>
+            <li>[Another responsibility with quantifiable results]</li>
+            <li>[Technology or skill used in this role]</li>
+            <li>[Impact or outcome of your work]</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="experience-item">
+        <div class="item-header">
+          <div>
+            <div class="item-title">[Previous Job Title]</div>
+            <div class="item-company">[Previous Company]</div>
+            <div class="item-location">[Location]</div>
+          </div>
+          <div class="item-date">[Start Date] - [End Date]</div>
+        </div>
+        <div class="item-description">
+          <ul>
+            <li>[Responsibility that showcases technical skills]</li>
+            <li>[Achievement with specific metrics if possible]</li>
+            <li>[Relevant project or initiative you led]</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Education Section -->
+    <div class="resume-section">
+      <h2><i class="fas fa-graduation-cap"></i> Education</h2>
+
+      <div class="education-item">
+        <div class="item-header">
+          <div>
+            <div class="item-title">Bachelor of Science in Computer and Electrical Engineering</div>
+            <div class="item-company">Oklahoma State University</div>
+            <div class="item-location">Stillwater, Oklahoma</div>
+          </div>
+          <div class="item-date">Expected [Graduation Year]</div>
+        </div>
+        <div class="item-description">
+          <ul>
+            <li><strong>GPA:</strong> [Your GPA] (if 3.5 or higher)</li>
+            <li><strong>Relevant Coursework:</strong> Digital Signal Processing, Computer Architecture, Embedded Systems, Circuit Analysis</li>
+            <li><strong>Dean's List:</strong> [Semesters] (if applicable)</li>
+            <li><strong>Engineering Honors Program:</strong> (if applicable)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="education-item">
+        <div class="item-header">
+          <div>
+            <div class="item-title">[Previous Education - High School/Community College]</div>
+            <div class="item-company">[Institution Name]</div>
+            <div class="item-location">[Location]</div>
+          </div>
+          <div class="item-date">[Graduation Year]</div>
+        </div>
+        <div class="item-description">
+          <ul>
+            <li><strong>GPA:</strong> [GPA] (if strong)</li>
+            <li><strong>Honors:</strong> [Any honors, valedictorian, etc.]</li>
+            <li><strong>Activities:</strong> [Relevant clubs, sports, leadership]</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Skills Section -->
+    <div class="resume-section">
+      <h2><i class="fas fa-cogs"></i> Technical Skills</h2>
+      <div class="skills-grid">
+        <div class="skill-category">
+          <h3>Programming Languages</h3>
+          <div class="skill-tags">
+            <span class="skill-tag">C++</span>
+            <span class="skill-tag">Python</span>
+            <span class="skill-tag">JavaScript</span>
+            <span class="skill-tag">MATLAB</span>
+            <span class="skill-tag">Verilog</span>
+            <span class="skill-tag">[Add more]</span>
+          </div>
+        </div>
+
+        <div class="skill-category">
+          <h3>Software & Tools</h3>
+          <div class="skill-tags">
+            <span class="skill-tag">FPGA</span>
+            <span class="skill-tag">Arduino</span>
+            <span class="skill-tag">CAD Software</span>
+            <span class="skill-tag">Git</span>
+            <span class="skill-tag">[Add tools]</span>
+          </div>
+        </div>
+
+        <div class="skill-category">
+          <h3>Hardware & Systems</h3>
+          <div class="skill-tags">
+            <span class="skill-tag">ESP32</span>
+            <span class="skill-tag">IoT Systems</span>
+            <span class="skill-tag">Circuit Design</span>
+            <span class="skill-tag">3D Printing</span>
+            <span class="skill-tag">[Add more]</span>
+          </div>
+        </div>
+
+        <div class="skill-category">
+          <h3>Engineering Areas</h3>
+          <div class="skill-tags">
+            <span class="skill-tag">Digital Signal Processing</span>
+            <span class="skill-tag">Automation</span>
+            <span class="skill-tag">Embedded Systems</span>
+            <span class="skill-tag">[Add areas]</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Projects Section -->
+    <div class="resume-section">
+      <h2><i class="fas fa-project-diagram"></i> Notable Projects</h2>
+
+      <div class="project-item">
+        <div class="item-header">
+          <div>
+            <div class="item-title">RISC-V Pipelined Processor</div>
+            <div class="item-company">Academic Project</div>
+          </div>
+          <div class="item-date">[Year]</div>
+        </div>
+        <div class="item-description">
+          <ul>
+            <li>Designed and implemented a 5-stage pipelined RISC-V processor in Verilog</li>
+            <li>Successfully executed complex instruction sets with hazard detection and forwarding</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="project-item">
+        <div class="item-header">
+          <div>
+            <div class="item-title">Racing Drones</div>
+            <div class="item-company">Personal Project</div>
+          </div>
+          <div class="item-date">[Year]</div>
+        </div>
+        <div class="item-description">
+          <ul>
+            <li>Built high-performance racing drones capable of 100+ MPH speeds</li>
+            <li>Programmed flight controllers and optimized for competitive racing</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="project-item">
+        <div class="item-header">
+          <div>
+            <div class="item-title">[Add Your Projects]</div>
+            <div class="item-company">[Project Type]</div>
+          </div>
+          <div class="item-date">[Year]</div>
+        </div>
+        <div class="item-description">
+          <ul>
+            <li>[Brief description of project and technologies used]</li>
+            <li>[Key outcomes or achievements]</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Awards & Certifications Section -->
+    <div class="resume-section">
+      <h2><i class="fas fa-award"></i> Awards & Certifications</h2>
+
+      <div class="education-item">
+        <div class="item-header">
+          <div>
+            <div class="item-title">[Award/Certification Name]</div>
+            <div class="item-company">[Issuing Organization]</div>
+          </div>
+          <div class="item-date">[Date]</div>
+        </div>
+      </div>
+
+      <div class="education-item">
+        <div class="item-header">
+          <div>
+            <div class="item-title">[Another Award/Certification]</div>
+            <div class="item-company">[Organization]</div>
+          </div>
+          <div class="item-date">[Date]</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="download-section">
+      <h3>Download Resume</h3>
+      <p>Get a copy of my complete resume in PDF format</p>
+      <a href="https://github.com/Frosty-Animal/Engineering-Portfolio/raw/main/resume.pdf" download class="download-link">
+        <i class="fas fa-download"></i> Download PDF Resume
+      </a>
+    </div>
   </div>
 </div>
-<footer>
-  <p>&copy; <script>document.write(new Date().getFullYear())</script> Isaiah Hajabolhassan. All Rights Reserved.</p>
-  <a href="https://github.com/Frosty-Animal" target="_blank">
-    <i class="fab fa-github"></i> GitHub
-  </a>
-  <a href="https://www.linkedin.com/in/isaiah-h/" target="_blank">
-    <i class="fab fa-linkedin"></i> LinkedIn
-  </a>
-  <a href="mailto:Isaiahmh28@gmail.com">
-    <i class="fas fa-envelope"></i> Email
-  </a>
-</footer>
+    <footer>
+      <p>&copy; <script>document.write(new Date().getFullYear())</script> Isaiah Hajabolhassan. All Rights Reserved.</p>
+      <a href="https://github.com/Frosty-Animal" target="_blank">
+        <i class="fab fa-github"></i> GitHub
+      </a>
+      <a href="https://www.linkedin.com/in/isaiah-h/" target="_blank">
+        <i class="fab fa-linkedin"></i> LinkedIn
+      </a>
+      <a href="mailto:Isaiahmh28@gmail.com">
+        <i class="fas fa-envelope"></i> Email
+      </a>
+    </footer>
+
+    <script>
+      // Page loads with detailed view by default - no toggle functionality needed
+    </script>
+
 </body>
 </html>

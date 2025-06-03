@@ -1,57 +1,193 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
   <meta charset="UTF-8">
-  <link rel="stylesheet" type = "text/css" href="./styles.css">
+  <link rel="stylesheet" type="text/css" href="./styles.css">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/png" href="./Screenshot 2024-12-01 045343.png">
-  <title>
-    About Me
-  </title>
-  <style>
+  <title>About Me</title>
 
+  <style>
+    /* Profile Picture CSS - FIXED */
+    .profile-section {
+      text-align: center;
+      padding: 40px 20px;
+      background-color: #f8f6f3;
+      margin: 20px 0;
+    }
 
     .profile-pic {
       display: block;
-      margin: 0 auto; /* Center the image */
-      width: 400px; /* Adjust size */
-      height: 400px; /* Adjust size */
-      border-radius: 50%; /* Make the image circular */
-      object-fit: cover; /* Ensure the image fills the frame */
+      margin: 20px auto;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 5px solid #ec7a1c;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease;
     }
 
+    .profile-pic:hover {
+      transform: scale(1.05);
+    }
 
+    /* Responsive profile picture */
+    @media (max-width: 768px) {
+      .profile-pic {
+        width: 250px;
+        height: 250px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .profile-pic {
+        width: 200px;
+        height: 200px;
+      }
+    }
+
+    /* Interests Section CSS */
+    .interests-section {
+      background-color: #f8f6f3;
+      padding: 60px 20px;
+      text-align: center;
+      margin: 40px 0;
+    }
+
+    .interests-section h2 {
+      font-size: 2.5rem;
+      color: #44443b;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .interests-subtitle {
+      font-size: 1.2rem;
+      color: #666;
+      margin-bottom: 50px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .interests-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      justify-content: center;
+      margin-top: 30px;
+      max-width: 1000px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .interest-tag {
+      background: linear-gradient(135deg, #ec7a1c, #bc6116);
+      color: white;
+      padding: 12px 20px;
+      border-radius: 25px;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(236, 122, 28, 0.3);
+    }
+
+    .interest-tag:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(236, 122, 28, 0.4);
+      background: linear-gradient(135deg, #bc6116, #ec7a1c);
+    }
+
+    /* About content styling */
+    .about-content {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    .about-content h1 {
+      color: #44443b;
+      font-size: 2.5rem;
+      margin-bottom: 30px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .about-content p {
+      color: #666;
+      font-size: 1.1rem;
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
   </style>
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
 
 <div class="topnav">
-  <a class="active" href="./index.html">Home</a>
+  <a href="./index.html">Home</a>
   <a href="./projects.html">Projects</a>
   <a href="./resume.html">Resume</a>
-  <a href="./about.html">About</a>
+  <a class="active" href="./about.html">About</a>
 </div>
 
-<div>
+<div class="about-content">
   <h1>About Me</h1>
-  <img class="profile-pic" src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/profilePicture.jpg"  width="500" height="300" alt="Isaiah's Profile Picture">
-  <p>Hello</p>
-  <footer>
-    <p>&copy; <script>document.write(new Date().getFullYear())</script> Isaiah Hajabolhassan. All Rights Reserved.</p>
-    <a href="https://github.com/Frosty-Animal" target="_blank">
-      <i class="fab fa-github"></i> GitHub
-    </a>
-    <a href="https://www.linkedin.com/in/isaiah-h/" target="_blank">
-      <i class="fab fa-linkedin"></i> LinkedIn
-    </a>
-    <a href="mailto:Isaiahmh28@gmail.com">
-      <i class="fas fa-envelope"></i> Email
-    </a>
-  </footer>
-
 </div>
+
+<section class="profile-section">
+  <img class="profile-pic" src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/AboutMePicture.jpg" alt="Isaiah's Profile Picture">
+
+  <div class="about-content">
+    <p>
+      Hello! I'm Isaiah Hajabolhassan, a passionate Computer and Electrical Engineering student at Oklahoma State University.
+    </p>
+    <p>
+      My journey in engineering has been driven by curiosity and a desire to understand how things work.
+      From building my first Arduino project to designing complex systems, I'm constantly learning and growing in this exciting field.
+    </p>
+  </div>
+</section>
+
+<section class="interests-section">
+  <h2>Interests & Passions</h2>
+  <p class="interests-subtitle">
+    Beyond engineering, here are the technologies, hobbies, and activities that inspire and drive me
+  </p>
+
+  <div class="interests-tags">
+    <span class="interest-tag">Arduino Programming</span>
+    <span class="interest-tag">IoT Development</span>
+    <span class="interest-tag">3D Printing</span>
+    <span class="interest-tag">Circuit Design</span>
+    <span class="interest-tag">FPGA Programming</span>
+    <span class="interest-tag">Machine Learning</span>
+    <span class="interest-tag">Robotics</span>
+    <span class="interest-tag">Photography</span>
+    <span class="interest-tag">Gaming</span>
+    <span class="interest-tag">Basketball</span>
+    <span class="interest-tag">Hiking</span>
+    <span class="interest-tag">Music Production</span>
+  </div>
+</section>
+
+<footer>
+  <p>&copy; <script>document.write(new Date().getFullYear())</script> Isaiah Hajabolhassan. All Rights Reserved.</p>
+  <a href="https://github.com/Frosty-Animal" target="_blank">
+    <i class="fab fa-github"></i> GitHub
+  </a>
+  <a href="https://www.linkedin.com/in/isaiah-h/" target="_blank">
+    <i class="fab fa-linkedin"></i> LinkedIn
+  </a>
+  <a href="mailto:Isaiahmh28@gmail.com">
+    <i class="fas fa-envelope"></i> Email
+  </a>
+</footer>
 
 </body>
 </html>
