@@ -3,7 +3,7 @@
 <head>
   <title>Portfolio</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/png" href="./Screenshot 2024-12-01 045343.png">
+  <link rel="icon" type="image/png" href="WebsiteTitlePicture.png">
   <style>
     * {
       margin: 0;
@@ -53,7 +53,6 @@
       color: black;
     }
 
-    /* Hero section with slideshow */
     .intro-header {
       position: relative;
       height: 60vh;
@@ -65,7 +64,6 @@
       text-align: center;
     }
 
-    /* Slideshow container */
     .slideshow-container {
       position: absolute;
       top: 0;
@@ -75,12 +73,10 @@
       z-index: -2;
     }
 
-    /* For the hero slideshow */
     .intro-header .slideshow-container {
-      width: 100vw; /* Use viewport width */
+      width: 100vw;
     }
 
-    /* Individual slide */
     .slide {
       position: absolute;
       top: 0;
@@ -96,13 +92,12 @@
     }
 
     .intro-header .slide img {
-      width: 100vw; /* Full viewport width */
+      width: 100vw;
       height: 100%;
       object-fit: cover;
       object-position: center;
     }
 
-    /* Dark overlay for better text readability */
     .intro-header::before {
       content: '';
       position: absolute;
@@ -115,7 +110,6 @@
       width: 100vw;
     }
 
-    /* Text content over slideshow */
     .hero-content {
       z-index: 1;
       color: white;
@@ -147,7 +141,6 @@
       text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
     }
 
-    /* Content styles */
     h1 {
       text-align: center;
       margin: 40px 0 20px 0;
@@ -168,7 +161,6 @@
       width: 100%;
     }
 
-    /* Featured Projects Section - ADDED MISSING CSS */
     .featured-projects {
       background-color: #f8f6f3;
       padding: 60px 20px;
@@ -283,7 +275,6 @@
       font-weight: 500;
     }
 
-    /* Updated button styles */
     .card-link {
       display: inline-flex;
       align-items: center;
@@ -307,16 +298,6 @@
       box-shadow: 0 4px 8px rgba(188, 97, 22, 0.3);
     }
 
-    .card-link.secondary {
-      background-color: transparent;
-      color: #ec7a1c;
-      border: 2px solid #ec7a1c;
-    }
-
-    .card-link.secondary:hover {
-      background-color: #ec7a1c;
-      color: white;
-    }
 
     .card-link i {
       margin-left: 5px;
@@ -389,14 +370,6 @@
       }
     }
 
-    @media (min-width: 769px) and (max-width: 1024px) {
-      .project-card {
-        width: calc(50% - 15px);
-        flex: 0 0 calc(50% - 15px);
-      }
-    }
-
-    /* Footer */
     footer {
       background-color: #333;
       color: #f2f2f2;
@@ -471,7 +444,7 @@
     <!-- Project 1: Smart Home Automation System -->
     <div class="featured-card">
       <div class="card-image">
-        <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/Capture.jpg" alt="Project 1">
+        <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/5219.jpg" alt="Project 1">
       </div>
       <div class="card-content">
         <h3 class="card-title">Oil Pan Automation</h3>
@@ -479,10 +452,10 @@
           Description Place holder
         </p>
         <div class="card-tech">
-          <span class="tech-tag">Arduino</span>
-          <span class="tech-tag">ESP32</span>
-          <span class="tech-tag">IoT</span>
-          <span class="tech-tag">C++</span>
+          <span class="tech-tag">PLC</span>
+          <span class="tech-tag">Pneumatics</span>
+          <span class="tech-tag">Motor Control</span>
+          <span class="tech-tag">Automation</span>
         </div>
         <a href="./Hopkins.html" class="card-link">
           View Project <i class="fas fa-arrow-right"></i>
@@ -490,7 +463,6 @@
       </div>
     </div>
 
-    <!-- Project 2: Digital Signal Processing Filter -->
     <div class="featured-card">
       <div class="card-image">
         <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/Capture1.PNG" alt="Project 2">
@@ -501,10 +473,10 @@
           Description Place holder
         </p>
         <div class="card-tech">
-          <span class="tech-tag">MATLAB</span>
+          <span class="tech-tag">RISCV Architecture</span>
           <span class="tech-tag">FPGA</span>
-          <span class="tech-tag">Verilog</span>
-          <span class="tech-tag">DSP</span>
+          <span class="tech-tag">System Verilog</span>
+          <span class="tech-tag">Vivado</span>
         </div>
         <a href="./CompArc.html" class="card-link">
           View Project <i class="fas fa-arrow-right"></i>
