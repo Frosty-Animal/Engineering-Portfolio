@@ -200,7 +200,9 @@
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
       transition: all 0.3s ease;
       position: relative;
-      height: 450px; /* Increased height to accommodate buttons */
+      height: 500px; /* Increased height to accommodate buttons */
+      display: flex;
+      flex-direction: column;
     }
 
     .featured-card:hover {
@@ -223,6 +225,7 @@
       height: 200px;
       overflow: hidden;
       position: relative;
+      flex-shrink: 0; /* Prevent image from shrinking */
     }
 
     .card-image img {
@@ -238,10 +241,11 @@
 
     .card-content {
       padding: 25px;
-      height: 250px;
+      flex: 1; /* Takes remaining space */
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      min-height: 300px; /* Ensures enough space for content */
     }
 
     .card-title {
@@ -249,6 +253,7 @@
       font-weight: bold;
       color: #44443b;
       margin-bottom: 10px;
+      flex-shrink: 0; /* Prevent title from shrinking */
     }
 
     .card-description {
@@ -256,7 +261,11 @@
       line-height: 1.6;
       font-size: 0.95rem;
       margin-bottom: 15px;
-      flex-grow: 1;
+      flex-grow: 1; /* Takes available space */
+      display: -webkit-box;
+      -webkit-line-clamp: 3; /* Limits to 3 lines to save space */
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
 
     .card-tech {
@@ -264,6 +273,7 @@
       flex-wrap: wrap;
       gap: 8px;
       margin-bottom: 20px;
+      flex-shrink: 0; /* Prevent tech tags from shrinking */
     }
 
     .tech-tag {
@@ -288,7 +298,8 @@
       font-size: 0.95rem;
       transition: all 0.3s ease;
       border: 2px solid #ec7a1c;
-      margin-top: auto;
+      flex-shrink: 0; /* Ensure button doesn't shrink */
+      margin-top: auto; /* Push button to bottom */
     }
 
     .card-link:hover {
@@ -297,7 +308,6 @@
       transform: translateY(-2px);
       box-shadow: 0 4px 8px rgba(188, 97, 22, 0.3);
     }
-
 
     .card-link i {
       margin-left: 5px;
@@ -330,6 +340,215 @@
       box-shadow: 0 8px 25px rgba(236, 122, 28, 0.4);
     }
 
+    /* Featured Navigation Tabs */
+    .featured-navigation {
+      background-color: #f8f6f3;
+      padding: 40px 20px;
+      text-align: center;
+      border-top: 8px solid #ddd8d2;
+    }
+
+    .featured-navigation h2 {
+      font-size: 2rem;
+      color: #44443b;
+      margin-bottom: 30px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .nav-tabs {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .nav-tab {
+      background: #ec7a1c;
+      border-radius: 15px;
+      padding: 30px 20px;
+      text-decoration: none;
+      color: white;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(236, 122, 28, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .nav-tab:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(236, 122, 28, 0.4);
+      background: #bc6116;
+    }
+
+    .nav-tab-icon {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+      display: block;
+    }
+
+    .nav-tab-title {
+      font-size: 1.3rem;
+      font-weight: bold;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .nav-tab-description {
+      font-size: 0.95rem;
+      opacity: 0.9;
+      line-height: 1.4;
+    }
+
+    /* Contact Section */
+    .contact-section {
+      background-color: #f8f6f3;
+      color: #44443b;
+      padding: 60px 20px;
+      text-align: center;
+      border-top: 8px solid #ddd8d2;
+    }
+
+    .contact-container {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .contact-section h2 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #44443b;
+    }
+
+    .contact-section p {
+      font-size: 1.1rem;
+      margin-bottom: 30px;
+      opacity: 0.8;
+      line-height: 1.6;
+      color: #666;
+    }
+
+    .contact-box {
+      background: white;
+      border-radius: 15px;
+      padding: 40px 30px;
+      border: 1px solid #e0e0e0;
+      margin-top: 30px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .contact-info {
+      margin-bottom: 30px;
+    }
+
+    .contact-info h3 {
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+      color: #ec7a1c;
+    }
+
+    .contact-info p {
+      color: #666;
+      margin: 0;
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      text-align: left;
+    }
+
+    .form-group label {
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #ec7a1c;
+      font-size: 0.95rem;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      padding: 12px 15px;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      background: #f9f9f9;
+      color: #44443b;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+      color: #999;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: #ec7a1c;
+      background: white;
+      box-shadow: 0 0 10px rgba(236, 122, 28, 0.2);
+    }
+
+    .form-group textarea {
+      min-height: 120px;
+      resize: vertical;
+      font-family: inherit;
+    }
+
+    .send-button {
+      padding: 15px 30px;
+      background: #ec7a1c;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-top: 10px;
+    }
+
+    .send-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(236, 122, 28, 0.4);
+      background: #bc6116;
+    }
+
+    .send-button:active {
+      transform: translateY(0);
+    }
+
+    .form-status {
+      margin-top: 15px;
+      padding: 10px;
+      border-radius: 5px;
+      display: none;
+    }
+
+    .form-status.success {
+      background-color: rgba(76, 175, 80, 0.3);
+      border: 1px solid #4CAF50;
+      color: #4CAF50;
+    }
+
+    .form-status.error {
+      background-color: rgba(244, 67, 54, 0.3);
+      border: 1px solid #f44336;
+      color: #f44336;
+    }
 
     .project-slide img {
       max-width: 100%;
@@ -364,9 +583,35 @@
       }
       .featured-card {
         height: auto;
+        min-height: 450px; /* Minimum height on mobile */
       }
       .card-content {
         height: auto;
+        min-height: 250px; /* Minimum height for content on mobile */
+      }
+      .card-description {
+        -webkit-line-clamp: 4; /* Allow more lines on mobile */
+      }
+
+      /* Navigation tabs responsive */
+      .featured-navigation {
+        padding: 30px 15px;
+      }
+      .nav-tabs {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      /* Contact section responsive */
+      .contact-section {
+        padding: 40px 15px;
+      }
+      .contact-form {
+        gap: 15px;
+      }
+      .send-button {
+        padding: 12px 25px;
+        font-size: 1rem;
       }
     }
 
@@ -389,7 +634,7 @@
       text-decoration: underline;
     }
   </style>
-  <!-- FontAwesome for icons -->
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
@@ -425,7 +670,6 @@
     </div>
   </div>
 
-  <!-- Text content over slideshow -->
   <div class="hero-content">
     <h1>Isaiah Hajabolhassan</h1>
     <p>Engineering Project and Design Portfolio</p>
@@ -445,10 +689,9 @@
   <p class="subtitle">A showcase of my most impactful engineering projects that demonstrate my skills in electrical and computer engineering</p>
 
   <div class="featured-grid">
-    <!-- Project 1: Smart Home Automation System -->
     <div class="featured-card">
       <div class="card-image">
-        <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/5219.jpg" alt="Project 1">
+        <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/HopkinsMachine.jpg" alt="Project 1">
       </div>
       <div class="card-content">
         <h3 class="card-title">Oil Pan Automation</h3>
@@ -469,7 +712,7 @@
 
     <div class="featured-card">
       <div class="card-image">
-        <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/Capture1.PNG" alt="Project 2">
+        <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/5StagedPiplinedArc.png" alt="Project 2">
       </div>
       <div class="card-content">
         <h3 class="card-title">5 Stage Pipelined Processor</h3>
@@ -491,7 +734,7 @@
     <!-- Project 3: Renewable Energy Monitor -->
     <div class="featured-card">
       <div class="card-image">
-        <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/IMG_4080.jpg" alt="Project 3">
+        <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/DroneProfilePicture.jpg" alt="Project 3">
       </div>
       <div class="card-content">
         <h3 class="card-title">Racing Drones</h3>
@@ -513,6 +756,76 @@
 
   <div class="view-all-btn">
     <a href="./projects.html">View All Projects</a>
+  </div>
+</section>
+
+<!-- Featured Navigation Section -->
+<section class="featured-navigation">
+  <h2>Learn More About Me</h2>
+
+  <div class="nav-tabs">
+    <a href="./about.html" class="nav-tab">
+      <i class="fas fa-user nav-tab-icon"></i>
+      <div class="nav-tab-title">About Me</div>
+      <div class="nav-tab-description">
+        Discover my background, interests, and what drives my passion for engineering
+      </div>
+    </a>
+
+    <a href="./resume.html" class="nav-tab">
+      <i class="fas fa-file-alt nav-tab-icon"></i>
+      <div class="nav-tab-title">My Resume</div>
+      <div class="nav-tab-description">
+        View my experience, education, skills, and professional achievements
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- Contact Section -->
+<section class="contact-section">
+  <div class="contact-container">
+    <h2>Let's Connect</h2>
+    <p>
+      Interested in my work or have a project in mind? I'd love to hear from you!
+      Send me a message and I'll get back to you as soon as possible.
+    </p>
+
+    <div class="contact-box">
+      <div class="contact-info">
+        <h3>Send Me a Message</h3>
+        <p>Fill out the form below to get in touch directly:</p>
+      </div>
+
+      <form class="contact-form" id="contactForm">
+        <div class="form-group">
+          <label for="email">Your Email Address</label>
+          <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  required
+                  placeholder="your.email@example.com"
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="message">Your Message</label>
+          <textarea
+                  id="message"
+                  name="message"
+                  required
+                  placeholder="Tell me about your project, question, or just say hello!"
+          ></textarea>
+        </div>
+
+        <button type="submit" class="send-button">
+          <i class="fas fa-paper-plane"></i> Send Message
+        </button>
+
+        <div class="form-status" id="formStatus"></div>
+      </form>
+    </div>
   </div>
 </section>
 
@@ -560,6 +873,73 @@
   setInterval(() => {
     changeSlide(1);
   }, 4000);
+
+  // Contact form handling
+  document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const formStatus = document.getElementById('formStatus');
+    const email = document.getElementById('email').value;
+    const message = document.getElementById('message').value;
+
+    // Basic validation
+    if (!email || !message) {
+      showStatus('Please fill in all fields.', 'error');
+      return;
+    }
+
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      showStatus('Please enter a valid email address.', 'error');
+      return;
+    }
+
+    // Show loading state
+    const submitButton = document.querySelector('.send-button');
+    const originalText = submitButton.innerHTML;
+    submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+    submitButton.disabled = true;
+
+    // Create mailto link (fallback method)
+    const subject = encodeURIComponent('Portfolio Contact Form Message');
+    const body = encodeURIComponent(`
+From: ${email}
+
+Message:
+${message}
+
+---
+Sent from Isaiah's Portfolio Contact Form
+    `);
+
+    // Try to use EmailJS or similar service (you'll need to set this up)
+    // For now, we'll use a mailto link as a reliable fallback
+    const mailtoLink = `mailto:Isaiahmh28@gmail.com?subject=${subject}&body=${body}`;
+
+    // Open email client
+    window.location.href = mailtoLink;
+
+    // Reset form and show success message
+    setTimeout(() => {
+      this.reset();
+      showStatus('Email client opened! Please send the pre-filled message.', 'success');
+      submitButton.innerHTML = originalText;
+      submitButton.disabled = false;
+    }, 1000);
+  });
+
+  function showStatus(message, type) {
+    const formStatus = document.getElementById('formStatus');
+    formStatus.textContent = message;
+    formStatus.className = `form-status ${type}`;
+    formStatus.style.display = 'block';
+
+    // Hide status after 5 seconds
+    setTimeout(() => {
+      formStatus.style.display = 'none';
+    }, 5000);
+  }
 </script>
 
 </body>

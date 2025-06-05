@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HVAC Control System</title>
     <link rel="stylesheet" type="text/css" href="./styles.css">
-    <link rel="icon" type="image/png" href="WebsiteTitlePicture.png">
+    <link rel="icon" type="image/png" href="./Screenshot 2024-12-01 045343.png">
     <style>
         .video-container {
             display: flex;
@@ -22,15 +22,45 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
+        .presentation-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px auto;
+            max-width: 1200px; /* Much wider than video */
+            width: 95%; /* Use most of the screen width */
+        }
+
+        .presentation-container iframe {
+            width: 100%;
+            height: 600px; /* Taller than video */
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border: 1px solid #ddd;
+        }
+
         @media (max-width: 768px) {
             .video-container iframe {
                 height: 315px;
+            }
+
+            .presentation-container iframe {
+                height: 500px;
             }
         }
 
         @media (max-width: 480px) {
             .video-container iframe {
                 height: 250px;
+            }
+
+            .presentation-container iframe {
+                height: 400px;
+            }
+
+            .presentation-container {
+                max-width: 100%;
+                width: 98%;
             }
         }
     </style>
@@ -161,21 +191,14 @@
         </div>
 
         <h3>Project Presentation</h3>
-        <div class="video-container">
-            <!-- PowerPoint Presentation Embed -->
+        <div class="presentation-container">
+            <!-- Try multiple embedding methods -->
             <iframe
-                    src="https://docs.google.com/gview?url=https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/HVAC_Presentation.pptx&embedded=true"
+                    src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/Hackathon2023_Team1.pdf&embedded=true"
                     title="HVAC Control System Presentation"
                     frameborder="0"
                     allowfullscreen>
             </iframe>
-        </div>
-
-        <div style="text-align: center; margin-top: 15px;">
-            <a href="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/Hackathon2023_Team1.pptx"
-               download class="button">
-                <i class="fas fa-download"></i> Download Presentation
-            </a>
         </div>
 
         <p><strong>Future Enhancements:</strong> The system could be expanded with machine learning capabilities to predict occupancy patterns, integration with building management systems, and support for multiple HVAC zones with coordinated control.</p>
