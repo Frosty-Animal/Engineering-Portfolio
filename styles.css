@@ -349,6 +349,7 @@ footer {
 footer a {
     color: #ec7a1c;
     text-decoration: none;
+    margin-right: 15px;
 }
 
 footer a:hover {
