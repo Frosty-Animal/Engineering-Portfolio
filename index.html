@@ -4,13 +4,10 @@
   <title>Portfolio</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/png" href="WebsiteTitlePicture.png">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
+    /* Additional styles specific to index page that aren't in styles.css */
     body {
       margin: 0;
       font-family: Arial, Helvetica, sans-serif;
@@ -19,40 +16,10 @@
       flex-direction: column;
       min-height: 100vh;
       width: 100%;
-      overflow-x: hidden; /* Prevent horizontal scrolling */
+      overflow-x: hidden;
     }
 
-    .topnav {
-      overflow: hidden;
-      background-color: #44443b;
-      width: 100%;
-    }
-
-    .topnav a {
-      float: left;
-      color: #f2f2f2;
-      text-align: center;
-      padding: 14px 16px;
-      text-decoration: none;
-      font-size: 17px;
-      transition: opacity 0.5s ease, transform 0.5s ease;
-    }
-
-    .topnav a:hover {
-      background-color: #bc6116;
-      color: white;
-    }
-
-    .topnav a.active {
-      background-color: #ec7a1c;
-      color: white;
-    }
-
-    .topnav a.active:hover {
-      background-color: #bc6116;
-      color: black;
-    }
-
+    /* Hero section styles */
     .intro-header {
       position: relative;
       height: 60vh;
@@ -141,26 +108,13 @@
       text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
     }
 
-    h1 {
-      text-align: center;
-      margin: 40px 0 20px 0;
-    }
-
-    p {
-      margin: 20px 40px;
-    }
-
-    p1 {
-      margin: 20px 40px;
-      text-indent: 50px;
-    }
-
     .container {
       padding: 50px;
       text-align: center;
       width: 100%;
     }
 
+    /* Featured projects section - using existing styles from styles.css */
     .featured-projects {
       background-color: #f8f6f3;
       padding: 60px 20px;
@@ -182,162 +136,6 @@
       max-width: 600px;
       margin-left: auto;
       margin-right: auto;
-    }
-
-    .featured-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-      gap: 40px;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 20px;
-    }
-
-    .featured-card {
-      background: white;
-      border-radius: 15px;
-      overflow: hidden;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-      transition: all 0.3s ease;
-      position: relative;
-      height: 500px; /* Increased height to accommodate buttons */
-      display: flex;
-      flex-direction: column;
-    }
-
-    .featured-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-    }
-
-    .featured-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 4px;
-      background: linear-gradient(90deg, #ec7a1c, #bc6116);
-      z-index: 1;
-    }
-
-    .card-image {
-      height: 200px;
-      overflow: hidden;
-      position: relative;
-      flex-shrink: 0; /* Prevent image from shrinking */
-    }
-
-    .card-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.3s ease;
-    }
-
-    .featured-card:hover .card-image img {
-      transform: scale(1.05);
-    }
-
-    .card-content {
-      padding: 25px;
-      flex: 1; /* Takes remaining space */
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      min-height: 300px; /* Ensures enough space for content */
-    }
-
-    .card-title {
-      font-size: 1.4rem;
-      font-weight: bold;
-      color: #44443b;
-      margin-bottom: 10px;
-      flex-shrink: 0; /* Prevent title from shrinking */
-    }
-
-    .card-description {
-      color: #666;
-      line-height: 1.6;
-      font-size: 0.95rem;
-      margin-bottom: 15px;
-      flex-grow: 1; /* Takes available space */
-      display: -webkit-box;
-      -webkit-line-clamp: 3; /* Limits to 3 lines to save space */
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-    }
-
-    .card-tech {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 20px;
-      flex-shrink: 0; /* Prevent tech tags from shrinking */
-    }
-
-    .tech-tag {
-      background-color: #ec7a1c;
-      color: white;
-      padding: 4px 10px;
-      border-radius: 15px;
-      font-size: 0.8rem;
-      font-weight: 500;
-    }
-
-    .card-link {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 12px 20px;
-      background-color: #ec7a1c;
-      color: white;
-      text-decoration: none;
-      border-radius: 6px;
-      font-weight: 600;
-      font-size: 0.95rem;
-      transition: all 0.3s ease;
-      border: 2px solid #ec7a1c;
-      flex-shrink: 0; /* Ensure button doesn't shrink */
-      margin-top: auto; /* Push button to bottom */
-    }
-
-    .card-link:hover {
-      background-color: #bc6116;
-      border-color: #bc6116;
-      transform: translateY(-2px);
-      box-shadow: 0 4px 8px rgba(188, 97, 22, 0.3);
-    }
-
-    .card-link i {
-      margin-left: 5px;
-      transition: transform 0.3s ease;
-    }
-
-    .card-link:hover i {
-      transform: translateX(3px);
-    }
-
-    .view-all-btn {
-      margin-top: 50px;
-    }
-
-    .view-all-btn a {
-      display: inline-block;
-      background: linear-gradient(135deg, #ec7a1c, #bc6116);
-      color: white;
-      padding: 15px 30px;
-      text-decoration: none;
-      border-radius: 30px;
-      font-weight: 600;
-      font-size: 1.1rem;
-      transition: all 0.3s ease;
-      box-shadow: 0 5px 15px rgba(236, 122, 28, 0.3);
-    }
-
-    .view-all-btn a:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(236, 122, 28, 0.4);
     }
 
     /* Featured Navigation Tabs */
@@ -550,14 +348,6 @@
       color: #f44336;
     }
 
-    .project-slide img {
-      max-width: 100%;
-      max-height: 100%;
-      object-fit: contain;
-      display: block;
-      margin: auto;
-    }
-
     /* Responsive adjustments */
     @media (max-width: 768px) {
       .intro-header {
@@ -570,30 +360,7 @@
         font-size: 1rem;
       }
 
-      /* Featured projects responsive */
-      .featured-projects {
-        padding: 40px 15px;
-      }
-      .featured-projects h2 {
-        font-size: 2rem;
-      }
-      .featured-grid {
-        grid-template-columns: 1fr;
-        gap: 30px;
-      }
-      .featured-card {
-        height: auto;
-        min-height: 450px; /* Minimum height on mobile */
-      }
-      .card-content {
-        height: auto;
-        min-height: 250px; /* Minimum height for content on mobile */
-      }
-      .card-description {
-        -webkit-line-clamp: 4; /* Allow more lines on mobile */
-      }
-
-      /* Navigation tabs responsive */
+      /* Featured navigation responsive */
       .featured-navigation {
         padding: 30px 15px;
       }
@@ -614,28 +381,7 @@
         font-size: 1rem;
       }
     }
-
-    footer {
-      background-color: #333;
-      color: #f2f2f2;
-      text-align: center;
-      padding: 20px;
-      margin-top: auto;
-      width: 100%;
-    }
-
-    footer a {
-      color: #ec7a1c;
-      text-decoration: none;
-      margin-right: 15px;
-    }
-
-    footer a:hover {
-      text-decoration: underline;
-    }
   </style>
-
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
 <div class="topnav">
@@ -664,9 +410,8 @@
     <div class="slide">
       <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/ImpactDrillPCB" alt="Engineering Project 4">
     </div>
-
     <div class="slide">
-      <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/Intellevent2.PNG" alt="Engineering Project 4">
+      <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/Intellevent2.PNG" alt="Engineering Project 5">
     </div>
   </div>
 

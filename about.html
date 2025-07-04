@@ -6,9 +6,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/png" href="WebsiteTitlePicture.png">
   <title>About Me</title>
-
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   <style>
-    /* Profile Picture CSS - FIXED */
+    body {
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      min-height: 100vh;
+    }
+
+    /* Profile Section */
     .profile-section {
       text-align: center;
       padding: 40px 20px;
@@ -40,27 +45,220 @@
       transform: scale(1.05);
     }
 
-    /* Responsive profile picture */
-    @media (max-width: 768px) {
-      .profile-pic {
-        width: 250px;
-        height: 250px;
-      }
+    /* About Content */
+    .about-content {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      text-align: left;
     }
 
-    @media (max-width: 480px) {
-      .profile-pic {
-        width: 200px;
-        height: 200px;
-      }
+    .about-content h1 {
+      text-align: center;
     }
 
-    /* Interests Section CSS */
+    .about-content p {
+      color: #666;
+      font-size: 1.1rem;
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+
+    /* New Sections */
+    .section {
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 30px;
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .section h2 {
+      color: #44443b;
+      font-size: 2rem;
+      margin-bottom: 20px;
+      text-align: center;
+      position: relative;
+      padding-bottom: 15px;
+    }
+
+    .section h2::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, #ec7a1c, #bc6116);
+    }
+
+    /* Journey Timeline */
+    .journey-timeline {
+      position: relative;
+      padding: 20px 0;
+    }
+
+    .timeline-item {
+      display: flex;
+      margin-bottom: 30px;
+      position: relative;
+    }
+
+    .timeline-date {
+      background: #ec7a1c;
+      color: white;
+      padding: 8px 15px;
+      border-radius: 20px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      white-space: nowrap;
+      margin-right: 20px;
+      min-width: 120px;
+      text-align: center;
+    }
+
+    .timeline-content {
+      flex: 1;
+      padding: 15px 20px;
+      background: #f8f6f3;
+      border-radius: 10px;
+      border-left: 4px solid #ec7a1c;
+    }
+
+    .timeline-content h4 {
+      color: #44443b;
+      margin: 0 0 8px 0;
+      font-size: 1.1rem;
+    }
+
+    .timeline-content p {
+      color: #666;
+      margin: 0;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    /* Values Grid */
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px;
+      margin-top: 30px;
+    }
+
+    .value-card {
+      background: linear-gradient(135deg, #f8f6f3, #e6e4e0);
+      padding: 25px;
+      border-radius: 12px;
+      text-align: center;
+      transition: transform 0.3s ease;
+      border: 2px solid transparent;
+    }
+
+    .value-card:hover {
+      transform: translateY(-5px);
+      border-color: #ec7a1c;
+    }
+
+    .value-icon {
+      font-size: 2.5rem;
+      color: #ec7a1c;
+      margin-bottom: 15px;
+    }
+
+    .value-card h4 {
+      color: #44443b;
+      margin-bottom: 10px;
+      font-size: 1.2rem;
+    }
+
+    .value-card p {
+      color: #666;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    /* Current Goals */
+    .goals-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .goals-list li {
+      background: #f8f6f3;
+      margin-bottom: 15px;
+      padding: 15px 20px;
+      border-radius: 8px;
+      border-left: 4px solid #ec7a1c;
+      font-size: 1rem;
+      color: #444;
+      transition: all 0.3s ease;
+    }
+
+    .goals-list li:hover {
+      background: #f0ede8;
+      transform: translateX(5px);
+    }
+
+    .goals-list li i {
+      color: #ec7a1c;
+      margin-right: 10px;
+      width: 20px;
+    }
+
+    /* Fun Facts */
+    .fun-facts {
+      background: linear-gradient(135deg, #ec7a1c, #bc6116);
+      color: white;
+      border-radius: 15px;
+      padding: 30px;
+      text-align: center;
+    }
+
+    .fun-facts h2 {
+      color: white;
+      margin-bottom: 25px;
+    }
+
+    .fun-facts h2::after {
+      background: white;
+    }
+
+    .facts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .fact-item {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 20px;
+      border-radius: 10px;
+      backdrop-filter: blur(5px);
+    }
+
+    .fact-item .fact-icon {
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+
+    .fact-item .fact-text {
+      font-size: 0.95rem;
+      line-height: 1.4;
+    }
+
+    /* Interests Section Enhancement */
     .interests-section {
-      background-color: #f8f6f3;
+      background: white;
       padding: 60px 20px;
       text-align: center;
       margin: 40px 0;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     }
 
     .interests-section h2 {
@@ -107,31 +305,50 @@
       box-shadow: 0 6px 20px rgba(236, 122, 28, 0.4);
     }
 
-    /* About content styling */
-    .about-content {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 40px 20px;
-      text-align: center;
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .profile-pic {
+        width: 250px;
+        height: 250px;
+      }
+
+      .section {
+        margin: 20px;
+        padding: 20px;
+      }
+
+      .timeline-item {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .timeline-date {
+        margin-right: 0;
+        align-self: flex-start;
+      }
+
+      .values-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+      }
+
+      .facts-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 15px;
+      }
     }
 
-    .about-content h1 {
-      color: #44443b;
-      font-size: 2.5rem;
-      margin-bottom: 30px;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-    }
+    @media (max-width: 480px) {
+      .profile-pic {
+        width: 200px;
+        height: 200px;
+      }
 
-    .about-content p {
-      color: #666;
-      font-size: 1.1rem;
-      line-height: 1.8;
-      margin-bottom: 20px;
+      .facts-grid {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
-
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
 
@@ -154,6 +371,74 @@
     <p>
 
     </p>
+  </div>
+</section>
+
+<section class="section">
+  <h2><i class="fas fa-target"></i> Current Goals & Aspirations</h2>
+  <ul class="goals-list">
+    <li>
+      <i class="fas fa-graduation-cap"></i>
+      Complete my Computer and Electrical Engineering degree with honors (Expected May 2026)
+    </li>
+    <li>
+      <i class="fas fa-industry"></i>
+      Gain experience in embedded systems and IoT development through internships and projects
+    </li>
+    <li>
+      <i class="fas fa-certificate"></i>
+      Obtain relevant industry certifications in FPGA programming and PCB design
+    </li>
+    <li>
+      <i class="fas fa-rocket"></i>
+      Contribute to open-source engineering projects and build a portfolio of innovative solutions
+    </li>
+    <li>
+      <i class="fas fa-handshake"></i>
+      Secure a full-time engineering role where I can apply my skills to meaningful projects
+    </li>
+  </ul>
+</section>
+
+<!-- Fun Facts -->
+<section class="fun-facts">
+  <h2><i class="fas fa-smile"></i> Fun Facts About Me</h2>
+  <div class="facts-grid">
+    <div class="fact-item">
+      <div class="fact-icon">
+        <i class="fas fa-code"></i>
+      </div>
+      <div class="fact-text">
+        Started programming at age 16 and haven't stopped learning new languages since
+      </div>
+    </div>
+
+    <div class="fact-item">
+      <div class="fact-icon">
+        <i class="fas fa-burn"></i>
+      </div>
+      <div class="fact-text">
+        Have probably gotten more soldering burns than I can count, but each one taught me something new
+      </div>
+    </div>
+
+    <div class="fact-item">
+      <div class="fact-icon">
+        <i class="fas fa-chess"></i>
+      </div>
+      <div class="fact-text">
+        Love chess because it's like debugging code - you need strategy, patience, and careful analysis
+      </div>
+    </div>
+
+    <div class="fact-item">
+      <div class="fact-icon">
+        <i class="fas fa-mountain"></i>
+      </div>
+      <div class="fact-text">
+        Hiking helps me think through complex engineering problems - fresh air, fresh perspectives
+      </div>
+    </div>
   </div>
 </section>
 

@@ -8,6 +8,8 @@
     <link rel="icon" type="image/png" href="WebsiteTitlePicture.png">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
+        /* Simple Filter Buttons to Match Your Site Style - Replace in projects.html */
+
         .filter-buttons {
             text-align: center;
             margin: 20px 0;
@@ -22,10 +24,11 @@
             text-decoration: none;
             border: none;
             border-radius: 5px;
-            margin: 40px 0 20px 0;
-            transition: opacity 0.5s ease, transform 0.5s ease;
+            margin: 10px 5px;
+            transition: all 0.3s ease;
             cursor: pointer;
             font-size: 16px;
+            font-family: Arial, Helvetica, sans-serif;
         }
 
         /* Hover effect */
@@ -41,29 +44,49 @@
             box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
         }
 
+        /* Keep your existing project card styles */
         .project-card {
-            display: block; /* Default: All projects displayed */
-            transition: opacity 0.3s ease, transform 0.3s ease;
+            display: block;
+            opacity: 1;
+            transform: scale(1) translateY(0);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            /* Keep your existing project card styles */
         }
 
         .project-card.hide {
-            display: none; /* Hide filtered out projects */
+            opacity: 0;
+            transform: scale(0.8) translateY(-20px);
+            pointer-events: none;
+            /* Don't use display: none anymore as it prevents transitions */
         }
 
-        /* Optional: Add animation for showing/hiding */
-        @media (prefers-reduced-motion: no-preference) {
-            .project-card {
-                opacity: 1;
-                transform: scale(1);
-            }
+        /* For showing cards back in */
+        .project-card:not(.hide) {
+            animation: slideInUp 0.5s ease forwards;
+        }
 
-            .project-card.hide {
+        @keyframes slideInUp {
+            from {
                 opacity: 0;
-                transform: scale(0.95);
-                transition: opacity 0.3s ease, transform 0.3s ease;
+                transform: scale(0.8) translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
             }
         }
-    </style>
+
+        .project-card {
+            display: block;
+            opacity: 1;
+            transition: opacity 0.3s ease;
+        }
+
+        .project-card.hide {
+            opacity: 0;
+            pointer-events: none;
+        }
+</style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
@@ -185,7 +208,7 @@
         </div>
     </div>
 </div>
-
+</body>
 <footer>
     <p>&copy; <script>document.write(new Date().getFullYear())</script> Isaiah Hajabolhassan. All Rights Reserved.</p>
     <a href="https://github.com/Frosty-Animal" target="_blank">
@@ -221,6 +244,4 @@
         });
     }
 </script>
-
-</body>
 </html>

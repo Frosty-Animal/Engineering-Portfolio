@@ -5,34 +5,53 @@ body {
 }
 
 .topnav {
-    overflow: hidden;
-    background-color: #44443b;
+    background: #44443b;
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+.topnav .logo {
+    color: white;
+    font-size: 1.4rem;
+    font-weight: bold;
 }
 
 .topnav a {
-    float: left;
     color: #f2f2f2;
-    text-align: center;
-    padding: 14px 16px;
     text-decoration: none;
-    font-size: 17px;
-    transition: opacity 0.5s ease, transform 0.5s ease;
+    font-weight: 500;
+    padding: 10px 20px;
+    position: relative;
+    transition: color 0.3s ease;
+    margin: 0 10px;
 }
 
-.topnav a:hover {
-    background-color: #bc6116;
-    color: white;
+.topnav a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #ec7a1c, #bc6116);
+    transition: width 0.3s ease;
+    border-radius: 2px;
 }
 
+.topnav a:hover::after,
+.topnav a.active::after {
+    width: 80%;
+}
+
+.topnav a:hover,
 .topnav a.active {
-    background-color: #ec7a1c;
-    color: white;
+    color: #ec7a1c;
 }
 
-.topnav a.active:hover {
-    background-color: #bc6116;
-    color: black;
-}
 
 h1 {
     text-align: center;
@@ -48,7 +67,6 @@ p1 {
     text-indent: 50px;
 }
 
-/* Featured Projects Section */
 .featured-projects {
     background-color: #f8f6f3;
     padding: 60px 20px;
@@ -88,7 +106,8 @@ p1 {
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
     position: relative;
-    height: 500px; /* Fixed height to ensure button visibility */
+    /* REMOVED: height: 500px; - This was causing the cutoff */
+    min-height: 500px; /* Changed to min-height instead */
     display: flex;
     flex-direction: column;
 }
@@ -110,18 +129,16 @@ p1 {
 }
 
 .card-image {
-    height: 200px; /* Fixed image height */
-    width: 100%;
+    height: 200px;
     overflow: hidden;
     position: relative;
-    flex-shrink: 0; /* Prevent image from shrinking */
+    flex-shrink: 0;
 }
 
 .card-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center;
     transition: transform 0.3s ease;
 }
 
@@ -135,7 +152,7 @@ p1 {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    min-height: 300px; /* Minimum height for content area */
+    /* REMOVED: min-height: 300px; - This was causing layout issues */
 }
 
 .card-title {
@@ -151,11 +168,8 @@ p1 {
     line-height: 1.6;
     font-size: 0.95rem;
     margin-bottom: 15px;
-    flex-grow: 1; /* Takes available space */
-    display: -webkit-box;
-    -webkit-line-clamp: 4; /* Limits to 4 lines */
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+    flex-grow: 1;
+    /* REMOVED: display: -webkit-box; and line clamps - Let text flow naturally */
 }
 
 .card-tech {
@@ -175,8 +189,7 @@ p1 {
     font-weight: 500;
 }
 
-/* Featured projects button styles */
-.featured-card .card-link {
+.card-link {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -189,23 +202,23 @@ p1 {
     font-size: 0.95rem;
     transition: all 0.3s ease;
     border: 2px solid #ec7a1c;
-    flex-shrink: 0; /* Ensure button doesn't shrink */
-    margin-top: auto;
+    flex-shrink: 0;
+    margin-top: auto; /* This pushes the button to the bottom */
 }
 
-.featured-card .card-link:hover {
+.card-link:hover {
     background-color: #bc6116;
     border-color: #bc6116;
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(188, 97, 22, 0.3);
 }
 
-.featured-card .card-link i {
+.card-link i {
     margin-left: 5px;
     transition: transform 0.3s ease;
 }
 
-.featured-card .card-link:hover i {
+.card-link:hover i {
     transform: translateX(3px);
 }
 
@@ -229,6 +242,34 @@ p1 {
 .view-all-btn a:hover {
     transform: translateY(-2px);
     box-shadow: 0 8px 25px rgba(236, 122, 28, 0.4);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .featured-projects {
+        padding: 40px 15px;
+    }
+
+    .featured-projects h2 {
+        font-size: 2rem;
+    }
+
+    .featured-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .featured-card {
+        min-height: auto; /* Remove min-height on mobile */
+    }
+
+    .card-content {
+        padding: 20px;
+    }
+}
+
+.view-all-btn {
+    margin-top: 50px;
 }
 
 /* Improved project grid layout */
@@ -341,19 +382,43 @@ footer {
     background-color: #333;
     color: #f2f2f2;
     text-align: center;
-    padding: 10px 0;
-    position: relative;
+    padding: 20px;
+    width: 100%; /* Full width */
+    max-width: 100vw; /* Don't exceed viewport width */
+    margin: 0; /* Remove any margins */
+    box-sizing: border-box; /* Include padding in width calculation */
+    flex-shrink: 0;
 }
 
 /* Footer link styles */
 footer a {
     color: #ec7a1c;
     text-decoration: none;
-    margin-right: 15px;
+    margin: 0 10px; /* Reduce margin if needed */
+    display: inline-block;
 }
 
 footer a:hover {
     text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    footer {
+        padding: 15px 10px;
+    }
+
+    footer a {
+        margin: 0 5px;
+        font-size: 0.9rem;
+    }
+
+    /* Stack footer links vertically on very small screens */
+    @media (max-width: 480px) {
+        footer a {
+            display: block;
+            margin: 5px 0;
+        }
+    }
 }
 
 .video-container {
@@ -700,3 +765,4 @@ video {
         flex: 0 0 calc(50% - 15px);
     }
 }
+
