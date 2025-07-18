@@ -197,11 +197,15 @@
         }
 
         /* Back button styling */
+        /* Improved back button styling with better positioning */
         .back-button {
             position: sticky;
             top: 20px;
             z-index: 100;
             margin-bottom: 20px;
+            /* Move button away from right edge */
+            margin-right: 20px;
+            text-align: right; /* Align the button to the right within its container */
         }
 
         .back-button a {
@@ -216,6 +220,8 @@
             font-weight: 500;
             transition: all 0.3s ease;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            /* Ensure button doesn't stretch full width */
+            width: fit-content;
         }
 
         .back-button a:hover {
@@ -224,6 +230,25 @@
             box-shadow: 0 6px 20px rgba(236, 122, 28, 0.3);
         }
 
+        /* Alternative: If you want it more to the left */
+        .back-button.left-aligned {
+            text-align: left;
+            margin-right: 0;
+            margin-left: 0;
+        }
+
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            .back-button {
+                margin-right: 10px;
+                top: 15px;
+            }
+
+            .back-button a {
+                padding: 10px 16px;
+                font-size: 0.9rem;
+            }
+        }
         /* Responsive adjustments */
         @media (max-width: 768px) {
             .content-wrapper {
@@ -251,6 +276,7 @@
                 grid-template-columns: 1fr;
             }
         }
+
     </style>
 </head>
 <body>
@@ -607,6 +633,53 @@
     // Auto-open the overview section on page load
     document.addEventListener('DOMContentLoaded', function() {
         toggleSection('overview');
+    });
+
+    // Mobile Navigation JavaScript
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
+    const navOverlay = document.getElementById('navOverlay');
+    const body = document.body;
+
+    // Toggle mobile menu
+    function toggleMobileMenu() {
+        hamburger.classList.toggle('active');
+        navLinks.classList.toggle('active');
+        navOverlay.classList.toggle('active');
+        body.classList.toggle('menu-open');
+    }
+
+    // Close mobile menu
+    function closeMobileMenu() {
+        hamburger.classList.remove('active');
+        navLinks.classList.remove('active');
+        navOverlay.classList.remove('active');
+        body.classList.remove('menu-open');
+    }
+
+    // Event listeners
+    hamburger.addEventListener('click', toggleMobileMenu);
+    navOverlay.addEventListener('click', closeMobileMenu);
+
+    // Close menu when clicking on a link (mobile)
+    navLinks.addEventListener('click', function(e) {
+        if (e.target.tagName === 'A' && window.innerWidth <= 768) {
+            closeMobileMenu();
+        }
+    });
+
+    // Close menu on window resize if screen becomes larger
+    window.addEventListener('resize', function() {
+        if (window.innerWidth > 768) {
+            closeMobileMenu();
+        }
+    });
+
+    // Handle escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && navLinks.classList.contains('active')) {
+            closeMobileMenu();
+        }
     });
 </script>
 
