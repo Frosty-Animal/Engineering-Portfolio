@@ -8,7 +8,6 @@
     <link rel="icon" type="image/png" href="Pictures/WebsiteTitlePicture.png">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
-        /* Simple Filter Buttons to Match Your Site Style - Replace in projects.html */
 
         .filter-buttons {
             text-align: center;
@@ -44,47 +43,39 @@
             box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
         }
 
-        /* Keep your existing project card styles */
-        .project-card {
-            display: block;
+        /* Pop Animation Classes for Project Cards */
+        .project-card.pop-out {
+            transform: scale(0.95);
+            opacity: 0.8;
+            transition: all 0.2s ease;
+        }
+
+        .project-card.pop-in {
+            animation: popIn 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+        }
+
+        @keyframes popIn {
+            0% {
+                transform: scale(0.8);
+                opacity: 0.6;
+            }
+            50% {
+                transform: scale(1.05);
+                opacity: 0.9;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        /* Ensure smooth transitions for show/hide states */
+        .project-card.show {
             opacity: 1;
             transform: scale(1) translateY(0);
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            /* Keep your existing project card styles */
-        }
-
-        .project-card.hide {
-            opacity: 0;
-            transform: scale(0.8) translateY(-20px);
-            pointer-events: none;
-            /* Don't use display: none anymore as it prevents transitions */
-        }
-
-        /* For showing cards back in */
-        .project-card:not(.hide) {
-            animation: slideInUp 0.5s ease forwards;
-        }
-
-        @keyframes slideInUp {
-            from {
-                opacity: 0;
-                transform: scale(0.8) translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1) translateY(0);
-            }
-        }
-
-        .project-card {
-            display: block;
-            opacity: 1;
-            transition: opacity 0.3s ease;
-        }
-
-        .project-card.hide {
-            opacity: 0;
-            pointer-events: none;
+            pointer-events: auto;
+            position: relative;
+            visibility: visible;
         }
 </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
@@ -109,7 +100,7 @@
 
 <div class="projects">
 
-    <div class="project-card internship">
+    <div class="project-card internship show">
         <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/HopkinsMachine.jpg" alt="">
         <div class="project-content">
             <h3>Oil Pan Automation</h3>
@@ -119,7 +110,7 @@
         </div>
     </div>
 
-    <div class="project-card personal">
+    <div class="project-card personal show">
         <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/HopkinsMachine.jpg" alt="">
         <div class="project-content">
             <h3>Automatic Music Box</h3>
@@ -129,7 +120,7 @@
         </div>
     </div>
 
-    <div class="project-card personal">
+    <div class="project-card personal show">
         <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/HopkinsMachine.jpg" alt="">
         <div class="project-content">
             <h3>8-bit Computer</h3>
@@ -139,7 +130,7 @@
         </div>
     </div>
 
-    <div class="project-card personal">
+    <div class="project-card personal show">
         <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/HopkinsMachine.jpg" alt="">
         <div class="project-content">
             <h3>Remote Hardware Rock Paper Scissors Game</h3>
@@ -149,7 +140,7 @@
         </div>
     </div>
 
-    <div class="project-card personal">
+    <div class="project-card personal show">
         <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/HopkinsMachine.jpg" alt="">
         <div class="project-content">
             <h3>RaspberryPi Cluster</h3>
@@ -159,7 +150,7 @@
         </div>
     </div>
 
-    <div class="project-card personal">
+    <div class="project-card personal show">
         <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/CNC.-PCBMaker.jpg" alt="">
         <div class="project-content">
             <h3>Augmented CNC machine for PCB production</h3>
@@ -169,7 +160,7 @@
         </div>
     </div>
 
-    <div class="project-card internship">
+    <div class="project-card internship show">
         <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/MedicalBandageMaker.jpg" alt="">
         <div class="project-content">
             <h3>Automatic Bandage Making Machine</h3>
@@ -179,8 +170,8 @@
         </div>
     </div>
 
-    <div class="project-card internship">
-        <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/HopkinsMachine.jpg" alt="">
+    <div class="project-card internship show">
+        <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/Pictures/HopkinsMachine.jpg" alt="">
         <div class="project-content">
             <h3>Oil Pan Automation</h3>
             <p><strong>Completed: December 2024</strong></p>
@@ -189,8 +180,8 @@
         </div>
     </div>
 
-    <div class="project-card internship">
-        <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/OilStates.jpg" alt="">
+    <div class="project-card internship show">
+        <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/Pictures/OilStates.jpg" alt="">
         <div class="project-content">
             <h3>Oil Plug Automation</h3>
             <p><strong>Ongoing</strong></p>
@@ -199,8 +190,8 @@
         </div>
     </div>
 
-    <div class="project-card internship">
-        <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/Capture1.PNG" alt="">
+    <div class="project-card internship show">
+        <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/Pictures/ImpactDrillPCB.jpg" alt="">
         <div class="project-content">
             <h3>Impact Drill for High Voltage Power Lines</h3>
             <p><strong>Ongoing</strong></p>
@@ -209,8 +200,8 @@
         </div>
     </div>
 
-    <div class="project-card school">
-        <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/Intellevent2.PNG" alt="">
+    <div class="project-card school show">
+        <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/Pictures/Intellevent2.PNG" alt="">
         <div class="project-content">
             <h3>Automatic HVAC Control Vent</h3>
             <p><strong>Completed Fall 2024</strong></p>
@@ -219,8 +210,8 @@
         </div>
     </div>
 
-    <div class="project-card personal">
-        <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/download.jpg" alt="">
+    <div class="project-card personal show">
+        <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/Pictures/download.jpg" alt="">
         <div class="project-content">
             <h3>Nixie Tube Watch</h3>
             <p><strong>Ongoing</strong></p>
@@ -229,8 +220,8 @@
         </div>
     </div>
 
-    <div class="project-card personal">
-        <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/DroneProfilePicture.jpg" alt="">
+    <div class="project-card personal show">
+        <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/Pictures/DroneProfilePicture.jpg" alt="">
         <div class="project-content">
             <h3>Racing Drones</h3>
             <p><strong>Completed: Summer 2023</strong></p>
@@ -239,8 +230,8 @@
         </div>
     </div>
 
-    <div class="project-card personal">
-        <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/3DPrinter.JPG" alt="">
+    <div class="project-card personal show">
+        <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/Pictures/3DPrinter.JPG" alt="">
         <div class="project-content">
             <h3>DIY Resin Printer</h3>
             <p><strong>Completed: Spring 2024</strong></p>
@@ -249,8 +240,8 @@
         </div>
     </div>
 
-    <div class="project-card internship">
-        <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/FrictionWelder.jpg" alt="">
+    <div class="project-card internship show">
+        <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/Pictures/FrictionWelder.jpg" alt="">
         <div class="project-content">
             <h3>Friction Welder</h3>
             <p><strong>Completed: Winter 2024</strong></p>
@@ -259,8 +250,8 @@
         </div>
     </div>
 
-    <div class="project-card internship">
-        <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/IMG_5146.jpg" alt="">
+    <div class="project-card internship show">
+        <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/Pictures/IMG_5146.jpg" alt="">
         <div class="project-content">
             <h3>Non-Contact Energized Cable Detector</h3>
             <p><strong>Ongoing</strong></p>
@@ -269,8 +260,8 @@
         </div>
     </div>
 
-    <div class="project-card school">
-        <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/5StagedPiplinedArc.png" alt="">
+    <div class="project-card school show">
+        <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/Pictures/5StagedPiplinedArc.png" alt="">
         <div class="project-content">
             <h3>Pipelined Computer</h3>
             <p><strong>Academic Project</strong></p>
@@ -297,22 +288,51 @@
     function filterProjects(category) {
         const projects = document.querySelectorAll('.project-card');
         const buttons = document.querySelectorAll('.filter-buttons button');
-        
+
         // Remove active class from all buttons
         buttons.forEach(btn => btn.classList.remove('active'));
-        
         // Add active class to clicked button
         document.getElementById(`btn-${category}`).classList.add('active');
-        
+
+        // Step 1: Add pop-out effect to ALL cards
         projects.forEach(project => {
-            if (category === 'all') {
-                project.classList.remove('hide'); // Show all projects
-            } else if (project.classList.contains(category)) {
-                project.classList.remove('hide'); // Show matching category
-            } else {
-                project.classList.add('hide'); // Hide non-matching categories
-            }
+            project.classList.add('pop-out');
+            // Remove any existing animation classes
+            project.classList.remove('pop-in');
         });
+
+        // Step 2: After pop-out animation, apply filtering and pop-in
+        setTimeout(() => {
+            projects.forEach(project => {
+                // Remove pop-out class
+                project.classList.remove('pop-out');
+
+                // Apply filtering logic
+                if (category === 'all') {
+                    project.classList.remove('hide');
+                    project.classList.add('show');
+                } else if (project.classList.contains(category)) {
+                    project.classList.remove('hide');
+                    project.classList.add('show');
+                } else {
+                    project.classList.add('hide');
+                    project.classList.remove('show');
+                }
+
+                // Add pop-in effect only to visible cards
+                if (!project.classList.contains('hide')) {
+                    project.classList.add('pop-in');
+                }
+            });
+
+            // Step 3: Clean up pop-in class after animation
+            setTimeout(() => {
+                projects.forEach(project => {
+                    project.classList.remove('pop-in');
+                });
+            }, 500);
+
+        }, 200); // Wait for pop-out animation to complete
     }
 
     // Mobile Navigation JavaScript

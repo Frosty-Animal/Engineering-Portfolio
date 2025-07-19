@@ -144,43 +144,35 @@
     /* Featured projects section - using existing styles from styles.css */
     .featured-projects {
       background-color: #f8f6f3;
-      padding: 60px 20px;
+      padding: 60px 0; /* Changed from 60px 20px to 60px 0 */
       text-align: center;
-      margin-top: 40px; /* Add space above featured projects */
+      width: 100%; /* Full width */
+      box-sizing: border-box; /* Include padding in width calculation */
+      margin-bottom: 40px;
+    }
 
+    .featured-projects-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px; /* Move horizontal padding to inner container */
     }
 
     .featured-projects h2 {
       font-size: 2.5rem;
       color: #44443b;
-      margin-bottom: 20px;
+      margin: 0 0 20px 0; /* Remove auto margins */
       text-transform: uppercase;
       letter-spacing: 2px;
+      text-align: center; /* Explicitly center */
     }
 
     .featured-projects .subtitle {
       font-size: 1.2rem;
       color: #666;
-      margin-bottom: 50px;
+      margin: 0 auto 50px auto; /* Keep auto margins for subtitle */
       max-width: 600px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    /* Featured Navigation Tabs */
-    .featured-navigation {
-      background-color: #f8f6f3;
-      padding: 40px 20px;
-      text-align: center;
-      border-top: 8px solid #ddd8d2;
-    }
-
-    .featured-navigation h2 {
-      font-size: 2rem;
-      color: #44443b;
-      margin-bottom: 30px;
-      text-transform: uppercase;
-      letter-spacing: 2px;
+      line-height: 1.6;
+      text-align: center; /* Explicitly center */
     }
 
     .nav-tabs {
@@ -429,22 +421,22 @@
   <div class="slideshow-container">
     <!-- Slide 1 -->
     <div class="slide active">
-      <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/DroneProfilePicture.jpg" alt="Engineering Project 1">
+      <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/Pictures/DroneProfilePicture.jpg" alt="Engineering Project 1">
     </div>
     <!-- Slide 2 -->
     <div class="slide">
-      <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/3DPrinter.JPG" alt="Engineering Project 2">
+      <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/Pictures/3DPrinter.JPG" alt="Engineering Project 2">
     </div>
     <!-- Slide 3 -->
     <div class="slide">
-      <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/FrictionWelder.jpg" alt="Engineering Project 3">
+      <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/Pictures/FrictionWelder.jpg" alt="Engineering Project 3">
     </div>
     <!-- Slide 4 -->
     <div class="slide">
-      <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/ImpactDrillPCB" alt="Engineering Project 4">
+      <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/Pictures/ImpactDrillPCB.jpg" alt="Engineering Project 4">
     </div>
     <div class="slide">
-      <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/Intellevent2.PNG" alt="Engineering Project 5">
+      <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/Pictures/HackOkstateLogo.png" alt="Engineering Project 5">
     </div>
   </div>
 

@@ -52,6 +52,51 @@ body {
     color: #ec7a1c;
 }
 
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+html {
+    overflow-x: hidden;
+}
+
+/* MOBILE-ONLY: Navigation fixes (768px and below) */
+@media (max-width: 768px) {
+    body {
+        overflow-x: hidden;
+        width: 100%;
+        max-width: 100vw;
+    }
+
+    .topnav {
+        padding: 15px 20px; /* Reduce padding on mobile */
+        justify-content: center; /* Center navigation items */
+        overflow: hidden; /* Prevent overflow */
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .topnav a {
+        padding: 8px 12px; /* Smaller padding */
+        margin: 0 5px; /* Smaller margins */
+        font-size: 0.9rem; /* Slightly smaller font */
+        white-space: nowrap; /* Prevent text wrapping */
+    }
+}
+
+/* MOBILE-ONLY: Very small screens (480px and below) */
+@media (max-width: 480px) {
+    .topnav {
+        padding: 12px 15px;
+        justify-content: space-evenly; /* Distribute evenly */
+    }
+
+    .topnav a {
+        padding: 6px 8px;
+        margin: 0 2px;
+        font-size: 0.8rem;
+    }
+}
 
 h1 {
     text-align: center;
