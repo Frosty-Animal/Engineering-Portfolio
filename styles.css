@@ -856,4 +856,60 @@ video {
         font-size: 13px;
     }
 
+/* ===== MOBILE HERO TEXT FIXES ===== */
 
+/* Tablet and mobile (768px and below) */
+@media (max-width: 768px) {
+    .intro-header {
+        justify-content: center; /* Center on mobile instead of flex-end */
+        padding: 0 15px; /* Add padding to prevent edge cutoff */
+    }
+
+    .hero-content {
+        width: 90%; /* Make wider on mobile */
+        max-width: none; /* Remove max-width constraint */
+        margin-right: 0; /* Remove right margin */
+        margin: 0 auto; /* Center the content */
+        padding: 20px; /* Reduce padding */
+    }
+
+    .hero-content h1 {
+        font-size: 1.8rem; /* Much smaller - was 2.5rem */
+        margin-bottom: 12px;
+        line-height: 1.2; /* Better line spacing */
+    }
+
+    .hero-content p {
+        font-size: 1rem; /* Smaller subtitle - was 1.2rem */
+        line-height: 1.3;
+    }
+}
+
+/* Small mobile phones (480px and below) */
+@media (max-width: 480px) {
+    .hero-content {
+        width: 95%; /* Even wider */
+        padding: 15px; /* Less padding */
+    }
+
+    .hero-content h1 {
+        font-size: 1.5rem; /* Even smaller */
+        margin-bottom: 10px;
+    }
+
+    .hero-content p {
+        font-size: 0.9rem;
+    }
+}
+
+/* Very small screens (360px and below) */
+@media (max-width: 360px) {
+    .hero-content h1 {
+        font-size: 1.3rem; /* Smallest size */
+        line-height: 1.1;
+    }
+
+    .hero-content p {
+        font-size: 0.85rem;
+    }
+}

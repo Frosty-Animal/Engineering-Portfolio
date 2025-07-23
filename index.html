@@ -27,7 +27,7 @@
       overflow: hidden;
       display: flex;
       align-items: center;
-      justify-content: flex-end; /* Changed from center to flex-end */
+      justify-content: flex-end;
       text-align: center;
     }
 
@@ -51,7 +51,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background: #000; /* This will eliminate the black bars */
+      background: #000;
     }
 
     .slide.active {
@@ -73,12 +73,10 @@
       display: block;
     }
 
-    /* Fix 3: Ensure slideshow container doesn't cause overflow issues */
     .intro-header .slideshow-container {
-      width: 100%; /* Remove the 100vw that was causing issues */
+      width: 100%;
     }
 
-    /* Fix 4: Ensure overlay doesn't cause width issues */
     .intro-header::before {
       content: '';
       position: absolute;
@@ -88,7 +86,7 @@
       bottom: 0;
       background: rgba(0, 0, 0, 0.5);
       z-index: -1;
-      width: 100%; /* Remove the 100vw that was causing issues */
+      width: 100%;
     }
 
     .hero-content {
@@ -99,12 +97,11 @@
       border-radius: 10px;
       backdrop-filter: blur(5px);
       animation: fadeIn 1s ease-in-out;
-      width: 40%; /* Made narrower so it fits on the right side */
-      max-width: 500px; /* Reduced max-width */
-      margin-right: 40px; /* Add right margin to pull it away from edge */
+      width: 40%;
+      max-width: 500px;
+      margin-right: 40px;
       position: relative;
     }
-
 
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(20px); }
@@ -120,59 +117,119 @@
     }
 
     .hero-content p {
-      font-size: 1.2rem;
+      font-size: 2.5rem;
+      font-weight: bold;
+      text-transform: uppercase;
       margin: 0;
-      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+      min-height: 1.2em; /* Ensure consistent height */
+      word-wrap: break-word; /* Allow text to wrap */
+      overflow-wrap: break-word; /* Modern browsers */
+      hyphens: auto; /* Enable hyphenation */
+    }
+
+    /* Typing effect styles */
+    .typing-container {
+      display: inline-block;
+      position: relative;
+    }
+
+    .typing-text {
+      display: inline;
+    }
+
+    .typing-cursor {
+      display: inline-block;
+      background-color: white;
+      margin-left: 3px;
+      width: 3px;
+      height: 1.2em;
+      animation: blink 1s infinite;
+      vertical-align: text-bottom;
+    }
+
+    .typing-cursor.typing {
+      animation: none;
+      background-color: white;
+    }
+
+    @keyframes blink {
+      0% { background-color: white; }
+      50% { background-color: transparent; }
+      100% { background-color: white; }
     }
 
     /* Mobile responsive */
     @media (max-width: 768px) {
-      .container {
-        padding: 40px 15px; /* Match other sections mobile padding */
+      .intro-header {
+        justify-content: center;
       }
 
-      .container h1 {
-        font-size: 2rem; /* Smaller on mobile */
+      .hero-content {
+        width: 80%;
+        margin-right: 0;
+        margin: 0 auto;
       }
 
-      .container p {
-        font-size: 1.1rem; /* Smaller on mobile */
-        margin: 15px auto; /* Reduce margin on mobile */
+      .hero-content p {
+        font-size: 1.8rem; /* Smaller on mobile */
+        line-height: 1.1; /* Tighter line spacing */
+        min-height: 2.2em; /* Account for potential line wrapping */
+      }
+
+      /* Even smaller for very small screens */
+      @media (max-width: 480px) {
+        .hero-content p {
+          font-size: 1.4rem;
+          line-height: 1.2;
+        }
+
+        .hero-content {
+          width: 90%;
+          padding: 20px;
+        }
       }
     }
 
     /* Featured projects section - using existing styles from styles.css */
     .featured-projects {
       background-color: #f8f6f3;
-      padding: 60px 0; /* Changed from 60px 20px to 60px 0 */
+      padding: 60px 20px;
       text-align: center;
-      width: 100%; /* Full width */
-      box-sizing: border-box; /* Include padding in width calculation */
-      margin-bottom: 40px;
-    }
-
-    .featured-projects-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 20px; /* Move horizontal padding to inner container */
+      margin-top: 40px;
     }
 
     .featured-projects h2 {
       font-size: 2.5rem;
       color: #44443b;
-      margin: 0 0 20px 0; /* Remove auto margins */
+      margin-bottom: 20px;
       text-transform: uppercase;
       letter-spacing: 2px;
-      text-align: center; /* Explicitly center */
     }
 
     .featured-projects .subtitle {
       font-size: 1.2rem;
       color: #666;
-      margin: 0 auto 50px auto; /* Keep auto margins for subtitle */
+      margin-bottom: 50px;
       max-width: 600px;
-      line-height: 1.6;
-      text-align: center; /* Explicitly center */
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Featured Navigation Tabs */
+    .featured-navigation {
+      background-color: #f8f6f3;
+      padding: 40px 20px;
+      text-align: center;
+      border-top: 8px solid #ddd8d2;
+    }
+
+    .featured-navigation h2 {
+      font-size: 2rem;
+      color: #44443b;
+      margin-bottom: 30px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
     }
 
     .nav-tabs {
@@ -371,20 +428,6 @@
 
     /* Responsive adjustments */
     @media (max-width: 768px) {
-      .intro-header {
-        justify-content: center; /* Center on mobile */
-      }
-
-      .hero-content {
-        width: 80%;
-        margin-right: 0;
-        margin: 0 auto;
-      }
-
-      .hero-content p {
-        font-size: 1rem;
-      }
-
       /* Featured navigation responsive */
       .featured-navigation {
         padding: 30px 15px;
@@ -433,16 +476,23 @@
     </div>
     <!-- Slide 4 -->
     <div class="slide">
-      <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/Pictures/ImpactDrillPCB.jpg" alt="Engineering Project 4">
+      <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/Pictures/ImpactDrillPCB" alt="Engineering Project 4">
     </div>
     <div class="slide">
-      <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/Pictures/HackOkstateLogo.png" alt="Engineering Project 5">
+      <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/Pictures/Intellevent2.PNG" alt="Engineering Project 5">
     </div>
   </div>
 
   <div class="hero-content">
-    <h1>Isaiah Hajabolhassan</h1>
-    <p>Engineering Project and Design Portfolio</p>
+    <p>
+      <span class="typing-container">
+        <span class="typing-text" id="typing-text"></span>
+        <span class="typing-cursor" id="typing-cursor"></span>
+      </span>
+    </p>
+    <p style="font-size: 1.2rem; font-weight: normal; text-transform: none; margin-top: 15px;">
+      Engineering Project and Design Portfolio
+    </p>
   </div>
 </div>
 
@@ -641,6 +691,43 @@
     changeSlide(1);
   }, 4000);
 
+  // Simple One-Time Typing Effect
+  function typeOnce() {
+    const text = "Isaiah Hajabolhassan";
+    const typingElement = document.getElementById('typing-text');
+    const cursorElement = document.getElementById('typing-cursor');
+
+    let charIndex = 0;
+
+    function type() {
+      if (charIndex < text.length) {
+        // Show solid cursor while typing
+        cursorElement.classList.add('typing');
+
+        // Add next character
+        typingElement.textContent = text.substring(0, charIndex + 1);
+        charIndex++;
+
+        // Variable speed for more natural typing
+        let typeSpeed = 100; // Default speed
+
+        // Slower after spaces for natural feel
+        const currentChar = text.charAt(charIndex - 1);
+        if (currentChar === ' ') {
+          typeSpeed = 150;
+        }
+
+        setTimeout(type, typeSpeed);
+      } else {
+        // Typing complete - resume blinking cursor
+        cursorElement.classList.remove('typing');
+      }
+    }
+
+    // Start typing
+    type();
+  }
+
   // Contact form handling
   document.getElementById('contactForm').addEventListener('submit', function(e) {
     e.preventDefault();
@@ -707,6 +794,12 @@ Sent from Isaiah's Portfolio Contact Form
       formStatus.style.display = 'none';
     }, 5000);
   }
+
+  // Initialize typing effect when page loads
+  window.addEventListener('load', function() {
+    // Small delay to let the hero section load first
+    setTimeout(typeOnce, 1000);
+  });
 </script>
 
 </body>
