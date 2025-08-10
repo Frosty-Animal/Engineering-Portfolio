@@ -194,9 +194,10 @@
     /* Featured projects section - using existing styles from styles.css */
     .featured-projects {
       background-color: #f8f6f3;
-      padding: 60px 20px;
+      padding: 60px 0; /* Remove horizontal padding */
       text-align: center;
-      margin-top: 40px;
+      margin: 40px 0; /* Remove auto margins */
+      width: 100%; /* Full width */
     }
 
     .featured-projects h2 {
@@ -205,6 +206,7 @@
       margin-bottom: 20px;
       text-transform: uppercase;
       letter-spacing: 2px;
+      padding: 0 20px; /* Add padding only to text elements */
     }
 
     .featured-projects .subtitle {
@@ -214,6 +216,25 @@
       max-width: 600px;
       margin-left: auto;
       margin-right: auto;
+      padding: 0 20px; /* Add padding for text readability */
+    }
+
+    .featured-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 40px;
+      max-width: 1200px;
+      margin: 0 auto; /* Center the grid */
+      padding: 0 20px; /* Keep padding for grid items */
+      justify-items: center; /* Center grid items */
+      width: calc(100% - 40px); /* Account for padding */
+    }
+
+    /* Ensure view-all button is centered */
+    .view-all-btn {
+      margin: 50px auto 0 auto; /* Center the button container */
+      text-align: center;
+      padding: 0 20px; /* Add padding for button */
     }
 
     /* Featured Navigation Tabs */
@@ -476,7 +497,7 @@
     </div>
     <!-- Slide 4 -->
     <div class="slide">
-      <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/Pictures/ImpactDrillPCB" alt="Engineering Project 4">
+      <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/Pictures/ImpactDrillPCB,jpg" alt="Engineering Project 4">
     </div>
     <div class="slide">
       <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/Pictures/Intellevent2.PNG" alt="Engineering Project 5">
