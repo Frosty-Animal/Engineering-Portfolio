@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   <style>
-    /* Additional styles specific to index page that aren't in styles.css */
+    /* INDEX PAGE SPECIFIC STYLES ONLY */
     body {
       margin: 0;
       font-family: Arial, Helvetica, sans-serif;
@@ -19,11 +19,12 @@
       overflow-x: hidden;
     }
 
-    /* Hero section styles */
+    /* HERO SLIDESHOW SECTION */
     .intro-header {
       position: relative;
-      height: 60vh;
-      width: 100%;
+      height: 75vh;
+      width: 100vw;
+      margin-left: calc(50% - 50vw);
       overflow: hidden;
       display: flex;
       align-items: center;
@@ -31,16 +32,16 @@
       text-align: center;
     }
 
-    .slideshow-container {
+    .hero-slideshow {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      z-index: -2;
+      z-index: 1;
     }
 
-    .slide {
+    .hero-slide {
       position: absolute;
       top: 0;
       left: 0;
@@ -48,49 +49,33 @@
       height: 100%;
       opacity: 0;
       transition: opacity 2s ease-in-out;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: #000;
     }
 
-    .slide.active {
+    .hero-slide.active {
       opacity: 1;
     }
 
-    .slide img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center center;
-    }
-
-    .intro-header .slide img {
+    .hero-slide img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       object-position: center;
-      display: block;
     }
 
-    .intro-header .slideshow-container {
-      width: 100%;
-    }
-
+    /* Dark overlay for text visibility */
     .intro-header::before {
       content: '';
       position: absolute;
       top: 0;
       left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(0, 0, 0, 0.5);
-      z-index: -1;
       width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 2;
     }
 
     .hero-content {
-      z-index: 1;
+      z-index: 3;
       color: white;
       padding: 30px;
       background: rgba(0, 0, 0, 0.7);
@@ -114,90 +99,57 @@
       text-transform: uppercase;
       margin-bottom: 15px;
       text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+      min-height: 3rem;
     }
 
     .hero-content p {
-      font-size: 2.5rem;
-      font-weight: bold;
-      text-transform: uppercase;
+      font-size: 1.2rem;
       margin: 0;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-      min-height: 1.2em; /* Ensure consistent height */
-      word-wrap: break-word; /* Allow text to wrap */
-      overflow-wrap: break-word; /* Modern browsers */
-      hyphens: auto; /* Enable hyphenation */
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
     }
 
-    /* Typing effect styles */
-    .typing-container {
+    /* TYPEWRITER ANIMATION */
+    .typewriter {
       display: inline-block;
       position: relative;
     }
 
-    .typing-text {
-      display: inline;
-    }
-
-    .typing-cursor {
+    .typewriter::after {
+      content: '|';
       display: inline-block;
-      background-color: white;
-      margin-left: 3px;
-      width: 3px;
-      height: 1.2em;
+      color: #ec7a1c;
       animation: blink 1s infinite;
-      vertical-align: text-bottom;
+      font-weight: normal;
     }
 
-    .typing-cursor.typing {
-      animation: none;
-      background-color: white;
+    .typewriter.typing-complete::after {
+      display: none;
     }
 
     @keyframes blink {
-      0% { background-color: white; }
-      50% { background-color: transparent; }
-      100% { background-color: white; }
+      0%, 50% { opacity: 1; }
+      51%, 100% { opacity: 0; }
     }
 
-    /* Mobile responsive */
-    @media (max-width: 768px) {
-      .intro-header {
-        justify-content: center;
-      }
+    .hero-subtitle {
+      opacity: 0;
+      transform: translateY(10px);
+      animation: slideInSubtitle 0.8s ease-out 3.5s forwards;
+    }
 
-      .hero-content {
-        width: 80%;
-        margin-right: 0;
-        margin: 0 auto;
-      }
-
-      .hero-content p {
-        font-size: 1.8rem; /* Smaller on mobile */
-        line-height: 1.1; /* Tighter line spacing */
-        min-height: 2.2em; /* Account for potential line wrapping */
-      }
-
-      /* Even smaller for very small screens */
-      @media (max-width: 480px) {
-        .hero-content p {
-          font-size: 1.4rem;
-          line-height: 1.2;
-        }
-
-        .hero-content {
-          width: 90%;
-          padding: 20px;
-        }
+    @keyframes slideInSubtitle {
+      to {
+        opacity: 1;
+        transform: translateY(0);
       }
     }
 
-    /* Featured projects section - using existing styles from styles.css */
+    /* FEATURED PROJECTS GRID */
     .featured-projects {
       background-color: #f8f6f3;
-      padding: 60px 0; /* Remove horizontal padding */
+      padding: 60px 20px;
       text-align: center;
-      margin: 40px 0; /* Remove auto margins */
-      width: 100%; /* Full width */
+      margin-top: 40px;
     }
 
     .featured-projects h2 {
@@ -206,7 +158,6 @@
       margin-bottom: 20px;
       text-transform: uppercase;
       letter-spacing: 2px;
-      padding: 0 20px; /* Add padding only to text elements */
     }
 
     .featured-projects .subtitle {
@@ -216,7 +167,6 @@
       max-width: 600px;
       margin-left: auto;
       margin-right: auto;
-      padding: 0 20px; /* Add padding for text readability */
     }
 
     .featured-grid {
@@ -224,35 +174,153 @@
       grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
       gap: 40px;
       max-width: 1200px;
-      margin: 0 auto; /* Center the grid */
-      padding: 0 20px; /* Keep padding for grid items */
-      justify-items: center; /* Center grid items */
-      width: calc(100% - 40px); /* Account for padding */
+      margin: 0 auto;
+      padding: 0 20px;
     }
 
-    /* Ensure view-all button is centered */
-    .view-all-btn {
-      margin: 50px auto 0 auto; /* Center the button container */
-      text-align: center;
-      padding: 0 20px; /* Add padding for button */
+    .featured-card {
+      background: white;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      position: relative;
+      min-height: 500px;
+      display: flex;
+      flex-direction: column;
     }
 
-    /* Featured Navigation Tabs */
-    .featured-navigation {
-      background-color: #f8f6f3;
-      padding: 40px 20px;
-      text-align: center;
-      border-top: 8px solid #ddd8d2;
+    .featured-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
     }
 
-    .featured-navigation h2 {
-      font-size: 2rem;
+    .featured-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #ec7a1c, #bc6116);
+      z-index: 1;
+    }
+
+    .card-image {
+      height: 200px;
+      overflow: hidden;
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .card-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .featured-card:hover .card-image img {
+      transform: scale(1.05);
+    }
+
+    .card-content {
+      padding: 25px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .card-title {
+      font-size: 1.4rem;
+      font-weight: bold;
       color: #44443b;
-      margin-bottom: 30px;
-      text-transform: uppercase;
-      letter-spacing: 2px;
+      margin-bottom: 10px;
+      flex-shrink: 0;
     }
 
+    .card-description {
+      color: #666;
+      line-height: 1.6;
+      font-size: 0.95rem;
+      margin-bottom: 15px;
+      flex-grow: 1;
+    }
+
+    .card-tech {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 20px;
+      flex-shrink: 0;
+    }
+
+    .tech-tag {
+      background-color: #ec7a1c;
+      color: white;
+      padding: 4px 10px;
+      border-radius: 15px;
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+
+    .card-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 20px;
+      background-color: #ec7a1c;
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: all 0.3s ease;
+      border: 2px solid #ec7a1c;
+      flex-shrink: 0;
+      margin-top: auto;
+    }
+
+    .card-link:hover {
+      background-color: #bc6116;
+      border-color: #bc6116;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(188, 97, 22, 0.3);
+    }
+
+    .card-link i {
+      margin-left: 5px;
+      transition: transform 0.3s ease;
+    }
+
+    .card-link:hover i {
+      transform: translateX(3px);
+    }
+
+    .view-all-btn {
+      margin-top: 50px;
+    }
+
+    .view-all-btn a {
+      display: inline-block;
+      background: #ec7a1c;
+      color: white;
+      padding: 15px 30px;
+      text-decoration: none;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(236, 122, 28, 0.3);
+    }
+
+    .view-all-btn a:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(236, 122, 28, 0.4);
+    }
+
+    /* NAVIGATION TABS */
     .nav-tabs {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -299,34 +367,10 @@
       line-height: 1.4;
     }
 
-    /* Contact Section */
-    .contact-section {
-      background-color: #f8f6f3;
-      color: #44443b;
-      padding: 60px 20px;
-      text-align: center;
-      border-top: 8px solid #ddd8d2;
-    }
-
+    /* CONTACT FORM */
     .contact-container {
       max-width: 600px;
       margin: 0 auto;
-    }
-
-    .contact-section h2 {
-      font-size: 2.5rem;
-      margin-bottom: 20px;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      color: #44443b;
-    }
-
-    .contact-section p {
-      font-size: 1.1rem;
-      margin-bottom: 30px;
-      opacity: 0.8;
-      line-height: 1.6;
-      color: #666;
     }
 
     .contact-box {
@@ -336,10 +380,6 @@
       border: 1px solid #e0e0e0;
       margin-top: 30px;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    }
-
-    .contact-info {
-      margin-bottom: 30px;
     }
 
     .contact-info h3 {
@@ -424,10 +464,6 @@
       background: #bc6116;
     }
 
-    .send-button:active {
-      transform: translateY(0);
-    }
-
     .form-status {
       margin-top: 15px;
       padding: 10px;
@@ -447,24 +483,41 @@
       color: #f44336;
     }
 
-    /* Responsive adjustments */
+    /* RESPONSIVE DESIGN */
     @media (max-width: 768px) {
-      /* Featured navigation responsive */
-      .featured-navigation {
+      .intro-header {
+        justify-content: center;
+        margin-left: 0;
+        width: 100%;
+      }
+
+      .hero-content {
+        width: 80%;
+        margin-right: 0;
+        margin: 0 auto;
+      }
+
+      .hero-content h1 {
+        font-size: 2rem;
+      }
+
+      .hero-content p {
+        font-size: 1rem;
+      }
+
+      .featured-projects {
         padding: 30px 15px;
       }
+
       .nav-tabs {
         grid-template-columns: 1fr;
         gap: 20px;
       }
 
-      /* Contact section responsive */
-      .contact-section {
-        padding: 40px 15px;
-      }
       .contact-form {
         gap: 15px;
       }
+
       .send-button {
         padding: 12px 25px;
         font-size: 1rem;
@@ -480,40 +533,28 @@
   <a href="./about.html">About</a>
 </div>
 
-<!-- Hero section with slideshow -->
 <div class="intro-header">
-  <div class="slideshow-container">
-    <!-- Slide 1 -->
-    <div class="slide active">
+  <div class="hero-slideshow">
+    <div class="hero-slide active">
       <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/Pictures/DroneProfilePicture.jpg" alt="Engineering Project 1">
     </div>
-    <!-- Slide 2 -->
-    <div class="slide">
+    <div class="hero-slide">
       <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/Pictures/3DPrinter.JPG" alt="Engineering Project 2">
     </div>
-    <!-- Slide 3 -->
-    <div class="slide">
+    <div class="hero-slide">
       <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/Pictures/FrictionWelder.jpg" alt="Engineering Project 3">
     </div>
-    <!-- Slide 4 -->
-    <div class="slide">
-      <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/Pictures/ImpactDrillPCB,jpg" alt="Engineering Project 4">
+    <div class="hero-slide">
+      <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/Pictures/ImpactDrillPCB" alt="Engineering Project 4">
     </div>
-    <div class="slide">
+    <div class="hero-slide">
       <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/Pictures/Intellevent2.PNG" alt="Engineering Project 5">
     </div>
   </div>
 
   <div class="hero-content">
-    <p>
-      <span class="typing-container">
-        <span class="typing-text" id="typing-text"></span>
-        <span class="typing-cursor" id="typing-cursor"></span>
-      </span>
-    </p>
-    <p style="font-size: 1.2rem; font-weight: normal; text-transform: none; margin-top: 15px;">
-      Engineering Project and Design Portfolio
-    </p>
+    <h1><span class="typewriter" id="typewriter-text"></span></h1>
+    <p class="hero-subtitle">Engineering Project and Design Portfolio</p>
   </div>
 </div>
 
@@ -534,7 +575,7 @@
       <div class="card-content">
         <h3 class="card-title">Oil Pan Automation</h3>
         <p class="card-description">
-          Description Place holder
+          Automated system for precise oil pan component placement for factory use.
         </p>
         <div class="card-tech">
           <span class="tech-tag">PLC</span>
@@ -555,12 +596,12 @@
       <div class="card-content">
         <h3 class="card-title">5 Stage Pipelined Processor</h3>
         <p class="card-description">
-          Description Place holder
+          Complete RISC-V processor implementation with hazard detection, data forwarding, and branch prediction capabilities.
         </p>
         <div class="card-tech">
-          <span class="tech-tag">RISCV Architecture</span>
+          <span class="tech-tag">RISC-V Architecture</span>
           <span class="tech-tag">FPGA</span>
-          <span class="tech-tag">System Verilog</span>
+          <span class="tech-tag">SystemVerilog</span>
           <span class="tech-tag">Vivado</span>
         </div>
         <a href="Projects/CompArc.html" class="card-link">
@@ -569,7 +610,6 @@
       </div>
     </div>
 
-    <!-- Project 3: Renewable Energy Monitor -->
     <div class="featured-card">
       <div class="card-image">
         <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/Pictures/DroneProfilePicture.jpg" alt="Project 3">
@@ -577,7 +617,7 @@
       <div class="card-content">
         <h3 class="card-title">Racing Drones</h3>
         <p class="card-description">
-          Description Place holder
+          High-performance FPV racing drones built from scratch, achieving 100+ MPH speeds with custom electronics and programming.
         </p>
         <div class="card-tech">
           <span class="tech-tag">Drone Racing</span>
@@ -597,7 +637,6 @@
   </div>
 </section>
 
-<!-- Featured Navigation Section -->
 <section class="featured-projects">
   <h2>Learn More About Me</h2>
 
@@ -620,14 +659,9 @@
   </div>
 </section>
 
-<!-- Contact Section -->
 <section class="featured-projects">
   <div class="contact-container">
     <h2>Let's Connect</h2>
-    <p>
-      Interested in my work or have a project in mind? I'd love to hear from you!
-      Send me a message and I'll get back to you as soon as possible.
-    </p>
 
     <div class="contact-box">
       <div class="contact-info">
@@ -681,75 +715,46 @@
 </footer>
 
 <script>
-  // Auto-advancing slideshow for intro header
-  let currentSlideIndex = 0;
-  const slides = document.querySelectorAll('.intro-header .slide');
-  const totalSlides = slides.length;
-
-  function showSlide(index) {
-    // Hide all slides
-    slides.forEach(slide => slide.classList.remove('active'));
-
-    // Show current slide
-    slides[index].classList.add('active');
-  }
-
-  function changeSlide(direction) {
-    currentSlideIndex += direction;
-
-    // Loop back to beginning/end
-    if (currentSlideIndex >= totalSlides) {
-      currentSlideIndex = 0;
-    } else if (currentSlideIndex < 0) {
-      currentSlideIndex = totalSlides - 1;
-    }
-
-    showSlide(currentSlideIndex);
-  }
-
-  // Auto-advance slideshow every 4 seconds
-  setInterval(() => {
-    changeSlide(1);
-  }, 4000);
-
-  // Simple One-Time Typing Effect
-  function typeOnce() {
-    const text = "Isaiah Hajabolhassan";
-    const typingElement = document.getElementById('typing-text');
-    const cursorElement = document.getElementById('typing-cursor');
-
-    let charIndex = 0;
+  // TYPEWRITER EFFECT
+  function typeWriter() {
+    const text = "ISAIAH HAJABOLHASSAN";
+    const typewriterElement = document.getElementById('typewriter-text');
+    let i = 0;
 
     function type() {
-      if (charIndex < text.length) {
-        // Show solid cursor while typing
-        cursorElement.classList.add('typing');
-
-        // Add next character
-        typingElement.textContent = text.substring(0, charIndex + 1);
-        charIndex++;
-
-        // Variable speed for more natural typing
-        let typeSpeed = 100; // Default speed
-
-        // Slower after spaces for natural feel
-        const currentChar = text.charAt(charIndex - 1);
-        if (currentChar === ' ') {
-          typeSpeed = 150;
-        }
-
-        setTimeout(type, typeSpeed);
+      if (i < text.length) {
+        typewriterElement.textContent += text.charAt(i);
+        i++;
+        const typingSpeed = Math.random() * 70 + 80;
+        setTimeout(type, typingSpeed);
       } else {
-        // Typing complete - resume blinking cursor
-        cursorElement.classList.remove('typing');
+        setTimeout(() => {
+          typewriterElement.classList.add('typing-complete');
+        }, 1000);
       }
     }
 
-    // Start typing
-    type();
+    setTimeout(type, 500);
   }
 
-  // Contact form handling
+  // SLIDESHOW
+  let currentSlideIndex = 0;
+  const heroSlides = document.querySelectorAll('.hero-slide');
+  const totalSlides = heroSlides.length;
+
+  function showSlide(index) {
+    heroSlides.forEach(slide => slide.classList.remove('active'));
+    heroSlides[index].classList.add('active');
+  }
+
+  function nextSlide() {
+    currentSlideIndex = (currentSlideIndex + 1) % totalSlides;
+    showSlide(currentSlideIndex);
+  }
+
+  setInterval(nextSlide, 4000);
+
+  // CONTACT FORM
   document.getElementById('contactForm').addEventListener('submit', function(e) {
     e.preventDefault();
 
@@ -757,45 +762,28 @@
     const email = document.getElementById('email').value;
     const message = document.getElementById('message').value;
 
-    // Basic validation
     if (!email || !message) {
       showStatus('Please fill in all fields.', 'error');
       return;
     }
 
-    // Email validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       showStatus('Please enter a valid email address.', 'error');
       return;
     }
 
-    // Show loading state
     const submitButton = document.querySelector('.send-button');
     const originalText = submitButton.innerHTML;
     submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
     submitButton.disabled = true;
 
-    // Create mailto link (fallback method)
     const subject = encodeURIComponent('Portfolio Contact Form Message');
-    const body = encodeURIComponent(`
-From: ${email}
-
-Message:
-${message}
-
----
-Sent from Isaiah's Portfolio Contact Form
-    `);
-
-    // Try to use EmailJS or similar service (you'll need to set this up)
-    // For now, we'll use a mailto link as a reliable fallback
+    const body = encodeURIComponent(`From: ${email}\n\nMessage:\n${message}\n\n---\nSent from Isaiah's Portfolio Contact Form`);
     const mailtoLink = `mailto:Isaiahmh28@gmail.com?subject=${subject}&body=${body}`;
 
-    // Open email client
     window.location.href = mailtoLink;
 
-    // Reset form and show success message
     setTimeout(() => {
       this.reset();
       showStatus('Email client opened! Please send the pre-filled message.', 'success');
@@ -810,66 +798,16 @@ Sent from Isaiah's Portfolio Contact Form
     formStatus.className = `form-status ${type}`;
     formStatus.style.display = 'block';
 
-    // Hide status after 5 seconds
     setTimeout(() => {
       formStatus.style.display = 'none';
     }, 5000);
   }
 
-  // Initialize typing effect when page loads
-  window.addEventListener('load', function() {
-    // Small delay to let the hero section load first
-    setTimeout(typeOnce, 1000);
+  // Initialize on page load
+  document.addEventListener('DOMContentLoaded', function() {
+    typeWriter();
   });
 </script>
 
 </body>
-<script>
-  // Mobile Navigation JavaScript
-  const hamburger = document.getElementById('hamburger');
-  const navLinks = document.getElementById('navLinks');
-  const navOverlay = document.getElementById('navOverlay');
-  const body = document.body;
-
-  // Toggle mobile menu
-  function toggleMobileMenu() {
-    hamburger.classList.toggle('active');
-    navLinks.classList.toggle('active');
-    navOverlay.classList.toggle('active');
-    body.classList.toggle('menu-open');
-  }
-
-  // Close mobile menu
-  function closeMobileMenu() {
-    hamburger.classList.remove('active');
-    navLinks.classList.remove('active');
-    navOverlay.classList.remove('active');
-    body.classList.remove('menu-open');
-  }
-
-  // Event listeners
-  hamburger.addEventListener('click', toggleMobileMenu);
-  navOverlay.addEventListener('click', closeMobileMenu);
-
-  // Close menu when clicking on a link (mobile)
-  navLinks.addEventListener('click', function(e) {
-    if (e.target.tagName === 'A' && window.innerWidth <= 768) {
-      closeMobileMenu();
-    }
-  });
-
-  // Close menu on window resize if screen becomes larger
-  window.addEventListener('resize', function() {
-    if (window.innerWidth > 768) {
-      closeMobileMenu();
-    }
-  });
-
-  // Handle escape key
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape' && navLinks.classList.contains('active')) {
-      closeMobileMenu();
-    }
-  });
-</script>
 </html>

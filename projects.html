@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,140 +7,107 @@
     <link rel="icon" type="image/png" href="Pictures/WebsiteTitlePicture.png">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
-
         .filter-buttons {
             text-align: center;
-            margin: 40px 0;
-            padding: 0 20px;
+            margin: 20px 0;
         }
 
         .filter-buttons button {
             display: inline-block;
-            padding: 15px 30px;
-            background: linear-gradient(135deg, #ec7a1c, #bc6116);
+            padding: 10px 20px;
+            background-color: #ec7a1c;
             color: white;
             border: none;
-            border-radius: 30px;
-            margin: 10px 8px;
+            border-radius: 5px;
+            margin: 10px 5px;
             transition: all 0.3s ease;
             cursor: pointer;
-            font-size: 1.1rem;
-            font-weight: 600;
+            font-size: 16px;
             font-family: Arial, Helvetica, sans-serif;
-            box-shadow: 0 5px 15px rgba(236, 122, 28, 0.3);
-            text-decoration: none;
         }
 
         .filter-buttons button:hover {
+            background-color: #bc6116;
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(236, 122, 28, 0.4);
         }
 
         .filter-buttons button.active {
-            background: linear-gradient(135deg, #bc6116, #9a4e12);
-            box-shadow: 0 8px 25px rgba(188, 97, 22, 0.4);
-            transform: translateY(-2px);
+            background-color: #bc6116;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
         }
 
-        /* Responsive filter buttons */
-        @media (max-width: 768px) {
-            .filter-buttons {
-                margin: 30px 0;
-                padding: 0 15px;
-            }
-
-            .filter-buttons button {
-                padding: 12px 20px;
-                margin: 8px 5px;
-                font-size: 1rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .filter-buttons {
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 10px;
-            }
-
-            .filter-buttons button {
-                flex: 1;
-                min-width: 120px;
-                margin: 5px;
-                padding: 10px 15px;
-                font-size: 0.9rem;
-            }
-        }
-
-        /* Ensure smooth transitions for show/hide states */
-        .project-card.show {
+        .project-card {
+            display: block;
             opacity: 1;
-            transform: scale(1) translateY(0);
-            pointer-events: auto;
-            position: relative;
-            visibility: visible;
+            transform: scale(1);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
-        .wip-badge {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
-            color: white;
-            padding: 6px 12px;
-            border-radius: 15px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            box-shadow: 0 2px 8px rgba(255, 107, 107, 0.4);
-            animation: wipPulse 2s infinite;
-            z-index: 10;
+        .project-card.hide {
+            opacity: 0;
+            transform: scale(0.8) translateY(-20px);
+            pointer-events: none;
         }
 
-        @keyframes wipPulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+        .project-card.show {
+            animation: slideInUp 0.6s ease forwards;
         }
 
-        /* WIP Section Divider */
-        .wip-section-divider {
-            margin: 40px 20px 30px 20px;
-            text-align: center;
-            position: relative;
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: scale(0.8) translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
         }
 
-        .wip-section-divider h2 {
-            color: #44443b;
-            font-size: 1.8rem;
-            margin: 0;
-            padding: 0 20px;
-            background: #e6e4e0;
+        .projects {
+            min-height: 100vh;
+        }
+
+        .main-content {
+            min-height: calc(100vh - 200px);
+        }
+
+        .company-badge {
             display: inline-block;
-            position: relative;
-            z-index: 2;
+            background: linear-gradient(135deg, #44443b, #5a5a4f);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin: 5px 0 8px 0;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
 
-        .wip-section-divider::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, #ec7a1c, transparent);
-            z-index: 1;
+        .company-badge.npdc {
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
         }
 
-        .wip-section-divider .subtitle {
-            color: #666;
-            font-size: 1rem;
-            margin-top: 10px;
-            font-style: italic;
+        .company-badge.bevins {
+            background: linear-gradient(135deg, #059669, #047857);
         }
 
-</style>
+        .company-badge.osu {
+            background: linear-gradient(135deg, #dc2626, #b91c1c);
+        }
+
+        .company-badge.personal {
+            background: linear-gradient(135deg, #7c3aed, #6d28d9);
+        }
+
+        .project-content h3 {
+            margin: 0 0 5px 0;
+            font-size: 1.2em;
+            line-height: 1.3;
+        }
+    </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
@@ -153,179 +119,196 @@
     <a href="./about.html">About</a>
 </div>
 
-<h1>My Projects</h1>
+<div class="main-content">
+    <h1>My Projects</h1>
 
-<div class="filter-buttons">
-    <button onclick="filterProjects('all')" class="active" id="btn-all">All</button>
-    <button onclick="filterProjects('internship')" id="btn-internship">Internship</button>
-    <button onclick="filterProjects('personal')" id="btn-personal">Personal Projects</button>
-    <button onclick="filterProjects('school')" id="btn-school">School</button>
+    <div class="filter-buttons">
+        <button onclick="filterProjects('all')" class="active" id="btn-all">All</button>
+        <button onclick="filterProjects('internship')" id="btn-internship">Internship</button>
+        <button onclick="filterProjects('personal')" id="btn-personal">Personal Projects</button>
+        <button onclick="filterProjects('school')" id="btn-school">School</button>
+    </div>
+
+    <div class="projects" id="projectsContainer">
+
+        <div class="project-card internship">
+            <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/Pictures/HopkinsMachine.jpg" alt="Oil Pan Automation">
+            <div class="project-content">
+                <h3>Oil Pan Automation</h3>
+                <div class="company-badge npdc">NPDC</div>
+                <p><strong>Completed: December 2024</strong></p>
+                <p>Developed a system to automate the placement of plugs for offshore oil rigs.</p>
+                <a href="Projects/Hopkins.html" aria-label="Learn more about Oil Pan Automation project">More Info</a>
+            </div>
+        </div>
+
+        <div class="project-card personal">
+            <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/Pictures/HopkinsMachine.jpg" alt="Automatic Music Box">
+            <div class="project-content">
+                <h3>Automatic Music Box</h3>
+                <div class="company-badge personal">Personal Project</div>
+                <p><strong>Completed: December 2024</strong></p>
+                <p>A custom-built music box that automatically plays melodies using mechanical components and programming.</p>
+                <a href="Projects/MusicBox.html" aria-label="Learn more about Automatic Music Box project">More Info</a>
+            </div>
+        </div>
+
+        <div class="project-card personal">
+            <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/Pictures/HopkinsMachine.jpg" alt="8-bit Computer">
+            <div class="project-content">
+                <h3>8-bit Computer</h3>
+                <div class="company-badge personal">Personal Project</div>
+                <p><strong>Completed: December 2024</strong></p>
+                <p>Built a functional 8-bit computer from scratch using discrete logic components and custom microcode.</p>
+                <a href="Projects/8-bitComputer.html" aria-label="Learn more about 8-bit Computer project">More Info</a>
+            </div>
+        </div>
+
+        <div class="project-card personal">
+            <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/Pictures/HopkinsMachine.jpg" alt="Rock Paper Scissors Hardware">
+            <div class="project-content">
+                <h3>Remote Hardware Rock Paper Scissors Game</h3>
+                <div class="company-badge personal">Personal Project</div>
+                <p><strong>Completed: December 2024</strong></p>
+                <p>A networked hardware implementation of Rock Paper Scissors using embedded systems and wireless communication.</p>
+                <a href="Projects/RPSHardware.html" aria-label="Learn more about RPS Hardware project">More Info</a>
+            </div>
+        </div>
+
+        <div class="project-card personal">
+            <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/Pictures/HopkinsMachine.jpg" alt="Raspberry Pi Cluster">
+            <div class="project-content">
+                <h3>Raspberry Pi Cluster</h3>
+                <div class="company-badge personal">Personal Project</div>
+                <p><strong>Completed: December 2024</strong></p>
+                <p>Built a distributed computing cluster using multiple Raspberry Pi units for parallel processing tasks.</p>
+                <a href="Projects/RaspberryPiCluster.html" aria-label="Learn more about RaspberryPi Cluster project">More Info</a>
+            </div>
+        </div>
+
+        <div class="project-card personal">
+            <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/Pictures/CNC.-PCBMaker.jpg" alt="CNC PCB Maker">
+            <div class="project-content">
+                <h3>Augmented CNC Machine for PCB Production</h3>
+                <div class="company-badge personal">Personal Project</div>
+                <p><strong>Completed: December 2024</strong></p>
+                <p>Modified a CNC machine with custom tooling and software to automate PCB manufacturing processes.</p>
+                <a href="Projects/CNC-PCBMaker.html" aria-label="Learn more about CNC PCB Maker project">More Info</a>
+            </div>
+        </div>
+
+        <div class="project-card internship">
+            <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/Pictures/MedicalBandageMaker.jpg" alt="Bandage Making Machine">
+            <div class="project-content">
+                <h3>Automatic Bandage Making Machine</h3>
+                <div class="company-badge npdc">NPDC</div>
+                <p><strong>Completed: December 2024</strong></p>
+                <p>Designed and built an automated system for manufacturing medical bandages with precise cutting and packaging.</p>
+                <a href="Projects/MedicalBandageMaker.html" aria-label="Learn more about Bandage Making Machine project">More Info</a>
+            </div>
+        </div>
+
+        <div class="project-card internship">
+            <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/Pictures/OilStates.jpg" alt="Oil Plug Automation">
+            <div class="project-content">
+                <h3>Oil Plug Automation</h3>
+                <div class="company-badge npdc">NPDC</div>
+                <p><strong>Ongoing</strong></p>
+                <p>Developing an automated system for precise placement and testing of oil plugs in industrial applications.</p>
+                <a href="Projects/OilStates.html" aria-label="Learn more about Oil Plug Automation project">More Info</a>
+            </div>
+        </div>
+
+        <div class="project-card internship">
+            <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/Pictures/Capture1.PNG" alt="Impact Drill">
+            <div class="project-content">
+                <h3>Impact Drill for High Voltage Power Lines</h3>
+                <div class="company-badge bevins">Bevins</div>
+                <p><strong>Ongoing</strong></p>
+                <p>Redesigned and tested an impact drill for safe remote use on 500kV power lines with EMF protection.</p>
+                <a href="Projects/Bevins.html" aria-label="Learn more about Impact Drill project">More Info</a>
+            </div>
+        </div>
+
+        <div class="project-card school">
+            <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/Pictures/Intellevent2.PNG" alt="HVAC Control Vent">
+            <div class="project-content">
+                <h3>Automatic HVAC Control Vent</h3>
+                <div class="company-badge osu">Oklahoma State University</div>
+                <p><strong>Completed: Fall 2024</strong></p>
+                <p>Created during a hackathon competition, using IR and temperature sensors to autonomously control HVAC vents.</p>
+                <a href="Projects/HVAC.html" aria-label="Learn more about HVAC Control Vent project">More Info</a>
+            </div>
+        </div>
+
+        <div class="project-card personal">
+            <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/Pictures/download.jpg" alt="Nixie Tube Watch">
+            <div class="project-content">
+                <h3>Nixie Tube Watch</h3>
+                <div class="company-badge personal">Personal Project</div>
+                <p><strong>Ongoing</strong></p>
+                <p>A unique timepiece that displays time using vintage nixie tubes with custom power management and control circuits.</p>
+                <a href="Projects/NixieTubeWatch.html" aria-label="Learn more about Nixie Tube Watch project">More Info</a>
+            </div>
+        </div>
+
+        <div class="project-card personal">
+            <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/Pictures/DroneProfilePicture.jpg" alt="Racing Drones">
+            <div class="project-content">
+                <h3>Racing Drones</h3>
+                <div class="company-badge personal">Personal Project</div>
+                <p><strong>Completed: Summer 2023</strong></p>
+                <p>Built high-performance racing drones from scratch for competitive flying and learning electronics integration.</p>
+                <a href="Projects/Drones.html" aria-label="Learn more about Racing Drones project">More Info</a>
+            </div>
+        </div>
+
+        <div class="project-card personal">
+            <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/Pictures/3DPrinter.JPG" alt="DIY Resin Printer">
+            <div class="project-content">
+                <h3>DIY Resin Printer</h3>
+                <div class="company-badge personal">Personal Project</div>
+                <p><strong>Completed: Spring 2024</strong></p>
+                <p>A custom desktop 3D printer that uses UV light and LCD screen technology for precise resin printing.</p>
+                <a href="Projects/3DPrinter.html" aria-label="Learn more about DIY Resin Printer project">More Info</a>
+            </div>
+        </div>
+
+        <div class="project-card internship">
+            <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/Pictures/FrictionWelder.jpg" alt="Friction Welder">
+            <div class="project-content">
+                <h3>Friction Welder</h3>
+                <div class="company-badge npdc">NPDC</div>
+                <p><strong>Completed: Winter 2024</strong></p>
+                <p>Designed a friction welder attachment for skid steers to enable efficient underground pipe welding operations.</p>
+                <a href="Projects/FrictionWelder.html" aria-label="Learn more about Friction Welder project">More Info</a>
+            </div>
+        </div>
+
+        <div class="project-card internship">
+            <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/Pictures/IMG_5146.jpg" alt="Cable Detector">
+            <div class="project-content">
+                <h3>Non-Contact Energized Cable Detector</h3>
+                <div class="company-badge bevins">Bevins</div>
+                <p><strong>Ongoing</strong></p>
+                <p>Researched and developed a device using Hall Effect and capacitive sensors to safely detect energized underground cables.</p>
+                <a href="Projects/CableDetector.html" aria-label="Learn more about Cable Detector project">More Info</a>
+            </div>
+        </div>
+
+        <div class="project-card school">
+            <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/Pictures/5StagedPiplinedArc.png" alt="Pipelined Computer">
+            <div class="project-content">
+                <h3>5-Stage Pipelined RISC-V Processor</h3>
+                <div class="company-badge osu">Oklahoma State University</div>
+                <p><strong>Academic Project</strong></p>
+                <p>Design and implementation of a 5-stage pipelined RISC-V computer architecture with hazard detection and forwarding.</p>
+                <a href="Projects/CompArc.html" aria-label="Learn more about Pipelined Computer project">More Info</a>
+            </div>
+        </div>
+    </div>
 </div>
 
-<div class="projects">
-
-    <div class="project-card internship show">
-        <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/Pictures/HopkinsMachine.jpg" alt="">
-        <div class="project-content">
-            <h3>Oil Pan Automation</h3>
-            <p><strong>Completed: December 2024</strong></p>
-            <p>While interning at the NPDC, I helped develop a system to automate the placement of plugs for offshore oil rigs.</p>
-            <a href="Projects/Hopkins.html" aria-label="Learn more about Oil Pan Automation project">More Info</a>
-        </div>
-    </div>
-
-    <div class="project-card internship show">
-        <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/Pictures/OilStates.jpg" alt="">
-        <div class="project-content">
-            <h3>Oil Plug Automation</h3>
-            <p><strong>Ongoing</strong></p>
-            <p>While interning at the NPDC, I helped develop a system to automate the placement of plugs for offshore oil rigs.</p>
-            <a href="Projects/OilStates.html" aria-label="Learn more about Oil Plug Automation project">More Info</a>
-        </div>
-    </div>
-
-    <div class="project-card internship show">
-        <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/Pictures/ImpactDrillPCB.jpg" alt="">
-        <div class="project-content">
-            <h3>Impact Drill for High Voltage Power Lines</h3>
-            <p><strong>Ongoing</strong></p>
-            <p>While interning at the NPDC, I redesigned and tested an impact drill for remote use on 500kV power lines.</p>
-            <a href="Projects/Bevins.html" aria-label="Learn more about Impact Drill project">More Info</a>
-        </div>
-    </div>
-
-    <div class="project-card school show">
-        <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/Pictures/Intellevent2.PNG" alt="">
-        <div class="project-content">
-            <h3>Automatic HVAC Control Vent</h3>
-            <p><strong>Completed Fall 2024</strong></p>
-            <p>Created during a hackathon competition, I used IR and temperature sensors to autonomously control vents for HVAC flow in buildings.</p>
-            <a href="Projects/HVAC.html" aria-label="Learn more about HVAC Control Vent project">More Info</a>
-        </div>
-    </div>
-
-    <div class="project-card personal show">
-        <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/Pictures/DroneProfilePicture.jpg" alt="">
-        <div class="project-content">
-            <h3>Racing Drones</h3>
-            <p><strong>Completed: Summer 2023</strong></p>
-            <p>A fun project to build racing drones with my friends for competitive flying and learning.</p>
-            <a href="Projects/Drones.html" aria-label="Learn more about Racing Drones project">More Info</a>
-        </div>
-    </div>
-
-    <div class="project-card personal show">
-        <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/Pictures/3DPrinter.JPG" alt="">
-        <div class="project-content">
-            <h3>DIY Resin Printer</h3>
-            <p><strong>Completed: Spring 2024</strong></p>
-            <p>A desktop 3D printer that uses UV light and an LCD screen to create precise 3D prints.</p>
-            <a href="Projects/3DPrinter.html" aria-label="Learn more about DIY Resin Printer project">More Info</a>
-        </div>
-    </div>
-
-    <div class="project-card internship show">
-        <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/Pictures/FrictionWelder.jpg" alt="">
-        <div class="project-content">
-            <h3>Friction Welder</h3>
-            <p><strong>Completed: Winter 2024</strong></p>
-            <p>While interning at the NPDC, I designed a friction welder that attaches to a skid steer for friction welding pipes to be laid underground.</p>
-            <a href="Projects/FrictionWelder.html" aria-label="Learn more about Friction Welder project">More Info</a>
-        </div>
-    </div>
-
-    <div class="project-card internship show">
-        <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/Pictures/Underground-Cables.jpg" alt="">
-        <div class="project-content">
-            <h3>Non-Contact Energized Cable Detector</h3>
-            <p><strong>Ongoing</strong></p>
-            <p>While interning at Bevins, I researched and developed a device that detects energized underground cables using Hall Effect sensors and capacitive sensors to .</p>
-            <a href="Projects/FrictionWelder.html" aria-label="Learn more about Friction Welder project">More Info</a>
-        </div>
-    </div>
-
-    <div class="project-card school show">
-        <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/Pictures/5StagedPiplinedArc.png" alt="">
-        <div class="project-content">
-            <h3>Pipelined Computer</h3>
-            <p><strong>Academic Project</strong></p>
-            <p>Design and implementation of a pipelined computer architecture as part of computer engineering coursework.</p>
-            <a href="Projects/CompArc.html" aria-label="Learn more about Pipelined Computer project">More Info</a>
-        </div>
-    </div>
-
-    <div class="project-card personal show">
-        <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/Pictures/images.png" alt="">
-        <div class="project-content">
-            <h3>Automatic Music Box</h3>
-            <p><strong>Completed: December 2024</strong></p>
-            <p>While interning at the NPDC, I helped develop a system to automate the placement of plugs for offshore oil rigs.</p>
-            <a href="Projects/MusicBox.html" aria-label="Learn more about Oil Pan Automation project">More Info</a>
-        </div>
-    </div>
-
-    <div class="project-card personal show">
-        <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/Pictures/images.png" alt="">
-        <div class="project-content">
-            <h3>8-bit Computer</h3>
-            <p><strong>Completed: December 2024</strong></p>
-            <p>While interning at the NPDC, I helped develop a system to automate the placement of plugs for offshore oil rigs.</p>
-            <a href="Projects/8-bitComputer.html" aria-label="Learn more about Oil Pan Automation project">More Info</a>
-        </div>
-    </div>
-
-    <div class="project-card personal show">
-        <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/Pictures/images.png" alt="">
-        <div class="project-content">
-            <h3>Remote Hardware Rock Paper Scissors Game</h3>
-            <p><strong>Completed: December 2024</strong></p>
-            <p>While interning at the NPDC, I helped develop a system to automate the placement of plugs for offshore oil rigs.</p>
-            <a href="Projects/RPSHardware.html" aria-label="Learn more about Oil Pan Automation project">More Info</a>
-        </div>
-    </div>
-
-    <div class="project-card personal show">
-        <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/Pictures/images.png" alt="">
-        <div class="project-content">
-            <h3>RaspberryPi Cluster</h3>
-            <p><strong>Completed: December 2024</strong></p>
-            <p>While interning at the NPDC, I helped develop a system to automate the placement of plugs for offshore oil rigs.</p>
-            <a href="Projects/RaspberryPiCluster.html" aria-label="Learn more about Oil Pan Automation project">More Info</a>
-        </div>
-    </div>
-
-    <div class="project-card personal show">
-        <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/Pictures/images.png" alt="">
-        <div class="project-content">
-            <h3>Augmented CNC machine for PCB production</h3>
-            <p><strong>Completed: December 2024</strong></p>
-            <p>While interning at the NPDC, I helped develop a system to automate the placement of plugs for offshore oil rigs.</p>
-            <a href="Projects/CNC-PCBMaker.html" aria-label="Learn more about Oil Pan Automation project">More Info</a>
-        </div>
-    </div>
-
-    <div class="project-card internship show">
-        <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/Pictures/images.png" alt="">
-        <div class="project-content">
-            <h3>Automatic Bandage Making Machine</h3>
-            <p><strong>Completed: December 2024</strong></p>
-            <p>While interning at the NPDC, I helped develop a system to automate the placement of plugs for offshore oil rigs.</p>
-            <a href="Projects/MedicalBandageMaker.html" aria-label="Learn more about Oil Pan Automation project">More Info</a>
-        </div>
-    </div>
-
-    <div class="project-card personal show">
-        <img src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/Pictures/images.png" alt="">
-        <div class="project-content">
-            <h3>Nixie Tube Watch</h3>
-            <p><strong>Ongoing</strong></p>
-            <p>A watch that displays time using nixie tubes rather than traditional clockwork or digital displays.</p>
-            <a href="Projects/NixieTubeWatch.html" aria-label="Learn more about Nixie Tube Watch project">More Info</a>
-        </div>
-    </div>
-
-</div>
-</body>
 <footer>
     <p>&copy; <script>document.write(new Date().getFullYear())</script> Isaiah Hajabolhassan. All Rights Reserved.</p>
     <a href="https://github.com/Frosty-Animal" target="_blank">
@@ -343,98 +326,27 @@
     function filterProjects(category) {
         const projects = document.querySelectorAll('.project-card');
         const buttons = document.querySelectorAll('.filter-buttons button');
+        const container = document.getElementById('projectsContainer');
 
-        // Remove active class from all buttons
         buttons.forEach(btn => btn.classList.remove('active'));
-        // Add active class to clicked button
         document.getElementById(`btn-${category}`).classList.add('active');
 
-        // Step 1: Add pop-out effect to ALL cards
         projects.forEach(project => {
-            project.classList.add('pop-out');
-            // Remove any existing animation classes
-            project.classList.remove('pop-in');
+            project.classList.remove('show');
+
+            if (category === 'all' || project.classList.contains(category)) {
+                project.classList.remove('hide');
+                setTimeout(() => project.classList.add('show'), 50);
+            } else {
+                project.classList.add('hide');
+            }
         });
 
-        // Step 2: After pop-out animation, apply filtering and pop-in
         setTimeout(() => {
-            projects.forEach(project => {
-                // Remove pop-out class
-                project.classList.remove('pop-out');
-
-                // Apply filtering logic
-                if (category === 'all') {
-                    project.classList.remove('hide');
-                    project.classList.add('show');
-                } else if (project.classList.contains(category)) {
-                    project.classList.remove('hide');
-                    project.classList.add('show');
-                } else {
-                    project.classList.add('hide');
-                    project.classList.remove('show');
-                }
-
-                // Add pop-in effect only to visible cards
-                if (!project.classList.contains('hide')) {
-                    project.classList.add('pop-in');
-                }
-            });
-
-            // Step 3: Clean up pop-in class after animation
-            setTimeout(() => {
-                projects.forEach(project => {
-                    project.classList.remove('pop-in');
-                });
-            }, 500);
-
-        }, 200); // Wait for pop-out animation to complete
+            projects.forEach(project => project.classList.remove('show'));
+        }, 700);
     }
-
-    // Mobile Navigation JavaScript
-    const hamburger = document.getElementById('hamburger');
-    const navLinks = document.getElementById('navLinks');
-    const navOverlay = document.getElementById('navOverlay');
-    const body = document.body;
-
-    // Toggle mobile menu
-    function toggleMobileMenu() {
-        hamburger.classList.toggle('active');
-        navLinks.classList.toggle('active');
-        navOverlay.classList.toggle('active');
-        body.classList.toggle('menu-open');
-    }
-
-    // Close mobile menu
-    function closeMobileMenu() {
-        hamburger.classList.remove('active');
-        navLinks.classList.remove('active');
-        navOverlay.classList.remove('active');
-        body.classList.remove('menu-open');
-    }
-
-    // Event listeners
-    hamburger.addEventListener('click', toggleMobileMenu);
-    navOverlay.addEventListener('click', closeMobileMenu);
-
-    // Close menu when clicking on a link (mobile)
-    navLinks.addEventListener('click', function(e) {
-        if (e.target.tagName === 'A' && window.innerWidth <= 768) {
-            closeMobileMenu();
-        }
-    });
-
-    // Close menu on window resize if screen becomes larger
-    window.addEventListener('resize', function() {
-        if (window.innerWidth > 768) {
-            closeMobileMenu();
-        }
-    });
-
-    // Handle escape key
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && navLinks.classList.contains('active')) {
-            closeMobileMenu();
-        }
-    });
 </script>
+
+</body>
 </html>

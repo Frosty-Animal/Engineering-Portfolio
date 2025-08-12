@@ -8,12 +8,13 @@
   <title>About Me</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   <style>
+    /* ABOUT PAGE SPECIFIC STYLES ONLY */
     body {
       background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
       min-height: 100vh;
     }
 
-
+    /* PROFILE SECTION */
     .profile-section {
       text-align: center;
       padding: 40px 20px;
@@ -45,7 +46,6 @@
       transform: scale(1.05);
     }
 
-    /* About Content */
     .about-content {
       max-width: 800px;
       margin: 0 auto;
@@ -64,7 +64,7 @@
       margin-bottom: 20px;
     }
 
-    /* New Sections */
+    /* SECTION STYLING */
     .section {
       max-width: 1000px;
       margin: 40px auto;
@@ -94,94 +94,7 @@
       background: linear-gradient(90deg, #ec7a1c, #bc6116);
     }
 
-    /* Journey Timeline */
-    .journey-timeline {
-      position: relative;
-      padding: 20px 0;
-    }
-
-    .timeline-item {
-      display: flex;
-      margin-bottom: 30px;
-      position: relative;
-    }
-
-    .timeline-date {
-      background: #ec7a1c;
-      color: white;
-      padding: 8px 15px;
-      border-radius: 20px;
-      font-weight: 600;
-      font-size: 0.9rem;
-      white-space: nowrap;
-      margin-right: 20px;
-      min-width: 120px;
-      text-align: center;
-    }
-
-    .timeline-content {
-      flex: 1;
-      padding: 15px 20px;
-      background: #f8f6f3;
-      border-radius: 10px;
-      border-left: 4px solid #ec7a1c;
-    }
-
-    .timeline-content h4 {
-      color: #44443b;
-      margin: 0 0 8px 0;
-      font-size: 1.1rem;
-    }
-
-    .timeline-content p {
-      color: #666;
-      margin: 0;
-      font-size: 0.95rem;
-      line-height: 1.5;
-    }
-
-    /* Values Grid */
-    .values-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 25px;
-      margin-top: 30px;
-    }
-
-    .value-card {
-      background: linear-gradient(135deg, #f8f6f3, #e6e4e0);
-      padding: 25px;
-      border-radius: 12px;
-      text-align: center;
-      transition: transform 0.3s ease;
-      border: 2px solid transparent;
-    }
-
-    .value-card:hover {
-      transform: translateY(-5px);
-      border-color: #ec7a1c;
-    }
-
-    .value-icon {
-      font-size: 2.5rem;
-      color: #ec7a1c;
-      margin-bottom: 15px;
-    }
-
-    .value-card h4 {
-      color: #44443b;
-      margin-bottom: 10px;
-      font-size: 1.2rem;
-    }
-
-    .value-card p {
-      color: #666;
-      font-size: 0.9rem;
-      line-height: 1.5;
-      margin: 0;
-    }
-
-    /* Current Goals */
+    /* GOALS LIST */
     .goals-list {
       list-style: none;
       padding: 0;
@@ -209,7 +122,7 @@
       width: 20px;
     }
 
-    /* Fun Facts */
+    /* FUN FACTS SECTION */
     .fun-facts {
       background: linear-gradient(135deg, #ec7a1c, #bc6116);
       color: white;
@@ -251,7 +164,7 @@
       line-height: 1.4;
     }
 
-    /* Interests Section Enhancement */
+    /* INTERESTS SECTION */
     .interests-section {
       background: white;
       padding: 60px 20px;
@@ -305,7 +218,7 @@
       box-shadow: 0 6px 20px rgba(236, 122, 28, 0.4);
     }
 
-    /* Responsive Design */
+    /* RESPONSIVE DESIGN */
     @media (max-width: 768px) {
       .profile-pic {
         width: 250px;
@@ -317,24 +230,13 @@
         padding: 20px;
       }
 
-      .timeline-item {
-        flex-direction: column;
-        gap: 10px;
-      }
-
-      .timeline-date {
-        margin-right: 0;
-        align-self: flex-start;
-      }
-
-      .values-grid {
-        grid-template-columns: 1fr;
-        gap: 15px;
-      }
-
       .facts-grid {
         grid-template-columns: 1fr 1fr;
         gap: 15px;
+      }
+
+      .interests-section {
+        padding: 40px 15px;
       }
     }
 
@@ -346,6 +248,10 @@
 
       .facts-grid {
         grid-template-columns: 1fr;
+      }
+
+      .interests-section h2 {
+        font-size: 2rem;
       }
     }
   </style>
@@ -359,7 +265,6 @@
   <a class="active" href="./about.html">About</a>
 </div>
 
-
 <section class="profile-section">
   <h1>About Me</h1>
   <img class="profile-pic" src="https://raw.githubusercontent.com/Frosty-Animal/Engineering-Portfolio/main/Pictures/AboutMePicture.jpg" alt="Isaiah's Profile Picture">
@@ -367,9 +272,11 @@
   <div class="about-content">
     <p>
       Hello! I'm Isaiah Hajabolhassan, a passionate Computer and Electrical Engineering student at Oklahoma State University.
+      I love tackling complex engineering challenges and turning innovative ideas into real-world solutions.
     </p>
     <p>
-
+      My journey in engineering has been driven by curiosity and a desire to understand how things work at their core.
+      From building racing drones to designing computer architectures, I enjoy projects that combine creativity with technical precision.
     </p>
   </div>
 </section>
@@ -379,32 +286,30 @@
   <ul class="goals-list">
     <li>
       <i class="fas fa-graduation-cap"></i>
-      Complete my Computer and Electrical Engineering degree with honors (Expected May 2026)
+      Place Holder
     </li>
     <li>
       <i class="fas fa-industry"></i>
-      Gain experience in embedded systems and IoT development through internships and projects
+      Place Holder
     </li>
     <li>
       <i class="fas fa-certificate"></i>
-      Obtain relevant industry certifications in FPGA programming and PCB design
+      Place Holder
     </li>
     <li>
       <i class="fas fa-rocket"></i>
-      Contribute to open-source engineering projects and build a portfolio of innovative solutions
+      Place Holder
     </li>
     <li>
       <i class="fas fa-handshake"></i>
-      Secure a full-time engineering role where I can apply my skills to meaningful projects
+      Place Holder
     </li>
   </ul>
 </section>
 
-
 <section class="interests-section">
   <h2>Interests & Passions</h2>
   <p class="interests-subtitle">
-    Beyond engineering, here are the technologies, hobbies, and activities that inspire and drive me
   </p>
 
   <div class="interests-tags">
@@ -412,7 +317,7 @@
     <span class="interest-tag">IoT Development</span>
     <span class="interest-tag">3D Printing</span>
     <span class="interest-tag">Circuit Design</span>
-    <span class="interest-tag">FPGA Programming</span>
+    <span class="interest-tag">Emmbedded Systems Programming</span>
     <span class="interest-tag">Machine Learning</span>
     <span class="interest-tag">Web Development</span>
     <span class="interest-tag">Robotics</span>
@@ -437,52 +342,4 @@
 </footer>
 
 </body>
-<script>
-  // Mobile Navigation JavaScript
-  const hamburger = document.getElementById('hamburger');
-  const navLinks = document.getElementById('navLinks');
-  const navOverlay = document.getElementById('navOverlay');
-  const body = document.body;
-
-  // Toggle mobile menu
-  function toggleMobileMenu() {
-    hamburger.classList.toggle('active');
-    navLinks.classList.toggle('active');
-    navOverlay.classList.toggle('active');
-    body.classList.toggle('menu-open');
-  }
-
-  // Close mobile menu
-  function closeMobileMenu() {
-    hamburger.classList.remove('active');
-    navLinks.classList.remove('active');
-    navOverlay.classList.remove('active');
-    body.classList.remove('menu-open');
-  }
-
-  // Event listeners
-  hamburger.addEventListener('click', toggleMobileMenu);
-  navOverlay.addEventListener('click', closeMobileMenu);
-
-  // Close menu when clicking on a link (mobile)
-  navLinks.addEventListener('click', function(e) {
-    if (e.target.tagName === 'A' && window.innerWidth <= 768) {
-      closeMobileMenu();
-    }
-  });
-
-  // Close menu on window resize if screen becomes larger
-  window.addEventListener('resize', function() {
-    if (window.innerWidth > 768) {
-      closeMobileMenu();
-    }
-  });
-
-  // Handle escape key
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape' && navLinks.classList.contains('active')) {
-      closeMobileMenu();
-    }
-  });
-</script>
 </html>

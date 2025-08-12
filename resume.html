@@ -17,21 +17,6 @@
       margin-bottom: 40px;
     }
 
-
-    .resume-content {
-      display: none;
-      animation: fadeIn 0.3s ease-in-out;
-    }
-
-    .resume-content.active {
-      display: block;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
     .resume-section {
       margin-bottom: 40px;
       background: white;
@@ -46,7 +31,6 @@
       margin-bottom: 20px;
       padding-bottom: 10px;
       position: relative;
-      /* Remove border-bottom */
     }
 
     .resume-section h2::after {
@@ -59,13 +43,13 @@
       background: linear-gradient(90deg, #ec7a1c, #bc6116);
     }
 
-    .experience-item, .education-item, .project-item {
+    .experience-item, .education-item {
       margin-bottom: 25px;
       padding-bottom: 20px;
       border-bottom: 1px solid #e0e0e0;
     }
 
-    .experience-item:last-child, .education-item:last-child, .project-item:last-child {
+    .experience-item:last-child, .education-item:last-child {
       border-bottom: none;
       margin-bottom: 0;
     }
@@ -121,62 +105,41 @@
 
     .skills-grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr); /* Force 4 equal columns */
-      gap: 15px; /* Reduced gap */
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
       margin-top: 20px;
     }
 
     .skill-category {
       background: #f8f6f3;
-      padding: 15px; /* Reduced padding */
+      padding: 15px;
       border-radius: 8px;
       border-left: 4px solid #ec7a1c;
-      min-height: 120px; /* Set minimum height for consistency */
+      min-height: 120px;
     }
 
     .skill-category h3 {
       color: #44443b;
-      margin-bottom: 8px; /* Reduced margin */
-      font-size: 1rem; /* Slightly smaller font */
+      margin-bottom: 8px;
+      font-size: 1rem;
       font-weight: 600;
     }
 
     .skill-tags {
       display: flex;
       flex-wrap: wrap;
-      gap: 6px; /* Reduced gap between tags */
+      gap: 6px;
     }
 
     .skill-tag {
       background-color: #ec7a1c;
       color: white;
-      padding: 4px 8px; /* Reduced padding */
-      border-radius: 12px; /* Smaller border radius */
-      font-size: 0.75rem; /* Smaller font size */
+      padding: 4px 8px;
+      border-radius: 12px;
+      font-size: 0.75rem;
       font-weight: 500;
-      white-space: nowrap; /* Prevent text wrapping */
+      white-space: nowrap;
     }
-
-    /* Responsive Design - Stack on smaller screens */
-    @media (max-width: 1024px) {
-      .skills-grid {
-        grid-template-columns: repeat(2, 1fr); /* 2 columns on tablets */
-        gap: 12px;
-      }
-    }
-
-    @media (max-width: 768px) {
-      .skills-grid {
-        grid-template-columns: 1fr; /* Single column on mobile */
-        gap: 10px;
-      }
-
-      .skill-category {
-        padding: 12px;
-        min-height: auto;
-      }
-    }
-
 
     .download-section {
       text-align: center;
@@ -184,6 +147,7 @@
       padding: 30px;
       background: white;
       border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     }
 
     .download-link {
@@ -208,7 +172,13 @@
       margin-right: 8px;
     }
 
-    /* Responsive Design */
+    @media (max-width: 1024px) {
+      .skills-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+      }
+    }
+
     @media (max-width: 768px) {
       .resume-container {
         padding: 15px;
@@ -229,11 +199,14 @@
 
       .skills-grid {
         grid-template-columns: 1fr;
+        gap: 10px;
       }
 
+      .skill-category {
+        padding: 12px;
+        min-height: auto;
+      }
     }
-
-
   </style>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
@@ -252,278 +225,218 @@
     <p>Computer and Electrical Engineering Student at Oklahoma State University</p>
   </div>
 
-  <!-- Detailed Resume Content -->
-  <div id="detailed-resume" class="resume-content active">
+  <div class="resume-section">
+    <h2><i class="fas fa-briefcase"></i> Work Experience</h2>
 
-    <!-- Work Experience Section -->
-    <div class="resume-section">
-      <h2><i class="fas fa-briefcase"></i> Work Experience</h2>
-
-      <div class="experience-item">
-        <div class="item-header">
-          <div>
-            <div class="item-title">Engineering Intern</div>
-            <div class="item-company">NPDC (New Product Development Center)</div>
-            <div class="item-location">Stillwater, Oklahoma</div>
-          </div>
-          <div class="item-date">May 2024 - Present</div>
+    <div class="experience-item">
+      <div class="item-header">
+        <div>
+          <div class="item-title">Engineering Intern</div>
+          <div class="item-company">NPDC (New Product Development Center)</div>
+          <div class="item-location">Stillwater, Oklahoma</div>
         </div>
-        <div class="item-description">
-          <ul>
-            <li>Developed automation systems for small to midsized manufactures</li>
-            <li>Designed and Implemented PCB's using KICAD for custom electrical projects </li>
-            <li>Designed BOM's for further manufacturing</li>
-            <li>3D modeled parts using Solidworks for prototyping and design</li>
-            <li>Collaborated with multidisciplinary teams on complex engineering projects</li>
-          </ul>
-        </div>
+        <div class="item-date">May 2024 - Present</div>
       </div>
-
-      <div class="experience-item">
-        <div class="item-header">
-          <div>
-            <div class="item-title">Research and Development Engineering Intern</div>
-            <div class="item-company">Bevins</div>
-            <div class="item-location">Tulsa, Oklahoma</div>
-          </div>
-          <div class="item-date">May 2025 - August 2025</div>
-        </div>
-        <div class="item-description">
-          <ul>
-            <li>Researched and developed an way to detect underground cables and phase for power lines without handing to physically handle or cut the cables<</li>
-            <li>Redesigned and built a ground set tester prototype for factory use</li>
-            <li></li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="experience-item">
-        <div class="item-header">
-          <div>
-            <div class="item-title">Technical Support Specialist</div>
-            <div class="item-company">Oklahoma State University</div>
-            <div class="item-location">Stillwater</div>
-          </div>
-          <div class="item-date">January 2024 - May 2024</div>
-        </div>
-        <div class="item-description">
-          <ul>
-            <li></li>
-            <li>Place Holder</li>
-            <li>Place Holder</li>
-            <li>Place Holder</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="experience-item">
-        <div class="item-header">
-          <div>
-            <div class="item-title">Tier 3/Shift Lead IT Helpdesk Phone Agent</div>
-            <div class="item-company">Oklahoma State University</div>
-            <div class="item-location">Stillwater, Oklahoma</div>
-          </div>
-          <div class="item-date">January 2022 - January 2024</div>
-        </div>
-        <div class="item-description">
-          <ul>
-            <li>Created training videos for the knowledge base using OBS to record and edit the video</li>
-            <li>Guided and trained junior helpdesk staff </li>
-            <li>Place Holder</li>
-          </ul>
-        </div>
+      <div class="item-description">
+        <ul>
+          <li>Developed automation systems for small to midsized manufacturers using PLC's</li>
+          <li>Designed and implemented PCBs using KiCAD for custom electrical projects</li>
+          <li>Created BOMs for further manufacturing</li>
+          <li>3D modeled parts using SolidWorks for prototyping and design</li>
+          <li>Collaborated with multidisciplinary teams on complex engineering projects</li>
+        </ul>
       </div>
     </div>
 
-    <!-- Education Section -->
-    <div class="resume-section">
-      <h2><i class="fas fa-graduation-cap"></i> Education</h2>
-
-      <div class="education-item">
-        <div class="item-header">
-          <div>
-            <div class="item-title">Bachelor of Science in Computer and Electrical Engineering</div>
-            <div class="item-title">Minor in Computer Science</div>
-            <div class="item-company">Oklahoma State University</div>
-            <div class="item-location">Stillwater, Oklahoma</div>
-          </div>
-          <div class="item-date">Expected May 2026</div>
+    <div class="experience-item">
+      <div class="item-header">
+        <div>
+          <div class="item-title">Research and Development Engineering Intern</div>
+          <div class="item-company">Bevins</div>
+          <div class="item-location">Tulsa, Oklahoma</div>
         </div>
-        <div class="item-description">
-          <ul>
-            <li><strong>Relevant Coursework:</strong>  Computer Architecture, Machine Learning, Signal Analysis, Electrical Design and Applications</li>
-            <li><strong>Activities:</strong>  OSU Hackathon 2021-2025, Chess Club, OSU Game Jam</li>
-
-          </ul>
-        </div>
+        <div class="item-date">May 2025 - August 2025</div>
       </div>
-
-      <div class="education-item">
-        <div class="item-header">
-          <div>
-            <div class="item-title">Francis Tuttle Technology Center</div>
-            <div class="item-company">Computer Science Academy</div>
-            <div class="item-location">Oklahoma City, Oklahoma</div>
-          </div>
-          <div class="item-date">August 2018 - May 2020</div>
-        </div>
-        <div class="item-description">
-          <ul>
-            <li><strong>Activities:</strong> TSA(Technology Students Association), CyberPatriot, First Robotics</li>
-          </ul>
-        </div>
+      <div class="item-description">
+        <ul>
+          <li>Researched and developed a method to detect underground cables and phase for power lines without physical contact by analyzing electromagnetic field fluctuations</li>
+          <li>Redesigned and built a ground set tester prototype for factory use and calibration</li>
+          <li>Developed and updated BOMs for several products to address component shortages and obsolescence</li>
+        </ul>
       </div>
     </div>
 
-    <!-- Skills Section -->
-    <div class="resume-section">
-      <h2><i class="fas fa-cogs"></i> Technical Skills</h2>
-      <div class="skills-grid">
-        <div class="skill-category">
-          <h3>Programming Languages</h3>
-          <div class="skill-tags">
-            <span class="skill-tag">C++</span>
-            <span class="skill-tag">Python</span>
-            <span class="skill-tag">JavaScript</span>
-            <span class="skill-tag">MATLAB</span>
-            <span class="skill-tag">Verilog</span>
-            <span class="skill-tag">Place Holder</span>
-          </div>
+    <div class="experience-item">
+      <div class="item-header">
+        <div>
+          <div class="item-title">Technical Support Specialist</div>
+          <div class="item-company">Oklahoma State University</div>
+          <div class="item-location">Stillwater, Oklahoma</div>
         </div>
-
-        <div class="skill-category">
-          <h3>Software & Tools</h3>
-          <div class="skill-tags">
-            <span class="skill-tag">FPGA</span>
-            <span class="skill-tag">Arduino</span>
-            <span class="skill-tag">CAD Software</span>
-            <span class="skill-tag">Git</span>
-            <span class="skill-tag">Place Holder</span>
-          </div>
-        </div>
-
-        <div class="skill-category">
-          <h3>Hardware & Systems</h3>
-          <div class="skill-tags">
-            <span class="skill-tag">ESP32</span>
-            <span class="skill-tag">IoT Systems</span>
-            <span class="skill-tag">Circuit Design</span>
-            <span class="skill-tag">3D Printing</span>
-            <span class="skill-tag">Place Holder</span>
-          </div>
-        </div>
-
-        <div class="skill-category">
-          <h3>Engineering Areas</h3>
-          <div class="skill-tags">
-            <span class="skill-tag">Digital Signal Processing</span>
-            <span class="skill-tag">Automation</span>
-            <span class="skill-tag">Embedded Systems</span>
-            <span class="skill-tag">Coding</span>
-          </div>
-        </div>
+        <div class="item-date">January 2024 - May 2024</div>
+      </div>
+      <div class="item-description">
+        <ul>
+          <li>Created Power Automate workflows to automate document storage from Microsoft SharePoint to Excel</li>
+          <li>Resolved advanced IT-related technical issues</li>
+          <li>Diagnosed, repaired, and replaced computers, laptops, phones, and servers</li>
+        </ul>
       </div>
     </div>
 
-    <!-- Awards & Certifications Section -->
-    <div class="resume-section">
-      <h2><i class="fas fa-award"></i> Awards & Certifications</h2>
-
-      <div class="education-item">
-        <div class="item-header">
-          <div>
-            <div class="item-title">Place Holder</div>
-            <div class="item-company">Place Holder</div>
-          </div>
-          <div class="item-date">Place Holder</div>
+    <div class="experience-item">
+      <div class="item-header">
+        <div>
+          <div class="item-title">Tier 3/Shift Lead IT Helpdesk Phone Agent</div>
+          <div class="item-company">Oklahoma State University</div>
+          <div class="item-location">Stillwater, Oklahoma</div>
         </div>
+        <div class="item-date">January 2022 - January 2024</div>
       </div>
-
-      <div class="education-item">
-        <div class="item-header">
-          <div>
-            <div class="item-title">Place Holder</div>
-            <div class="item-company">Place Holder</div>
-          </div>
-          <div class="item-date">Place Holder</div>
-        </div>
+      <div class="item-description">
+        <ul>
+          <li>Created comprehensive training videos using OBS for knowledge base, improving new hire onboarding efficiency</li>
+          <li>Mentored and trained junior helpdesk staff on escalation procedures</li>
+          <li>Ensured quality control measures were maintained across phone agents to meet service standards</li>
+          <li>Resolved complex escalated technical issues</li>
+        </ul>
       </div>
-    </div>
-
-    <div class="download-section">
-      <h3>Download Resume</h3>
-      <p>Get a copy of my complete resume in PDF format</p>
-      <a href="https://github.com/Frosty-Animal/Engineering-Portfolio/raw/main/Isaiah_s_Resume (1).pdf" download class="download-link">
-        <i class="fas fa-download"></i> Download PDF Resume
-      </a>
     </div>
   </div>
-</div>
-    <footer>
-      <p>&copy; <script>document.write(new Date().getFullYear())</script> Isaiah Hajabolhassan. All Rights Reserved.</p>
-      <a href="https://github.com/Frosty-Animal" target="_blank">
-        <i class="fab fa-github"></i> GitHub
-      </a>
-      <a href="https://www.linkedin.com/in/isaiah-h/" target="_blank">
-        <i class="fab fa-linkedin"></i> LinkedIn
-      </a>
-      <a href="mailto:Isaiahmh28@gmail.com">
-        <i class="fas fa-envelope"></i> Email
-      </a>
-    </footer>
 
-    <script>
-      // Page loads with detailed view by default - no toggle functionality needed
-    </script>
+  <div class="resume-section">
+    <h2><i class="fas fa-graduation-cap"></i> Education</h2>
+
+    <div class="education-item">
+      <div class="item-header">
+        <div>
+          <div class="item-title">Bachelor of Science in Computer and Electrical Engineering</div>
+          <div class="item-title">Minor in Computer Science</div>
+          <div class="item-company">Oklahoma State University</div>
+          <div class="item-location">Stillwater, Oklahoma</div>
+        </div>
+        <div class="item-date">August 2021 - Expected May 2026</div>
+      </div>
+      <div class="item-description">
+        <ul>
+          <li><strong>Relevant Coursework:</strong> Computer Architecture, Machine Learning, Signal Analysis, Electrical Design and Applications</li>
+          <li><strong>Activities:</strong> OSU Hackathon 2021-2025, Chess Club, OSU Game Jam</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="education-item">
+      <div class="item-header">
+        <div>
+          <div class="item-title">Francis Tuttle Technology Center</div>
+          <div class="item-company">Computer Science Academy</div>
+          <div class="item-location">Oklahoma City, Oklahoma</div>
+        </div>
+        <div class="item-date">August 2018 - May 2020</div>
+      </div>
+      <div class="item-description">
+        <ul>
+          <li><strong>Activities:</strong> TSA (Technology Students Association), CyberPatriot, FIRST Robotics</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="resume-section">
+    <h2><i class="fas fa-cogs"></i> Technical Skills</h2>
+    <div class="skills-grid">
+      <div class="skill-category">
+        <h3>Programming Languages</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">RISC-V</span>
+          <span class="skill-tag">C/C++/C#</span>
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">JavaScript</span>
+          <span class="skill-tag">HTML</span>
+          <span class="skill-tag">CSS</span>
+          <span class="skill-tag">SystemVerilog</span>
+        </div>
+      </div>
+
+      <div class="skill-category">
+        <h3>Software & Tools</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">MATLAB</span>
+          <span class="skill-tag">PSPICE</span>
+          <span class="skill-tag">SolidWorks</span>
+          <span class="skill-tag">LabVIEW</span>
+          <span class="skill-tag">Git</span>
+          <span class="skill-tag">Power Automate</span>
+          <span class="skill-tag">MPLAB</span>
+        </div>
+      </div>
+
+      <div class="skill-category">
+        <h3>Hardware & Systems</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">PLC</span>
+          <span class="skill-tag">IoT Systems</span>
+          <span class="skill-tag">Circuit Design</span>
+          <span class="skill-tag">3D Printing</span>
+          <span class="skill-tag">CNC Routing</span>
+        </div>
+      </div>
+
+      <div class="skill-category">
+        <h3>Engineering Areas</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">Digital Signal Processing</span>
+          <span class="skill-tag">Automation</span>
+          <span class="skill-tag">Embedded Systems</span>
+          <span class="skill-tag">Machine Learning</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="resume-section">
+    <h2><i class="fas fa-award"></i> Awards & Certifications</h2>
+
+    <div class="education-item">
+      <div class="item-header">
+        <div>
+          <div class="item-title">CompTIA A+ Certification</div>
+        </div>
+        <div class="item-date">In Progress</div>
+      </div>
+    </div>
+
+    <div class="education-item">
+      <div class="item-header">
+        <div>
+          <div class="item-title">Computer & Electrical FE Certification</div>
+        </div>
+        <div class="item-date">Planned 2026</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="download-section">
+    <h3>Download Resume</h3>
+    <p>Get a copy of my complete resume in PDF format</p>
+    <a href="https://github.com/Frosty-Animal/Engineering-Portfolio/raw/main/Documents/Isaiah_Resume.pdf" download class="download-link">
+      <i class="fas fa-download"></i> Download PDF Resume
+    </a>
+  </div>
+</div>
+
+<footer>
+  <p>&copy; <script>document.write(new Date().getFullYear())</script> Isaiah Hajabolhassan. All Rights Reserved.</p>
+  <a href="https://github.com/Frosty-Animal" target="_blank">
+    <i class="fab fa-github"></i> GitHub
+  </a>
+  <a href="https://www.linkedin.com/in/isaiah-h/" target="_blank">
+    <i class="fab fa-linkedin"></i> LinkedIn
+  </a>
+  <a href="mailto:Isaiahmh28@gmail.com">
+    <i class="fas fa-envelope"></i> Email
+  </a>
+</footer>
 
 </body>
-
-<script>
-  // Mobile Navigation JavaScript
-  const hamburger = document.getElementById('hamburger');
-  const navLinks = document.getElementById('navLinks');
-  const navOverlay = document.getElementById('navOverlay');
-  const body = document.body;
-
-  // Toggle mobile menu
-  function toggleMobileMenu() {
-    hamburger.classList.toggle('active');
-    navLinks.classList.toggle('active');
-    navOverlay.classList.toggle('active');
-    body.classList.toggle('menu-open');
-  }
-
-  // Close mobile menu
-  function closeMobileMenu() {
-    hamburger.classList.remove('active');
-    navLinks.classList.remove('active');
-    navOverlay.classList.remove('active');
-    body.classList.remove('menu-open');
-  }
-
-  // Event listeners
-  hamburger.addEventListener('click', toggleMobileMenu);
-  navOverlay.addEventListener('click', closeMobileMenu);
-
-  // Close menu when clicking on a link (mobile)
-  navLinks.addEventListener('click', function(e) {
-    if (e.target.tagName === 'A' && window.innerWidth <= 768) {
-      closeMobileMenu();
-    }
-  });
-
-  // Close menu on window resize if screen becomes larger
-  window.addEventListener('resize', function() {
-    if (window.innerWidth > 768) {
-      closeMobileMenu();
-    }
-  });
-
-  // Handle escape key
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape' && navLinks.classList.contains('active')) {
-      closeMobileMenu();
-    }
-  });
-</script>
 </html>
