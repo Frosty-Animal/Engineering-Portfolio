@@ -414,8 +414,6 @@ p1 {
     background-color: #bc6116;
 }
 
-/* MOBILE FIXES - Add these styles */
-/* MOBILE FIXES - Add these styles */
 @media (max-width: 768px) {
     .project-card {
         width: calc(100% - 20px);
@@ -441,7 +439,7 @@ p1 {
         bottom: 0;
         left: 0;
         right: 0;
-        background: rgba(0, 0, 0, 0.95); /* Darker for better readability */
+        background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
         color: white;
         padding: 20px 15px 15px;
         opacity: 1; /* Always visible on mobile */
