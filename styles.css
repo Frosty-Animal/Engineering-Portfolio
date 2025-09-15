@@ -909,12 +909,12 @@ video {
     }
 
     .hero-content h1 {
-        font-size: 1.5rem; /* Smaller font size */
+        font-size: 1.0rem; /* Smaller font size */
         margin-bottom: 12px;
         line-height: 1.2;
-        word-wrap: break-word; /* Allow text to wrap */
-        overflow-wrap: break-word; /* Better browser support */
-        hyphens: auto; /* Allow hyphenation if needed */
+        /* word-wrap: break-word; /* Allow text to wrap */
+        /* overflow-wrap: break-word; /* Better browser support */
+        /* hyphens: auto; /* Allow hyphenation if needed */
     }
 
     .hero-content p {
@@ -931,7 +931,7 @@ video {
     }
 
     .hero-content h1 {
-        font-size: 1.3rem; /* Even smaller */
+        font-size: 1.0rem; /* Even smaller */
         letter-spacing: -0.5px; /* Tighten letter spacing */
     }
 
