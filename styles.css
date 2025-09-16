@@ -854,25 +854,6 @@ video {
 }
 
 
-    /* Featured projects responsive */
-    .featured-projects {
-        padding: 40px 15px;
-    }
-
-    .featured-projects h2 {
-        font-size: 2rem;
-    }
-
-    .featured-grid {
-        grid-template-columns: 1fr;
-        gap: 30px;
-    }
-
-    .featured-card {
-        height: auto;
-        min-height: 450px; /* Minimum height on mobile */
-    }
-
     .card-content {
         min-height: 250px;
     }
