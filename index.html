@@ -75,6 +75,15 @@
       z-index: 2;
     }
 
+    @media (max-width: 768px) {
+        .intro-header {
+            height: 80vh; /* Increase from 60vh to 80vh */
+            justify-content: center; /* Center content on mobile */
+            align-items: center;
+            padding: 20px 0; /* Add vertical padding */
+        }
+    }
+
     .hero-content {
       z-index: 3;
       color: white;
@@ -84,7 +93,7 @@
       backdrop-filter: blur(5px);
       animation: fadeIn 1s ease-in-out;
       width: 40%;
-      max-width: 500px;
+      max-width: none;
       margin-right: 40px;
       position: relative;
     }
